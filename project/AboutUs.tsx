@@ -27,7 +27,6 @@ type Props = {
     accent?: string
     founderImage?: string
     heroCtaUrl?: string
-    heroSecondaryUrl?: string
     announceCtaUrl?: string
     announceSecondaryUrl?: string
 }
@@ -35,7 +34,6 @@ type Props = {
 export default function AboutUs(props: Props) {
     const accent = props.accent || GOLD
     const heroCtaUrl = props.heroCtaUrl || "#donate"
-    const heroSecondaryUrl = props.heroSecondaryUrl || "#mission"
     const announceCtaUrl = props.announceCtaUrl || "#donate"
     const announceSecondaryUrl = props.announceSecondaryUrl || "#mission"
 
@@ -81,12 +79,6 @@ export default function AboutUs(props: Props) {
                                 }}
                             >
                                 Support the mission →
-                            </a>
-                            <a
-                                href={heroSecondaryUrl}
-                                style={{ ...S.btn, ...S.btnGhost }}
-                            >
-                                Read our mission
                             </a>
                         </div>
                     </div>
@@ -741,11 +733,6 @@ addPropertyControls(AboutUs, {
         type: ControlType.Link,
         title: "Hero: Primary Button",
         defaultValue: "#donate",
-    },
-    heroSecondaryUrl: {
-        type: ControlType.Link,
-        title: "Hero: Secondary Button",
-        defaultValue: "#mission",
     },
     announceCtaUrl: {
         type: ControlType.Link,
