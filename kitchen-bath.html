@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Kitchen &amp; Bath Estimate | OE Services</title>
+<meta name="description" content="Get an instant kitchen and bathroom remodel estimate from OE Services. Bundle both and save 10%. Real regional pricing. Licensed in NV, CA, AZ.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.oeservices.us/kitchen-bath.html">
+<meta property="og:title" content="Free Kitchen &amp; Bath Estimate | OE Services">
+<meta property="og:description" content="Instant kitchen &amp; bath remodel estimate. Bundle both and save 10%. Licensed in NV, CA, AZ.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.oeservices.us/assets/oe-logo-2026.png">
+<link rel="icon" type="image/png" href="assets/oe-logo-2026.png">
+<meta name="theme-color" content="#1D6FA4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.est-wrap{background:#eef2f7;min-height:calc(100vh - 64px);padding:2rem 1rem 5rem}
+.est-card{background:#fff;border-radius:16px;box-shadow:0 4px 32px rgba(0,0,0,.10);max-width:560px;width:100%;margin:0 auto;padding:2.5rem 2rem}
+.prog-bar{height:4px;background:#e8edf2;border-radius:2px;margin-bottom:.75rem;overflow:hidden}
+.prog-fill{height:100%;background:#1D6FA4;border-radius:2px;transition:width .4s ease}
+.steps-row{display:flex;justify-content:space-between;margin-bottom:2rem}
+.step-pip{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:#aaa}
+.step-pip.active{color:#1D6FA4}
+.step-pip.done{color:#1a8a5a}
+.step-circ{width:26px;height:26px;border-radius:50%;border:2px solid #dde2e8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#aaa;background:#fff}
+.step-pip.active .step-circ{border-color:#1D6FA4;color:#1D6FA4}
+.step-pip.done .step-circ{border-color:#1a8a5a;background:#1a8a5a;color:#fff;font-size:10px}
+.est-step{display:none}.est-step.active{display:block}
+.est-card h2{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:700;color:#1a1a1a;margin-bottom:.4rem}
+.est-sub{font-size:14px;color:#666;margin-bottom:1.5rem;line-height:1.6}
+.fl{display:block;font-size:12px;font-weight:600;color:#888;margin-bottom:5px;letter-spacing:.4px;text-transform:uppercase}
+.est-card input[type=text],.est-card input[type=email],.est-card input[type=tel],.est-card textarea,.est-card select{width:100%;padding:11px 13px;border:1.5px solid #dde2e8;border-radius:8px;font-size:15px;font-family:'Barlow',sans-serif;color:#1a1a1a;margin-bottom:1rem;outline:none;transition:border-color .2s;background:#fff}
+.est-card input:focus,.est-card textarea:focus,.est-card select:focus{border-color:#1D6FA4;box-shadow:0 0 0 3px rgba(29,111,164,.12)}
+.est-card textarea{resize:vertical;min-height:80px}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{font-size:12px;color:#c0392b;margin-top:-8px;margin-bottom:10px;display:none}
+/* Service cards */
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem}
+.svc-card{border:2px solid #dde2e8;border-radius:12px;padding:20px 16px;cursor:pointer;transition:border-color .2s,background .2s;position:relative;background:#fff;text-align:center}
+.svc-card:hover{border-color:#1D6FA4}
+.svc-card.selected{border-color:#1D6FA4;background:rgba(29,111,164,.06)}
+.svc-chk{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:#1D6FA4;display:none;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700}
+.svc-card.selected .svc-chk{display:flex}
+.svc-emoji{font-size:28px;margin-bottom:8px;display:block}
+.svc-nm{font-size:16px;font-weight:700;color:#1a1a1a;font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em}
+.svc-tagline{font-size:11px;color:#888;margin-top:4px;line-height:1.4}
+.svc-from{font-size:12px;color:#1D6FA4;font-weight:600;margin-top:6px}
+.svc-err{font-size:13px;color:#c0392b;text-align:center;display:none;margin-bottom:.75rem}
+.svc-err.show{display:block}
+/* Scope */
+.scope-sec{display:none;margin-bottom:1.25rem}
+.scope-sec.visible{display:block}
+.scope-lbl{font-size:11px;font-weight:700;color:#1D6FA4;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e8edf2}
+.scope-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.scope-opt{border:1.5px solid #dde2e8;border-radius:10px;padding:12px 8px;cursor:pointer;text-align:center;transition:border-color .2s,background .2s;background:#fff}
+.scope-opt:hover{border-color:#1D6FA4}
+.scope-opt.selected{border-color:#1D6FA4;background:rgba(29,111,164,.06)}
+.scope-emoji{font-size:18px;display:block;margin-bottom:4px}
+.scope-nm{font-size:12px;font-weight:600;color:#1a1a1a}
+.scope-range{font-size:11px;color:#1D6FA4;margin-top:2px;font-weight:500}
+/* Bundle */
+.bundle-banner{background:linear-gradient(135deg,#1a6e3f,#21874e);border-radius:12px;padding:16px;margin-bottom:1.25rem;color:#fff;display:none}
+.bundle-banner.show{display:block}
+.bundle-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
+.bundle-badge{background:rgba(255,255,255,.15);border-radius:10px;padding:8px 12px;text-align:center;flex-shrink:0}
+.bundle-badge-pct{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;line-height:1}
+.bundle-badge-lbl{font-size:10px;font-weight:700;letter-spacing:.06em}
+.bundle-title{font-size:15px;font-weight:700;margin-bottom:3px}
+.bundle-sub{font-size:12px;opacity:.85;line-height:1.4}
+.bundle-savings{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;margin-bottom:8px}
+.bundle-savings-lbl{font-size:12px;opacity:.85}
+.bundle-savings-amt{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#7effc4}
+.bundle-why{font-size:11px;opacity:.75;line-height:1.8}
+.bundle-nudge{background:#fff8e8;border:1.5px solid #f0c050;border-radius:10px;padding:12px 14px;margin-bottom:1.25rem;font-size:13px;color:#7a5a00;cursor:pointer;display:none;line-height:1.5}
+.bundle-nudge.show{display:block}
+.bundle-nudge:hover{background:#fff3d0}
+/* Nav buttons */
+.est-nav{display:flex;gap:10px;margin-top:1.25rem}
+.est-btn{flex:3;padding:14px;background:#1D6FA4;color:#fff;border:none;border-radius:9px;font-family:'Barlow',sans-serif;font-size:16px;font-weight:600;cursor:pointer;transition:background .2s}
+.est-btn:hover{background:#155f8e}
+.est-btn.submit{background:#1a6e3f}
+.est-btn.submit:hover{background:#155e35}
+.btn-bk{flex:1;padding:14px;background:transparent;border:1.5px solid #dde2e8;border-radius:9px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:500;color:#888;cursor:pointer;transition:all .2s;display:none}
+.btn-bk:hover{border-color:#999;color:#333}
+/* Photo upload */
+.upload-zone{border:2px dashed #dde2e8;border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:.75rem}
+.upload-zone:hover{border-color:#1D6FA4;background:rgba(29,111,164,.03)}
+.upload-icon{font-size:28px;margin-bottom:6px;display:block}
+.upload-title{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:3px}
+.upload-sub{font-size:12px;color:#888}
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:.5rem}
+.photo-wrap{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden}
+.photo-thumb{width:100%;height:100%;object-fit:cover}
+.photo-del{position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,.6);border:none;color:#fff;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.photo-count{font-size:12px;color:#888;margin-bottom:.5rem}
+.add-more-btn{font-size:13px;color:#1D6FA4;background:none;border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-weight:600;display:none;padding:4px 0}
+.add-more-btn:hover{text-decoration:underline}
+/* Video */
+#camera-feed,#recorded-video{width:100%;border-radius:10px;display:none;margin-bottom:.75rem;max-height:240px;background:#000;object-fit:cover}
+.record-btn{width:100%;padding:13px;background:#1D6FA4;color:#fff;border:none;border-radius:9px;font-family:'Barlow',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s;margin-bottom:.75rem}
+.record-btn:hover{background:#155f8e}
+.record-btn.recording{background:#c0392b}
+.rec-dot{width:10px;height:10px;border-radius:50%;background:#fff;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.timer-wrap{display:none;margin-bottom:.75rem}
+.timer-label{font-size:12px;color:#666;margin-bottom:4px}
+.timer-track{height:4px;background:#e8edf2;border-radius:2px;overflow:hidden}
+.timer-fill{height:100%;background:#c0392b;border-radius:2px}
+.video-status{font-size:13px;color:#1a8a5a;margin-bottom:.5rem}
+.remove-video-btn{display:none;font-size:13px;color:#c0392b;background:none;border:none;cursor:pointer;font-family:'Barlow',sans-serif;margin-bottom:.75rem}
+.divider-or{display:flex;align-items:center;gap:10px;font-size:12px;color:#aaa;margin:12px 0}
+.divider-or::before,.divider-or::after{content:'';flex:1;height:1px;background:#e8edf2}
+.upload-vid-zone{border:2px dashed #dde2e8;border-radius:10px;padding:14px;text-align:center;cursor:pointer;font-size:13px;color:#666;transition:border-color .2s}
+.upload-vid-zone:hover{border-color:#1D6FA4}
+.skip-lnk{font-size:13px;color:#aaa;text-align:center;margin-top:10px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;display:block}
+.skip-lnk:hover{color:#666}
+/* Estimate display */
+.est-reveal{background:#1D6FA4;border-radius:12px;padding:1.5rem;color:#fff;margin-bottom:1rem}
+.est-rv-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;opacity:.8;margin-bottom:4px}
+.est-rv-amount{font-family:'Barlow Condensed',sans-serif;font-size:46px;font-weight:700;line-height:1}
+.est-rv-original{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;text-decoration:line-through;opacity:.55;margin-left:8px}
+.est-rv-range{font-size:13px;opacity:.8;margin-top:4px}
+.est-rv-region{font-size:12px;opacity:.7;margin-top:3px}
+.est-rows{margin-top:12px;border-top:1px solid rgba(255,255,255,.2);padding-top:12px}
+.est-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;opacity:.9}
+.est-row-val{font-weight:600}
+.est-discount-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.est-discount-lbl{color:#7effc4;font-weight:600}
+.est-discount-val{color:#7effc4;font-weight:700}
+.est-after-discount{display:flex;justify-content:space-between;font-size:15px;font-weight:700;padding-top:8px;border-top:1px solid rgba(255,255,255,.25)}
+.est-total-row{display:flex;justify-content:space-between;font-size:15px;font-weight:700;padding-top:8px;border-top:1px solid rgba(255,255,255,.25)}
+/* Review */
+.review-card{background:#f4f6f9;border-radius:10px;padding:1rem;margin-bottom:1rem}
+.review-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #e8edf2;font-size:13px}
+.review-row:last-child{border-bottom:none}
+.review-key{color:#888;font-weight:500}
+.review-val{color:#1a1a1a;text-align:right;max-width:60%}
+/* Success */
+.success-screen{display:none;text-align:center;padding:2rem 0}
+.check-circle{width:64px;height:64px;background:#e6f4ef;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
+.check-circle svg{width:32px;height:32px;stroke:#1a8a5a;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.success-est{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:700;color:#1D6FA4;margin-bottom:1.25rem}
+.success-steps-box{background:#f4f6f9;border-radius:10px;padding:1rem;margin-bottom:1rem;text-align:left}
+.ss-item{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #e8edf2;align-items:flex-start}
+.ss-item:last-child{border-bottom:none}
+.ss-num{width:26px;height:26px;border-radius:50%;background:#1D6FA4;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.ss-text{font-size:13px;color:#555;line-height:1.5}
+.ss-text strong{color:#1a1a1a;display:block;margin-bottom:2px}
+.call-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:#1D6FA4;color:#fff;border:none;border-radius:9px;font-family:'Barlow',sans-serif;font-size:16px;font-weight:600;cursor:pointer;text-decoration:none;margin-top:12px;transition:background .2s}
+.call-btn:hover{background:#155f8e}
+.disclaimer{font-size:11px;color:#aaa;line-height:1.6;padding:10px 12px;background:#f9f9f9;border-radius:6px;margin-bottom:1rem}
+@media(max-width:560px){
+  .est-card{padding:1.5rem 1rem}
+  .svc-grid,.frow2{grid-template-columns:1fr}
+  .scope-grid{grid-template-columns:repeat(3,1fr)}
+  .photo-grid{grid-template-columns:repeat(3,1fr)}
+  .est-rv-amount{font-size:36px}
+  .est-wrap{padding:1rem .5rem 4rem}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/oe-logo-2026.png" alt="OE Services LLC">
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="electrical.html">Electrical</a>
+      <a href="hvac.html">HVAC</a>
+      <a href="roofing.html">Roofing</a>
+      <a href="kitchen-bath.html" aria-current="page">Kitchen &amp; Bath</a>
+      <a href="adu.html">ADU &amp; Builds</a>
+    </nav>
+    <a href="kitchen-bath.html" class="btn btn-primary nav-cta">Get estimate</a>
+  </div>
+</header>
+
+<main class="est-wrap">
+<div class="est-card">
+
+  <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  <div class="steps-row" id="steps-row">
+    <div class="step-pip active" id="si-1"><div class="step-circ" id="sc-1">1</div><span>Services</span></div>
+    <div class="step-pip" id="si-2"><div class="step-circ" id="sc-2">2</div><span>Details</span></div>
+    <div class="step-pip" id="si-3"><div class="step-circ" id="sc-3">3</div><span>Contact</span></div>
+    <div class="step-pip" id="si-4"><div class="step-circ" id="sc-4">4</div><span>Photos</span></div>
+    <div class="step-pip" id="si-5"><div class="step-circ" id="sc-5">5</div><span>Estimate</span></div>
+  </div>
+
+  <!-- STEP 1: Services -->
+  <div class="est-step active" id="step-1">
+    <h2>What are you remodeling?</h2>
+    <p class="est-sub">Select one or both — we specialize in kitchens and bathrooms, full service start to finish.</p>
+
+    <div class="svc-grid">
+      <div class="svc-card" id="svc-kitchen" onclick="toggleSvc('kitchen')">
+        <div class="svc-chk">✓</div>
+        <span class="svc-emoji">🍳</span>
+        <div class="svc-nm">Kitchen</div>
+        <div class="svc-tagline">Cabinets, counters, appliances, flooring &amp; more</div>
+        <div class="svc-from">From $12,000</div>
+      </div>
+      <div class="svc-card" id="svc-bath" onclick="toggleSvc('bath')">
+        <div class="svc-chk">✓</div>
+        <span class="svc-emoji">🛁</span>
+        <div class="svc-nm">Bathroom</div>
+        <div class="svc-tagline">Tile, vanity, shower, fixtures &amp; more</div>
+        <div class="svc-from">From $8,000</div>
+      </div>
+    </div>
+    <div class="svc-err" id="svc-err">Please select at least one to continue.</div>
+
+    <div class="bundle-banner" id="bundle-banner">
+      <div class="bundle-top">
+        <div class="bundle-badge">
+          <div class="bundle-badge-pct">10%</div>
+          <div class="bundle-badge-lbl">OFF</div>
+        </div>
+        <div>
+          <div class="bundle-title">Bundle &amp; Save 🎉</div>
+          <div class="bundle-sub">You've selected both services — you qualify for our 10% bundle discount, applied at contract signing.</div>
+        </div>
+      </div>
+      <div class="bundle-savings">
+        <span class="bundle-savings-lbl">&#128176; Your bundle savings:</span>
+        <span class="bundle-savings-amt" id="bundle-savings-amount">10% off total</span>
+      </div>
+      <div class="bundle-why">&#10003; One crew, one timeline — less disruption<br>&#10003; No second mobilization cost<br>&#10003; Coordinated design for a seamless look</div>
+    </div>
+
+    <div class="bundle-nudge" id="bundle-nudge" onclick="nudgeClick()">
+      &#128161; <strong>Add the other service and save 10%.</strong> Most customers who remodel a kitchen find the bathroom makes more sense at the same time. <strong>Tap to add →</strong>
+    </div>
+
+    <!-- Kitchen scope -->
+    <div class="scope-sec" id="scope-kitchen">
+      <div class="scope-lbl">Kitchen scope</div>
+      <div class="scope-grid">
+        <div class="scope-opt" id="k-minor" onclick="setScope('kitchen','minor')"><span class="scope-emoji">🔧</span><div class="scope-nm">Minor Update</div><div class="scope-range">$12K–$20K</div></div>
+        <div class="scope-opt" id="k-mid" onclick="setScope('kitchen','mid')"><span class="scope-emoji">🏠</span><div class="scope-nm">Full Remodel</div><div class="scope-range">$25K–$55K</div></div>
+        <div class="scope-opt" id="k-major" onclick="setScope('kitchen','major')"><span class="scope-emoji">✨</span><div class="scope-nm">Luxury</div><div class="scope-range">$60K–$100K+</div></div>
+      </div>
+    </div>
+
+    <!-- Bath scope -->
+    <div class="scope-sec" id="scope-bath">
+      <div class="scope-lbl">Bathroom scope</div>
+      <div class="scope-grid">
+        <div class="scope-opt" id="b-minor" onclick="setScope('bath','minor')"><span class="scope-emoji">🔧</span><div class="scope-nm">Cosmetic</div><div class="scope-range">$8K–$14K</div></div>
+        <div class="scope-opt" id="b-mid" onclick="setScope('bath','mid')"><span class="scope-emoji">🏠</span><div class="scope-nm">Full Remodel</div><div class="scope-range">$15K–$30K</div></div>
+        <div class="scope-opt" id="b-major" onclick="setScope('bath','major')"><span class="scope-emoji">✨</span><div class="scope-nm">Luxury</div><div class="scope-range">$35K–$65K+</div></div>
+      </div>
+    </div>
+
+    <div class="est-nav">
+      <button class="btn-bk" id="bk-1" onclick="goBack()" style="display:none">&#8592; Back</button>
+      <button class="est-btn" onclick="goNext()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Details -->
+  <div class="est-step" id="step-2">
+    <h2>Tell us about your project</h2>
+    <p class="est-sub">This helps us give you an accurate regional estimate — prices vary by area.</p>
+
+    <label class="fl">Project address *</label>
+    <div style="position:relative;margin-bottom:1rem">
+      <input type="text" id="address-input" placeholder="123 Main St, Las Vegas NV 89101" style="margin-bottom:0">
+      <div id="region-tag" style="display:none;font-size:12px;color:#1D6FA4;margin-top:4px;font-weight:500">&#128205; <span id="region-name"></span></div>
+    </div>
+    <div class="err" id="err-address">Please enter your address</div>
+
+    <label class="fl">Property type *</label>
+    <select id="property-type">
+      <option value="">Select property type…</option>
+      <option>Single family home</option>
+      <option>Condo / townhome</option>
+      <option>Multi-family / duplex</option>
+      <option>Commercial property</option>
+      <option>New construction</option>
+    </select>
+    <div class="err" id="err-property">Please select a property type</div>
+
+    <label class="fl">Ideal start date</label>
+    <select id="timeline">
+      <option value="">When do you want to start?</option>
+      <option>As soon as possible</option>
+      <option>Within 1 month</option>
+      <option>1–3 months from now</option>
+      <option>3–6 months from now</option>
+      <option>Just getting a budget</option>
+    </select>
+
+    <label class="fl">Anything specific we should know? (optional)</label>
+    <textarea id="description" placeholder="Layout changes, materials you love, budget constraints…"></textarea>
+
+    <div class="est-nav">
+      <button class="btn-bk" onclick="goBack()">&#8592; Back</button>
+      <button class="est-btn" onclick="goNext()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Contact -->
+  <div class="est-step" id="step-3">
+    <h2>Where do we send your estimate?</h2>
+    <p class="est-sub">We'll reach out within 2 hours to confirm details and schedule your free in-home consultation.</p>
+
+    <div class="frow2">
+      <div>
+        <label class="fl">First name *</label>
+        <input type="text" id="fname" placeholder="John" autocomplete="given-name">
+        <div class="err" id="err-fname">Required</div>
+      </div>
+      <div>
+        <label class="fl">Last name *</label>
+        <input type="text" id="lname" placeholder="Smith" autocomplete="family-name">
+        <div class="err" id="err-lname">Required</div>
+      </div>
+    </div>
+    <label class="fl">Phone *</label>
+    <input type="tel" id="phone" placeholder="(702) 555-0123" autocomplete="tel">
+    <div class="err" id="err-phone">Required</div>
+    <label class="fl">Email *</label>
+    <input type="email" id="email" placeholder="john@email.com" autocomplete="email">
+    <div class="err" id="err-email">Enter a valid email</div>
+
+    <div style="background:#f4f6f9;border-radius:10px;padding:12px;font-size:12px;color:#555;line-height:1.7">
+      &#128274; Your info is never sold or shared &nbsp;&#183;&nbsp; &#128222; We only call once, when you're ready &nbsp;&#183;&nbsp; &#9989; Free in-home visit, no obligation
+    </div>
+
+    <div class="est-nav">
+      <button class="btn-bk" onclick="goBack()">&#8592; Back</button>
+      <button class="est-btn" onclick="goNext()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Photos & Video -->
+  <div class="est-step" id="step-4">
+    <h2>Show us your space</h2>
+    <p class="est-sub">Photos and a short video help us give you a <strong>30% more accurate estimate</strong> before we even visit. This step is optional.</p>
+
+    <div class="scope-lbl" style="margin-bottom:10px">&#128247; Photos — up to 10</div>
+    <div class="upload-zone" onclick="document.getElementById('photo-input').click()">
+      <span class="upload-icon">&#128248;</span>
+      <div class="upload-title">Tap to take or upload photos</div>
+      <div class="upload-sub">JPG, PNG &middot; Current kitchen/bath, any damage or details</div>
+    </div>
+    <input type="file" id="photo-input" accept="image/*" multiple capture="environment" style="display:none" onchange="handlePhotos(event)">
+    <div class="photo-grid" id="photo-grid"></div>
+    <div class="photo-count" id="photo-count"></div>
+    <button class="add-more-btn" id="add-more-btn" onclick="document.getElementById('photo-input').click()">+ Add more photos</button>
+
+    <div class="scope-lbl" style="margin-top:1.25rem;margin-bottom:10px">&#127909; Quick walkthrough video — up to 25 seconds</div>
+    <video id="camera-feed" autoplay muted playsinline></video>
+    <video id="recorded-video" controls></video>
+    <button class="record-btn" id="record-btn" onclick="toggleRecording()">
+      <span id="rec-icon">&#9210;</span>
+      <span id="rec-text">Record a walkthrough video</span>
+    </button>
+    <div class="timer-wrap" id="timer-wrap">
+      <div class="timer-label">Recording… <span id="secs">25</span>s left</div>
+      <div class="timer-track"><div class="timer-fill" id="timer-fill" style="width:100%"></div></div>
+    </div>
+    <div class="video-status" id="video-status"></div>
+    <button class="remove-video-btn" id="remove-video-btn" onclick="removeVideo()">&#10005; Remove &amp; retake</button>
+    <div class="divider-or">or upload a file</div>
+    <div class="upload-vid-zone" onclick="document.getElementById('video-upload').click()">
+      <div>&#128193; Upload a video file (MP4, MOV)</div>
+    </div>
+    <input type="file" id="video-upload" accept="video/*" style="display:none" onchange="handleVideoUpload(event)">
+
+    <div class="est-nav">
+      <button class="btn-bk" onclick="goBack()">&#8592; Back</button>
+      <button class="est-btn" onclick="goNext()">See my estimate &rarr;</button>
+    </div>
+    <a class="skip-lnk" onclick="goNext()">Skip this step →</a>
+  </div>
+
+  <!-- STEP 5: Estimate + Review -->
+  <div class="est-step" id="step-5">
+    <h2>Your preliminary estimate</h2>
+    <p class="est-sub">Based on your selections and regional labor data. A final quote follows your in-home visit.</p>
+
+    <div class="est-reveal" id="estimate-box">
+      <div class="est-rv-lbl">Estimated project cost</div>
+      <div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:4px">
+        <div class="est-rv-amount" id="est-amount">—</div>
+        <div class="est-rv-original" id="est-original" style="display:none"></div>
+      </div>
+      <div class="est-rv-range" id="est-range"></div>
+      <div class="est-rv-region" id="est-region"></div>
+      <div class="est-rows" id="est-rows"></div>
+    </div>
+
+    <div class="disclaimer">
+      This is a preliminary range based on scope and 2026 regional market data. Your final written quote is provided after your free in-home consultation — no obligation.
+    </div>
+
+    <div class="scope-lbl" style="margin-bottom:10px">Review your request</div>
+    <div class="review-card">
+      <div class="review-rows" id="review-list"></div>
+    </div>
+
+    <div class="est-nav">
+      <button class="btn-bk" onclick="goBack()">&#8592; Back</button>
+      <button class="est-btn submit" id="btn-submit" onclick="submitForm()">Send My Estimate Request &#10003;</button>
+    </div>
+  </div>
+
+  <!-- Success -->
+  <div class="success-screen" id="success-screen">
+    <div class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <h2>You're all set!</h2>
+    <p class="est-sub">Your estimate request has been received. The OE Services team will reach out within <strong>2 hours</strong> to confirm details.</p>
+    <div class="success-est" id="success-est"></div>
+    <div class="success-steps-box">
+      <div class="ss-item"><div class="ss-num">1</div><div class="ss-text"><strong>We review your project</strong>Our team looks over your photos, video, and details</div></div>
+      <div class="ss-item"><div class="ss-num">2</div><div class="ss-text"><strong>We call you within 2 hours</strong>Quick 5-minute call to confirm scope and schedule</div></div>
+      <div class="ss-item"><div class="ss-num">3</div><div class="ss-text"><strong>Free in-home consultation</strong>We visit your space and provide a written quote</div></div>
+    </div>
+    <a href="tel:8055032787" class="call-btn">&#128222; Call Us Now — (805) 503-2787</a>
+  </div>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html"><img src="assets/oe-logo-2026.png" alt="OE Services LLC" class="footer-logo"></a>
+        <p>Licensed electrical &amp; general contractor serving Nevada, California &amp; Arizona.</p>
+        <div class="footer-lic">NV #0093240 &middot; #0087180<br>CA #1057069 &middot; #1124897<br>AZ ROC #354397</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="electrical.html">Electrical</a></li>
+          <li><a href="hvac.html">HVAC</a></li>
+          <li><a href="roofing.html">Roofing</a></li>
+          <li><a href="kitchen-bath.html">Kitchen &amp; Bath</a></li>
+          <li><a href="adu.html">ADU &amp; Builds</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:18055032787">(805) 503-2787</a></li>
+          <li><a href="mailto:ahernandez@oeservices.us">ahernandez@oeservices.us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 OE Services LLC. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<!-- Google Maps Places API — optional, enhances address autocomplete -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initGoogleMaps" async defer></script>
+<script>
+// ── STATE ──────────────────────────────────────
+let currentStep = 1;
+const totalSteps = 5;
+let selectedSvcs = { kitchen: false, bath: false };
+let selectedScope = { kitchen: null, bath: null };
+let photoFiles = [];
+let videoBlob = null;
+let recordedChunks = [];
+let mediaRecorder = null;
+let cameraStream = null;
+let isRecording = false;
+let timerInterval = null;
+let secondsLeft = 25;
+let detectedZip = '';
+let detectedRegion = null;
+let autocomplete = null;
+
+// ── REGIONAL PRICING ───────────────────────────
+const KITCHEN = { minor: 16000, mid: 38000, major: 78000 };
+const BATH    = { minor: 11000, mid: 22000, major: 48000 };
+const BUNDLE_DISCOUNT = 0.10;
+
+function getRegion(zip) {
+  if (!zip || zip.length < 3) return { name: 'Your Area', multiplier: 1.0 };
+  const p3 = parseInt(zip.substring(0,3));
+  const p2 = parseInt(zip.substring(0,2));
+  if (p2 === 94 || (p3 >= 950 && p3 <= 952)) return { name: 'Bay Area / Silicon Valley, CA', multiplier: 1.55 };
+  if (p3 >= 900 && p3 <= 919) return { name: 'Los Angeles Metro, CA', multiplier: 1.45 };
+  if (p3 >= 919 && p3 <= 921) return { name: 'San Diego, CA', multiplier: 1.38 };
+  if (p2 === 92 || p2 === 93 || p2 === 96) return { name: 'California', multiplier: 1.25 };
+  if (p3 === 891 || p3 === 890 || p3 === 889) return { name: 'Las Vegas, NV', multiplier: 1.02 };
+  if (p3 === 894 || p3 === 895) return { name: 'Reno, NV', multiplier: 1.03 };
+  if (p2 === 89) return { name: 'Nevada', multiplier: 1.02 };
+  if (p3 >= 850 && p3 <= 853) return { name: 'Phoenix Metro, AZ', multiplier: 0.97 };
+  if (p3 === 857) return { name: 'Tucson, AZ', multiplier: 0.93 };
+  if (p2 === 85 || p2 === 86) return { name: 'Arizona', multiplier: 0.95 };
+  return { name: 'Your Area', multiplier: 1.0 };
+}
+
+function extractZip(str) {
+  const m = str.match(/\b\d{5}\b/);
+  return m ? m[0] : '';
+}
+
+function calcEstimate() {
+  const region = detectedRegion || getRegion(detectedZip);
+  let kBase = 0, bBase = 0;
+  if (selectedSvcs.kitchen && selectedScope.kitchen) kBase = KITCHEN[selectedScope.kitchen] * region.multiplier;
+  if (selectedSvcs.bath && selectedScope.bath)        bBase = BATH[selectedScope.bath] * region.multiplier;
+  const subtotal    = kBase + bBase;
+  const bundled     = selectedSvcs.kitchen && selectedSvcs.bath && !!selectedScope.kitchen && !!selectedScope.bath;
+  const discountAmt = bundled ? Math.round(subtotal * BUNDLE_DISCOUNT / 500) * 500 : 0;
+  const total       = subtotal - discountAmt;
+  const low  = Math.round(total * 0.85 / 500) * 500;
+  const high = Math.round(total * 1.18 / 500) * 500;
+  const mid  = Math.round((low + high) / 2 / 500) * 500;
+  const subLow  = Math.round(subtotal * 0.85 / 500) * 500;
+  const subHigh = Math.round(subtotal * 1.18 / 500) * 500;
+  const subMid  = Math.round((subLow + subHigh) / 2 / 500) * 500;
+  return { kBase, bBase, subtotal, discountAmt, total, low, high, mid, subMid, region, bundled };
+}
+
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+
+// ── GOOGLE MAPS AUTOCOMPLETE ───────────────────
+function initGoogleMaps() {
+  const input = document.getElementById('address-input');
+  if (!input || typeof google === 'undefined') return;
+  autocomplete = new google.maps.places.Autocomplete(input, {
+    types: ['address'], componentRestrictions: { country: 'us' },
+    fields: ['formatted_address', 'address_components']
+  });
+  autocomplete.addListener('place_changed', () => {
+    const place = autocomplete.getPlace();
+    if (!place.address_components) return;
+    let zip = '';
+    for (const comp of place.address_components) {
+      if (comp.types.includes('postal_code')) { zip = comp.long_name; break; }
+    }
+    if (!zip) zip = extractZip(place.formatted_address || '');
+    detectedZip = zip;
+    detectedRegion = getRegion(zip);
+    showRegionTag();
+  });
+}
+
+function showRegionTag() {
+  if (!detectedRegion) return;
+  const tag = document.getElementById('region-tag');
+  document.getElementById('region-name').textContent = detectedRegion.name + ' · ' + detectedRegion.multiplier + 'x regional pricing';
+  tag.style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('address-input');
+  if (input) {
+    input.addEventListener('blur', () => {
+      const zip = extractZip(input.value);
+      if (zip && zip !== detectedZip) {
+        detectedZip = zip; detectedRegion = getRegion(zip); showRegionTag();
+      }
+    });
+  }
+  updateProgress();
+});
+
+// ── BUNDLE LOGIC ────────────────────────────────
+function updateBundleUI() {
+  const both   = selectedSvcs.kitchen && selectedSvcs.bath;
+  const onlyOne = (selectedSvcs.kitchen || selectedSvcs.bath) && !both;
+  const banner = document.getElementById('bundle-banner');
+  const nudge  = document.getElementById('bundle-nudge');
+  if (both) {
+    if (selectedScope.kitchen && selectedScope.bath) {
+      const { discountAmt } = calcEstimate();
+      document.getElementById('bundle-savings-amount').textContent = fmt(discountAmt) + ' OFF';
+    } else {
+      document.getElementById('bundle-savings-amount').textContent = '10% off your total';
+    }
+    banner.classList.add('show'); nudge.classList.remove('show');
+  } else {
+    banner.classList.remove('show'); nudge.classList.toggle('show', onlyOne);
+    if (onlyOne) {
+      const missing = selectedSvcs.kitchen ? 'bathroom' : 'kitchen';
+      nudge.innerHTML = '&#128161; <strong>Add a ' + missing + ' remodel and save 10%.</strong> Most customers do both at once — one crew, one timeline, less disruption. <strong>Tap to add →</strong>';
+    }
+  }
+}
+
+function nudgeClick() {
+  if (selectedSvcs.kitchen && !selectedSvcs.bath) toggleSvc('bath');
+  else if (selectedSvcs.bath && !selectedSvcs.kitchen) toggleSvc('kitchen');
+}
+
+// ── SERVICE TOGGLE ─────────────────────────────
+function toggleSvc(type) {
+  selectedSvcs[type] = !selectedSvcs[type];
+  document.getElementById('svc-' + type).classList.toggle('selected', selectedSvcs[type]);
+  document.getElementById('scope-' + type).classList.toggle('visible', selectedSvcs[type]);
+  if (!selectedSvcs[type]) {
+    selectedScope[type] = null;
+    document.querySelectorAll('#scope-' + type + ' .scope-opt').forEach(el => el.classList.remove('selected'));
+  }
+  document.getElementById('svc-err').classList.remove('show');
+  updateBundleUI();
+}
+
+function setScope(type, level) {
+  selectedScope[type] = level;
+  const prefix = type === 'kitchen' ? 'k' : 'b';
+  ['minor','mid','major'].forEach(l => {
+    document.getElementById(prefix + '-' + l).classList.toggle('selected', l === level);
+  });
+  updateBundleUI();
+}
+
+// ── ESTIMATE BUILD ─────────────────────────────
+function buildEstimate() {
+  const { kBase, bBase, subtotal, discountAmt, low, high, mid, subMid, region, bundled } = calcEstimate();
+  const origEl = document.getElementById('est-original');
+  document.getElementById('est-amount').textContent = fmt(mid);
+  if (bundled && discountAmt > 0) {
+    origEl.textContent = fmt(subMid); origEl.style.display = 'inline';
+  } else { origEl.style.display = 'none'; }
+  document.getElementById('est-range').textContent = 'Estimated range: ' + fmt(low) + ' – ' + fmt(high);
+  document.getElementById('est-region').innerHTML = '&#128205; ' + region.name + ' regional pricing applied';
+  const kLabel = { minor: 'Kitchen — Minor Update', mid: 'Kitchen — Full Remodel', major: 'Kitchen — Luxury Remodel' };
+  const bLabel = { minor: 'Bath — Cosmetic Update', mid: 'Bath — Full Remodel', major: 'Bath — Luxury Remodel' };
+  let html = '';
+  if (selectedSvcs.kitchen && selectedScope.kitchen) html += rowHtml(kLabel[selectedScope.kitchen], fmt(kBase));
+  if (selectedSvcs.bath && selectedScope.bath)        html += rowHtml(bLabel[selectedScope.bath],    fmt(bBase));
+  if (bundled && discountAmt > 0) {
+    html += '<div class="est-row" style="border-top:1px solid rgba(255,255,255,.2);padding-top:8px;margin-top:4px"><span style="opacity:.8">Subtotal</span><span class="est-row-val" style="opacity:.8">' + fmt(subMid) + '</span></div>';
+    html += '<div class="est-discount-row"><span class="est-discount-lbl">&#127881; 10% Bundle Discount</span><span class="est-discount-val">− ' + fmt(discountAmt) + '</span></div>';
+    html += '<div class="est-after-discount"><span>Your bundled estimate</span><span>' + fmt(mid) + '</span></div>';
+  } else {
+    html += '<div class="est-total-row"><span>Midpoint estimate</span><span>' + fmt(mid) + '</span></div>';
+  }
+  document.getElementById('est-rows').innerHTML = html;
+}
+
+function rowHtml(label, val) {
+  return '<div class="est-row"><span class="est-row-label">' + label + '</span><span class="est-row-val">' + val + '</span></div>';
+}
+
+function getSvcsLabel() {
+  const kl = { minor: 'Kitchen (Minor)', mid: 'Kitchen (Full)', major: 'Kitchen (Luxury)' };
+  const bl = { minor: 'Bath (Cosmetic)', mid: 'Bath (Full)', major: 'Bath (Luxury)' };
+  const parts = [];
+  if (selectedSvcs.kitchen && selectedScope.kitchen) parts.push(kl[selectedScope.kitchen]);
+  if (selectedSvcs.bath    && selectedScope.bath)    parts.push(bl[selectedScope.bath]);
+  return parts.join(' + ') || '—';
+}
+
+function buildReview() {
+  buildEstimate();
+  const d = getFormData();
+  const { mid, discountAmt, bundled } = calcEstimate();
+  const rows = [
+    ['Name',       d.fname + ' ' + d.lname],
+    ['Phone',      d.phone],
+    ['Email',      d.email],
+    ['Address',    d.address || 'Not provided'],
+    ['Services',   getSvcsLabel()],
+    ['Bundle',     bundled ? '&#127881; 10% OFF — ' + fmt(discountAmt) + ' savings' : 'N/A'],
+    ['Property',   d.property || 'Not specified'],
+    ['Timeline',   d.timeline || 'Not specified'],
+    ['Photos',     photoFiles.length > 0 ? photoFiles.length + ' photo(s)' : 'None'],
+    ['Video',      videoBlob ? 'Attached' : 'None'],
+  ];
+  document.getElementById('review-list').innerHTML = rows.map(([k,v]) =>
+    '<div class="review-row"><span class="review-key">' + k + '</span><span class="review-val">' + v + '</span></div>'
+  ).join('');
+}
+
+// ── NAVIGATION ─────────────────────────────────
+function updateProgress() {
+  const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  for (let i = 1; i <= totalSteps; i++) {
+    const si = document.getElementById('si-' + i);
+    const sc = document.getElementById('sc-' + i);
+    si.className = 'step-pip';
+    if (i < currentStep) { si.classList.add('done'); sc.innerHTML = '&#10003;'; }
+    else if (i === currentStep) { si.classList.add('active'); sc.textContent = i; }
+    else { sc.textContent = i; }
+  }
+  // Show back buttons on steps 2+
+  document.querySelectorAll('.btn-bk').forEach(b => b.style.display = currentStep > 1 ? 'block' : 'none');
+}
+
+function showStep(n) {
+  document.querySelectorAll('.est-step').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('step-' + n);
+  if (panel) panel.classList.add('active');
+  if (n === totalSteps) buildReview();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goNext() {
+  if (currentStep === 1 && !v1()) return;
+  if (currentStep === 2 && !v2()) return;
+  if (currentStep === 3 && !v3()) return;
+  if (currentStep === totalSteps) { submitForm(); return; }
+  currentStep++;
+  showStep(currentStep);
+  updateProgress();
+}
+
+function goBack() {
+  if (currentStep <= 1) return;
+  currentStep--;
+  showStep(currentStep);
+  updateProgress();
+}
+
+// ── VALIDATION ─────────────────────────────────
+function showErr(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = show ? 'block' : 'none';
+}
+
+function v1() {
+  const any = selectedSvcs.kitchen || selectedSvcs.bath;
+  if (!any) { document.getElementById('svc-err').classList.add('show'); return false; }
+  if (selectedSvcs.kitchen && !selectedScope.kitchen) { alert('Please choose a scope for your Kitchen remodel.'); return false; }
+  if (selectedSvcs.bath && !selectedScope.bath) { alert('Please choose a scope for your Bathroom remodel.'); return false; }
+  return true;
+}
+
+function v2() {
+  let ok = true;
+  const addr = document.getElementById('address-input').value.trim();
+  showErr('err-address', !addr); if (!addr) ok = false;
+  const prop = document.getElementById('property-type').value;
+  showErr('err-property', !prop); if (!prop) ok = false;
+  return ok;
+}
+
+function v3() {
+  let ok = true;
+  showErr('err-fname', !document.getElementById('fname').value.trim()); if (!document.getElementById('fname').value.trim()) ok = false;
+  showErr('err-lname', !document.getElementById('lname').value.trim()); if (!document.getElementById('lname').value.trim()) ok = false;
+  showErr('err-phone', !document.getElementById('phone').value.trim()); if (!document.getElementById('phone').value.trim()) ok = false;
+  const em = document.getElementById('email').value.trim();
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+  showErr('err-email', !emailOk); if (!emailOk) ok = false;
+  return ok;
+}
+
+// ── PHOTOS ─────────────────────────────────────
+function handlePhotos(e) {
+  photoFiles = photoFiles.concat(Array.from(e.target.files)).slice(0, 10);
+  renderPhotos(); e.target.value = '';
+}
+function removePhoto(i) { photoFiles.splice(i, 1); renderPhotos(); }
+function renderPhotos() {
+  const grid = document.getElementById('photo-grid');
+  grid.innerHTML = '';
+  photoFiles.forEach((f, i) => {
+    const wrap = document.createElement('div'); wrap.className = 'photo-wrap';
+    const img = document.createElement('img'); img.className = 'photo-thumb'; img.src = URL.createObjectURL(f);
+    const del = document.createElement('button'); del.className = 'photo-del'; del.innerHTML = '✕';
+    del.onclick = () => removePhoto(i);
+    wrap.appendChild(img); wrap.appendChild(del); grid.appendChild(wrap);
+  });
+  document.getElementById('photo-count').textContent = photoFiles.length > 0 ? photoFiles.length + ' photo' + (photoFiles.length !== 1 ? 's' : '') + ' added' : '';
+  document.getElementById('add-more-btn').style.display = (photoFiles.length > 0 && photoFiles.length < 10) ? 'inline-flex' : 'none';
+}
+
+// ── VIDEO ──────────────────────────────────────
+async function toggleRecording() {
+  if (!isRecording) {
+    try {
+      cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: true });
+      const feed = document.getElementById('camera-feed');
+      feed.srcObject = cameraStream; feed.style.display = 'block';
+      document.getElementById('recorded-video').style.display = 'none';
+      recordedChunks = [];
+      let opts = {};
+      if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8')) opts = { mimeType: 'video/webm;codecs=vp8' };
+      else if (MediaRecorder.isTypeSupported('video/mp4')) opts = { mimeType: 'video/mp4' };
+      mediaRecorder = new MediaRecorder(cameraStream, opts);
+      mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
+      mediaRecorder.onstop = () => {
+        videoBlob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'video/webm' });
+        const vid = document.getElementById('recorded-video');
+        vid.src = URL.createObjectURL(videoBlob); vid.style.display = 'block';
+        feed.style.display = 'none';
+        document.getElementById('video-status').textContent = '✓ Video recorded successfully';
+        document.getElementById('remove-video-btn').style.display = 'block';
+        document.getElementById('record-btn').style.display = 'none';
+        if (cameraStream) cameraStream.getTracks().forEach(t => t.stop());
+      };
+      mediaRecorder.start(100);
+      isRecording = true; secondsLeft = 25;
+      const btn = document.getElementById('record-btn');
+      btn.classList.add('recording');
+      document.getElementById('rec-icon').innerHTML = '<span class="rec-dot"></span>';
+      document.getElementById('rec-text').textContent = 'Tap to stop';
+      document.getElementById('timer-wrap').style.display = 'block';
+      document.getElementById('secs').textContent = secondsLeft;
+      const fill = document.getElementById('timer-fill');
+      fill.style.transition = 'none'; fill.style.width = '100%';
+      setTimeout(() => { fill.style.transition = 'width 25s linear'; fill.style.width = '0%'; }, 50);
+      timerInterval = setInterval(() => { secondsLeft--; document.getElementById('secs').textContent = secondsLeft; if (secondsLeft <= 0) stopRecording(); }, 1000);
+    } catch(err) {
+      document.getElementById('video-status').textContent = 'Camera not accessible — please upload a file below.';
+    }
+  } else { stopRecording(); }
+}
+
+function stopRecording() {
+  isRecording = false; clearInterval(timerInterval);
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+  document.getElementById('record-btn').classList.remove('recording');
+  document.getElementById('rec-icon').textContent = '⏺';
+  document.getElementById('rec-text').textContent = 'Record a walkthrough video';
+  document.getElementById('timer-wrap').style.display = 'none';
+}
+
+function handleVideoUpload(e) {
+  const f = e.target.files[0]; if (!f) return;
+  videoBlob = f;
+  const vid = document.getElementById('recorded-video');
+  vid.src = URL.createObjectURL(f); vid.style.display = 'block';
+  document.getElementById('video-status').textContent = '✓ Video ready: ' + f.name;
+  document.getElementById('camera-feed').style.display = 'none';
+  document.getElementById('remove-video-btn').style.display = 'block';
+  document.getElementById('record-btn').style.display = 'none';
+}
+
+function removeVideo() {
+  videoBlob = null; recordedChunks = [];
+  const vid = document.getElementById('recorded-video'); vid.src = ''; vid.style.display = 'none';
+  document.getElementById('video-status').textContent = '';
+  document.getElementById('remove-video-btn').style.display = 'none';
+  document.getElementById('record-btn').style.display = 'flex';
+  document.getElementById('video-upload').value = '';
+  if (cameraStream) { cameraStream.getTracks().forEach(t => t.stop()); cameraStream = null; }
+}
+
+// ── FORM DATA + SUBMIT ─────────────────────────
+function getFormData() {
+  return {
+    fname:    document.getElementById('fname').value.trim(),
+    lname:    document.getElementById('lname').value.trim(),
+    phone:    document.getElementById('phone').value.trim(),
+    email:    document.getElementById('email').value.trim(),
+    address:  document.getElementById('address-input').value.trim(),
+    property: document.getElementById('property-type').value,
+    timeline: document.getElementById('timeline').value,
+    description: document.getElementById('description').value.trim(),
+  };
+}
+
+function submitForm() {
+  const d = getFormData();
+  const { low, high, mid, discountAmt, bundled, region, subtotal } = calcEstimate();
+  const bundleNote = bundled
+    ? '\n BUNDLE DEAL APPLIED\nSubtotal:  ' + fmt(Math.round((Math.round(subtotal*0.85/500)*500 + Math.round(subtotal*1.18/500)*500)/2/500)*500) + '\nDiscount:  10% OFF — ' + fmt(discountAmt) + ' savings\nFinal Est: ' + fmt(mid) + '\n'
+    : '';
+  const subject = encodeURIComponent((bundled ? 'BUNDLE DEAL — ' : '') + 'Kitchen/Bath Estimate Request — OE Services');
+  const body = encodeURIComponent(
+    'NEW ESTIMATE REQUEST — OE SERVICES\n\nCUSTOMER\nName:      ' + d.fname + ' ' + d.lname +
+    '\nPhone:     ' + d.phone + '\nEmail:     ' + d.email + '\nAddress:   ' + d.address +
+    '\n\nPROJECT\nServices:  ' + getSvcsLabel() + '\nProperty:  ' + (d.property || 'Not specified') +
+    '\nRegion:    ' + region.name + ' (' + region.multiplier + 'x)\nTimeline:  ' + (d.timeline || 'Not specified') +
+    '\nNotes:     ' + (d.description || 'None') +
+    '\n\nPRELIMINARY ESTIMATE\nRange:     ' + fmt(low) + ' – ' + fmt(high) + '\nMidpoint:  ' + fmt(mid) +
+    bundleNote +
+    '\nATTACHMENTS\nPhotos:    ' + (photoFiles.length > 0 ? photoFiles.length + ' photo(s)' : 'None') +
+    '\nVideo:     ' + (videoBlob ? 'Attached' : 'None') +
+    '\n\nSubmitted via OE Services estimate form'
+  );
+  window.location.href = 'mailto:ahernandez@oeservices.us?subject=' + subject + '&body=' + body;
+
+  // Show success
+  document.querySelectorAll('.est-step').forEach(p => { p.style.display = 'none'; });
+  document.getElementById('success-screen').style.display = 'block';
+  document.getElementById('success-est').textContent = bundled ? fmt(mid) + ' (bundled)' : fmt(mid);
+}
+</script>
+</body>
+</html>
