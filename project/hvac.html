@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Free HVAC Estimate | OE Services — Instant Pricing &amp; Rebates</title>
+<meta name="description" content="Get an instant HVAC, window or insulation estimate. Real regional pricing, every rebate you qualify for — federal IRA, state and utility incentives." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="assets/styles.css?v=4" />
+</head>
+<body>
+
+<header class="est-top">
+  <div class="container">
+    <a href="index.html" class="back">← Back to OE Services</a>
+    <a href="index.html" class="logo"><img src="assets/oe-logo.png" alt="OE Services" /></a>
+    <a href="tel:18055032787" class="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.13 4.18 2 2 0 0 1 4.12 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(805) 503-2787</a>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="container">
+    <div class="progress-row"><span data-progress-idx>Step 1 of 5</span><span class="right" data-progress-label>Your details</span></div>
+    <div class="progress-rail"><div class="progress-bar"></div></div>
+  </div>
+</div>
+
+<main class="est-page">
+<div class="est-wrap" id="wiz">
+
+  <!-- Step 1 -->
+  <section class="step" data-label="Your details">
+    <div class="step-head">
+      <div class="kicker">Step 01</div>
+      <h2>Get your free HVAC estimate</h2>
+      <p>Real regional pricing for HVAC, windows and insulation — plus every rebate you qualify for. No obligation.</p>
+    </div>
+    <div class="q-block">
+      <div class="field"><label>Full name</label><input type="text" required /></div>
+      <div class="field-grid">
+        <div class="field"><label>Phone</label><input type="tel" required /></div>
+        <div class="field"><label>Email</label><input type="email" required /></div>
+      </div>
+      <div class="field"><label>Street address</label><input type="text" required /></div>
+      <div class="field-grid-3">
+        <div class="field"><label>City</label><input type="text" required /></div>
+        <div class="field"><label>State</label><select required><option value="">Select</option><option>NV</option><option>CA</option><option>AZ</option></select></div>
+        <div class="field"><label>ZIP</label><input type="text" required maxlength="5" /></div>
+      </div>
+    </div>
+    <div class="nav-row"><span></span><button class="btn btn-primary" data-next>Continue →</button></div>
+  </section>
+
+  <!-- Step 2: Services -->
+  <section class="step" data-label="Services">
+    <div class="step-head">
+      <div class="kicker">Step 02</div>
+      <h2>What do you need?</h2>
+      <p>Select all services — we'll show pricing and which rebates apply to each.</p>
+    </div>
+    <div class="card-grid" data-card-group="multi">
+      <div class="opt-card" data-key="new"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><h4>New HVAC installation</h4><p>Full system for new construction or first-time install</p><div class="price">From $6,500</div></div>
+      <div class="opt-card" data-key="replace"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><h4>HVAC removal &amp; replacement</h4><p>Remove old unit, install new energy-efficient system</p><div class="price">From $4,200</div></div>
+      <div class="opt-card" data-key="windows"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><h4>Energy-efficient windows</h4><p>Double/triple pane, low-E glass, utility savings</p><div class="price">From $580/window</div></div>
+      <div class="opt-card" data-key="insul"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><h4>Insulation &amp; weatherization</h4><p>Attic, wall insulation, air sealing</p><div class="price">From $1,800</div></div>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-prev>← Back</button><button class="btn btn-primary" data-next>Continue →</button></div>
+  </section>
+
+  <!-- Step 3: Details -->
+  <section class="step" data-label="Project details">
+    <div class="step-head">
+      <div class="kicker">Step 03</div>
+      <h2>Project details</h2>
+      <p>Just a few specifics so we can dial in your number.</p>
+    </div>
+
+    <div class="q-block">
+      <h3>HVAC specifics</h3>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Home size (sq ft)</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Under 1,000</button><button class="chip">1,000–1,500</button><button class="chip">1,500–2,500</button><button class="chip">2,500–3,500</button><button class="chip">Over 3,500</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">System type</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Central AC only</button><button class="chip">Heat pump</button><button class="chip">Gas furnace + AC</button><button class="chip">Mini-split</button><button class="chip">Not sure</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Number of zones</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 0"><button class="chip">1</button><button class="chip">2</button><button class="chip">3+</button></div>
+    </div>
+
+    <div class="q-block">
+      <h3>Windows</h3>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Number of windows</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">1–5</button><button class="chip">6–10</button><button class="chip">11–20</button><button class="chip">20+</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Window type</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 0"><button class="chip">Single → double</button><button class="chip">Double → triple</button><button class="chip">Custom</button><button class="chip">Not sure</button></div>
+    </div>
+
+    <div class="q-block">
+      <h3>Insulation</h3>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Areas</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Attic</button><button class="chip">Walls</button><button class="chip">Crawlspace</button><button class="chip">Full home</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Current insulation</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 0"><button class="chip">None</button><button class="chip">Minimal</button><button class="chip">Moderate</button><button class="chip">Don't know</button></div>
+    </div>
+
+    <div class="q-block">
+      <h3>Your home</h3>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Home built</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Before 1978</button><button class="chip">1978–2000</button><button class="chip">2000–2015</button><button class="chip">After 2015</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Home type</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 0"><button class="chip">Single family</button><button class="chip">Townhouse</button><button class="chip">Condo</button><button class="chip">Multi-family</button></div>
+    </div>
+
+    <div class="nav-row"><button class="btn btn-ghost" data-prev>← Back</button><button class="btn btn-primary" data-next>See my estimate →</button></div>
+  </section>
+
+  <!-- Step 4: Estimate -->
+  <section class="step" data-label="Your estimate">
+    <div class="step-head">
+      <div class="kicker">Step 04</div>
+      <h2>Your estimate range</h2>
+      <p>Regional pricing for your area. Includes all permits, planning &amp; coordination. OE Services handles all permit applications, plan submittals, and inspection scheduling on your behalf.</p>
+    </div>
+    <div class="est-out">
+      <div class="est-out-hero">
+        <div class="lbl">Total estimated range</div>
+        <div class="price h-display">$8,400 – $14,200</div>
+        <div class="note">Includes labor · materials · permits · disposal · contingency</div>
+      </div>
+      <div class="est-out-body">
+        <div class="line-item"><span class="lbl">HVAC removal &amp; replacement — 3-ton heat pump</span><span class="val">$7,500 – $12,400</span></div>
+        <div class="line-item"><span class="lbl">Permit + inspection (CA region)</span><span class="val">$450 – $1,200</span></div>
+        <div class="line-item"><span class="lbl">Old unit removal &amp; haul-off</span><span class="val">$250 – $500</span></div>
+
+        <div class="rebate-box">
+          <h4><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Rebates &amp; tax credits you qualify for</h4>
+          <div class="rebate-line"><span>IRA 25C HVAC Credit (federal)</span><span class="v">−$2,000</span></div>
+          <div class="rebate-line"><span>IRA HEEHRA Electrification Rebate</span><span class="v">−$1,750</span></div>
+          <div class="rebate-line"><span>CA Energy Upgrade California</span><span class="v">−$650</span></div>
+          <div class="rebate-total"><span>Estimated net cost</span><span>$4,000 – $9,800</span></div>
+        </div>
+
+        <div class="banner">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <div><h4>We file every rebate on your behalf</h4><p>Federal IRA 25C/HEEHRA, CA SGIP, NV Energy and APS/SRP utility rebates — all paperwork handled.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-prev>← Back</button><button class="btn btn-primary" data-next>Confirm →</button></div>
+  </section>
+
+  <!-- Step 5 -->
+  <section class="step" data-label="Confirmation">
+    <div class="step-head">
+      <div class="kicker">Step 05</div>
+      <h2>You're all set</h2>
+      <p>We'll review your project details and reach out within 2 hours.</p>
+    </div>
+    <div class="next-steps">
+      <div class="ns-card"><div class="num">1</div><h4>We'll call within 2 hours</h4><p>A local specialist reviews your details and reaches out to confirm.</p></div>
+      <div class="ns-card"><div class="num">2</div><h4>Free on-site inspection</h4><p>We come to you, confirm scope, no cost, no obligation.</p></div>
+      <div class="ns-card"><div class="num">3</div><h4>Detailed written quote</h4><p>Line-item breakdown of materials, labor, and timeline. No hidden fees.</p></div>
+      <div class="ns-card"><div class="num">4</div><h4>You decide</h4><p>Zero pressure. We earn your business by being the best option.</p></div>
+    </div>
+    <div class="nav-row" style="justify-content:center;margin-top:32px"><a class="btn btn-ghost" href="index.html">← Back to OE Services</a></div>
+  </section>
+
+</div>
+</main>
+
+<footer class="foot" style="padding:32px 0">
+  <div class="container foot-bottom" style="border:none;padding-top:0">
+    <div>© 2026 OE Services LLC · <a href="tel:18055032787" style="color:#fff">(805) 503-2787</a></div>
+    <div class="lic">NV #0093240 · CA #1057069 · AZ ROC #354397</div>
+  </div>
+</footer>
+
+<script src="assets/estimator.js"></script>
+<script>
+  const root = document.getElementById('wiz');
+  OE.bindCards(root);
+  OE.Wizard(root);
+</script>
+<script src="assets/nav.js" defer></script>
+</body>
+</html>

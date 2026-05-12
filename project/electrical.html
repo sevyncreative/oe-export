@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Free Electrical Estimate | OE Services</title>
+<meta name="description" content="Get an instant electrical estimate. Panel upgrades, EV charger installs, generator & battery backup, new circuits. Licensed in NV, CA, AZ." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="assets/styles.css?v=4" />
+</head>
+<body>
+
+<header class="est-top">
+  <div class="container">
+    <a href="index.html" class="back">← Back to OE Services</a>
+    <a href="index.html" class="logo"><img src="assets/oe-logo.png" alt="OE Services" /></a>
+    <a href="tel:18055032787" class="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.13 4.18 2 2 0 0 1 4.12 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(805) 503-2787</a>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="container">
+    <div class="progress-row">
+      <span data-progress-idx>Step 1 of 5</span>
+      <span class="right" data-progress-label>Your details</span>
+    </div>
+    <div class="progress-rail"><div class="progress-bar"></div></div>
+  </div>
+</div>
+
+<main class="est-page">
+<div class="est-wrap" id="wiz">
+
+  <!-- Step 1: Contact -->
+  <section class="step" data-label="Your details">
+    <div class="step-head">
+      <div class="kicker">Step 01</div>
+      <h2>Get your free estimate</h2>
+      <p>Takes under 2 minutes. Real regional pricing for panel upgrades, EV chargers, generators &amp; more — plus every rebate you qualify for. No obligation.</p>
+    </div>
+    <div class="q-block">
+      <div class="field"><label>Full name</label><input type="text" required placeholder="Jane Smith" /></div>
+      <div class="field-grid">
+        <div class="field"><label>Phone</label><input type="tel" required placeholder="(555) 555-5555" /></div>
+        <div class="field"><label>Email</label><input type="email" required placeholder="you@email.com" /></div>
+      </div>
+      <div class="field"><label>Street address</label><input type="text" required placeholder="123 Main St" /></div>
+      <div class="field-grid-3">
+        <div class="field"><label>City</label><input type="text" required /></div>
+        <div class="field"><label>State</label><select required><option value="">Select</option><option>NV</option><option>CA</option><option>AZ</option></select></div>
+        <div class="field"><label>ZIP</label><input type="text" required maxlength="5" /></div>
+      </div>
+    </div>
+    <div class="nav-row"><span></span><button class="btn btn-primary" data-next>Continue →</button></div>
+  </section>
+
+  <!-- Step 2: Services -->
+  <section class="step" data-label="Services">
+    <div class="step-head">
+      <div class="kicker">Step 02</div>
+      <h2>What do you need?</h2>
+      <p>Select all services — we'll show pricing and which rebates &amp; tax credits apply to each.</p>
+    </div>
+    <div class="card-grid-3" data-card-group="multi" data-required-group="1">
+      <div class="opt-card" data-key="panel">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Electrical panel upgrade</h4><p>100→200A or 200→400A service upgrade with new main panel</p>
+        <div class="price">From $2,200</div>
+      </div>
+      <div class="opt-card" data-key="ev">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>EV charger installation</h4><p>Level 2 home charging — Tesla, NEMA 14-50, hardwired</p>
+        <div class="price">From $850</div>
+      </div>
+      <div class="opt-card" data-key="gen">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Standby generator</h4><p>Whole-home backup generator with automatic transfer switch</p>
+        <div class="price">From $7,800</div>
+      </div>
+      <div class="opt-card" data-key="bat">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Battery backup system</h4><p>Tesla Powerwall / Enphase / SolarEdge home battery</p>
+        <div class="price">From $11,500</div>
+      </div>
+      <div class="opt-card" data-key="circ">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>New circuits / outlets</h4><p>Dedicated circuits, kitchen upgrades, outlet additions</p>
+        <div class="price">From $450</div>
+      </div>
+      <div class="opt-card" data-key="rewire">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Rewire / troubleshoot</h4><p>Partial rewire, code corrections, fault diagnosis</p>
+        <div class="price">From $350</div>
+      </div>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-prev>← Back</button><button class="btn btn-primary" data-next>Continue →</button></div>
+  </section>
+
+  <!-- Step 3: Project details -->
+  <section class="step" data-label="Project details">
+    <div class="step-head">
+      <div class="kicker">Step 03</div>
+      <h2>A few details</h2>
+      <p>This helps us tune your estimate to your exact home and equipment.</p>
+    </div>
+
+    <div class="q-block">
+      <h3>Panel upgrade specifics</h3>
+      <div class="sub">Skip if not applicable.</div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Current panel size</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">60A or less</button><button class="chip">100A</button><button class="chip">150A</button><button class="chip">200A or more</button><button class="chip">Don't know</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Panel location</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Interior garage</button><button class="chip">Exterior wall</button><button class="chip">Basement</button><button class="chip">Don't know</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Service mast replacement needed?</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 0"><button class="chip">Yes</button><button class="chip">No</button><button class="chip">Don't know</button></div>
+    </div>
+
+    <div class="q-block">
+      <h3>EV charger specifics</h3>
+      <div class="sub">Skip if not applicable.</div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">EV brand</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Tesla</button><button class="chip">Ford</button><button class="chip">GM</button><button class="chip">BMW</button><button class="chip">Other</button><button class="chip">Not purchased yet</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Outlet type</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Hardwired 48A</button><button class="chip">NEMA 14-50</button><button class="chip">NEMA 6-50</button><button class="chip">Don't know</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Panel capacity available?</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 0"><button class="chip">Yes</button><button class="chip">No</button><button class="chip">Not sure</button></div>
+    </div>
+
+    <div class="q-block">
+      <h3>Generator &amp; battery</h3>
+      <div class="sub">Skip if not applicable.</div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Generator size</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Partial home 7–12kW</button><button class="chip">Whole home 14–20kW</button><button class="chip">Large home 22kW+</button><button class="chip">Not sure</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Fuel</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Natural gas</button><button class="chip">Propane</button><button class="chip">Not sure</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Battery brand</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Tesla Powerwall</button><button class="chip">Enphase</button><button class="chip">SolarEdge</button><button class="chip">Other</button><button class="chip">Not sure</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Paired with solar?</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 0"><button class="chip">Yes</button><button class="chip">No</button><button class="chip">Planning solar</button></div>
+    </div>
+
+    <div class="q-block">
+      <h3>Your home</h3>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Home built</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 16px"><button class="chip">Before 1978</button><button class="chip">1978–2000</button><button class="chip">2000–2015</button><button class="chip">After 2015</button></div>
+      <label style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--muted)">Home type</label>
+      <div class="radio-row" data-chip-group style="margin:8px 0 0"><button class="chip">Single family</button><button class="chip">Townhouse</button><button class="chip">Condo</button><button class="chip">Multi-family</button><button class="chip">Commercial</button></div>
+    </div>
+
+    <div class="nav-row"><button class="btn btn-ghost" data-prev>← Back</button><button class="btn btn-primary" data-next>See my estimate →</button></div>
+  </section>
+
+  <!-- Step 4: Estimate Output -->
+  <section class="step" data-label="Your estimate">
+    <div class="step-head">
+      <div class="kicker">Step 04</div>
+      <h2>Your estimate range</h2>
+      <p>All-in pricing (labor, materials, permits, contingency). Every rebate you qualify for, automatically. Zero obligation.</p>
+    </div>
+
+    <div class="est-out">
+      <div class="est-out-hero">
+        <div class="lbl">Total estimated range</div>
+        <div class="price h-display">$3,400 – $5,800</div>
+        <div class="note">Includes labor · materials · permits · contingency</div>
+      </div>
+      <div class="est-out-body">
+        <div class="line-item"><span class="lbl">Electrical panel upgrade — 200A</span><span class="val">$2,400 – $4,000</span></div>
+        <div class="line-item"><span class="lbl">EV charger installation — NEMA 14-50</span><span class="val">$850 – $1,400</span></div>
+        <div class="line-item"><span class="lbl">Permit + inspection</span><span class="val">$150 – $400</span></div>
+
+        <div class="rebate-box">
+          <h4>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            Rebates &amp; tax credits you qualify for
+          </h4>
+          <div class="rebate-line"><span>IRA 30C EV Charging Credit (federal)</span><span class="v">−$255</span></div>
+          <div class="rebate-line"><span>IRA 25C Panel Upgrade Credit (federal)</span><span class="v">−$600</span></div>
+          <div class="rebate-line"><span>NV Energy PowerShift Battery Program</span><span class="v">Applies</span></div>
+          <div class="rebate-total"><span>Estimated net cost</span><span>$2,545 – $4,945</span></div>
+        </div>
+
+        <div class="banner">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/></svg></div>
+          <div><h4>Workmanship-backed install</h4><p>Every install permitted, inspected, and backed by our written workmanship warranty. We file all rebate paperwork on your behalf.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row"><button class="btn btn-ghost" data-prev>← Back</button><button class="btn btn-primary" data-next>Confirm &amp; schedule →</button></div>
+  </section>
+
+  <!-- Step 5: Confirmation -->
+  <section class="step" data-label="Confirmation">
+    <div class="step-head">
+      <div class="kicker">Step 05</div>
+      <h2>You're all set</h2>
+      <p>We'll review your project details and reach out within 2 hours.</p>
+    </div>
+
+    <div class="q-block">
+      <h3>Project summary</h3>
+      <div class="line-item"><span class="lbl">Services</span><span class="val">Panel upgrade · EV charger</span></div>
+      <div class="line-item"><span class="lbl">Address</span><span class="val">On file</span></div>
+      <div class="line-item"><span class="lbl">Estimated range</span><span class="val">$3,400 – $5,800</span></div>
+    </div>
+
+    <h3 style="font-family:var(--font-head);font-size:22px;text-transform:uppercase;margin:32px 0 8px">What happens next</h3>
+    <div class="next-steps">
+      <div class="ns-card"><div class="num">1</div><h4>We'll call within 2 hours</h4><p>A local specialist reviews your details and reaches out to confirm.</p></div>
+      <div class="ns-card"><div class="num">2</div><h4>Free on-site inspection</h4><p>We come to you, confirm scope, no cost, no obligation.</p></div>
+      <div class="ns-card"><div class="num">3</div><h4>Detailed written quote</h4><p>Line-item breakdown of materials, labor, and timeline. No hidden fees.</p></div>
+      <div class="ns-card"><div class="num">4</div><h4>You decide</h4><p>Zero pressure. We earn your business by being the best option, not the loudest.</p></div>
+    </div>
+
+    <div class="nav-row" style="justify-content:center;margin-top:32px"><a class="btn btn-ghost" href="index.html">← Back to OE Services</a></div>
+  </section>
+
+</div>
+</main>
+
+<footer class="foot" style="padding:32px 0">
+  <div class="container foot-bottom" style="border:none;padding-top:0">
+    <div>© 2026 OE Services LLC · <a href="tel:18055032787" style="color:#fff">(805) 503-2787</a> · <a href="mailto:ahernandez@oeservices.us" style="color:#fff">ahernandez@oeservices.us</a></div>
+    <div class="lic">NV #0093240 · CA #1057069 · AZ ROC #354397</div>
+  </div>
+</footer>
+
+<script src="assets/estimator.js"></script>
+<script>
+  const root = document.getElementById('wiz');
+  OE.bindCards(root);
+  OE.Wizard(root);
+</script>
+<script src="assets/nav.js" defer></script>
+</body>
+</html>
