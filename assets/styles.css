@@ -352,12 +352,14 @@ section.tight{padding:var(--s-7) 0}
   background:#fff;border-radius:var(--r-lg);overflow:hidden;
   border:1px solid var(--line);
   display:flex;flex-direction:column;
+  min-width:0;
   transition:.2s;
 }
 .svc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--blue-light)}
 .svc-cover{
-  aspect-ratio:16/10;background:linear-gradient(160deg,#0d4d7a,#1a2733);
+  width:100%;aspect-ratio:16/10;background:linear-gradient(160deg,#0d4d7a,#1a2733);
   position:relative;overflow:hidden;color:#fff;display:grid;place-items:center;
+  flex-shrink:0;
 }
 .svc-cover::before{
   content:"";position:absolute;inset:0;opacity:.13;
