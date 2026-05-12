@@ -2,7 +2,7 @@ import * as React from "react"
 import { addPropertyControls, ControlType } from "framer"
 
 /**
- * About Us — Landon Robinson Foundation
+ * About Us - Landon Robinson Foundation
  *
  * Drop-in Framer code component. Self-contained: no external CSS,
  * no external assets. Paste into a new Code component in Framer,
@@ -25,14 +25,19 @@ const FONT_BODY =
 
 type Props = {
     accent?: string
-    ctaUrl?: string
-    secondaryCtaUrl?: string
+    founderImage?: string
+    heroCtaUrl?: string
+    heroSecondaryUrl?: string
+    announceCtaUrl?: string
+    announceSecondaryUrl?: string
 }
 
 export default function AboutUs(props: Props) {
     const accent = props.accent || GOLD
-    const ctaUrl = props.ctaUrl || "#donate"
-    const secondaryCtaUrl = props.secondaryCtaUrl || "#mission"
+    const heroCtaUrl = props.heroCtaUrl || "#donate"
+    const heroSecondaryUrl = props.heroSecondaryUrl || "#mission"
+    const announceCtaUrl = props.announceCtaUrl || "#donate"
+    const announceSecondaryUrl = props.announceSecondaryUrl || "#mission"
 
     return (
         <div style={S.root}>
@@ -61,13 +66,13 @@ export default function AboutUs(props: Props) {
                         <p style={S.heroLead}>
                             The Landon Robinson Foundation is a mental health
                             advocacy organization built to confront one of the
-                            most urgent challenges facing young people today —
+                            most urgent challenges facing young people today:
                             youth suicide, and the silent struggles that too
                             often go unseen, unspoken, and unsupported.
                         </p>
                         <div style={S.heroCtas}>
                             <a
-                                href={ctaUrl}
+                                href={heroCtaUrl}
                                 style={{
                                     ...S.btn,
                                     ...S.btnPrimary,
@@ -78,7 +83,7 @@ export default function AboutUs(props: Props) {
                                 Support the mission →
                             </a>
                             <a
-                                href={secondaryCtaUrl}
+                                href={heroSecondaryUrl}
                                 style={{ ...S.btn, ...S.btnGhost }}
                             >
                                 Read our mission
@@ -109,7 +114,7 @@ export default function AboutUs(props: Props) {
                                 Our Mission
                             </div>
                             <h2 style={S.h2}>
-                                Awareness, education, and real support — for
+                                Awareness, education, and real support for
                                 the young people who need it most.
                             </h2>
                         </div>
@@ -124,7 +129,7 @@ export default function AboutUs(props: Props) {
                             </p>
                             <p style={S.body}>
                                 We believe mental health belongs in every
-                                conversation — at home, in the locker room, in
+                                conversation, at home, in the locker room, in
                                 the classroom, and on the field. Our work is
                                 built to break the silence and replace it with
                                 real tools, real training, and real support
@@ -163,7 +168,7 @@ export default function AboutUs(props: Props) {
                             num="01"
                             accent={accent}
                             title="Research & Awareness"
-                            body="We promote evidence-based research to strengthen our understanding of youth suicide and support more effective prevention efforts — because what we measure, we can move."
+                            body="We promote evidence-based research to strengthen our understanding of youth suicide and support more effective prevention efforts, because what we measure, we can move."
                             icon={
                                 <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.8">
                                     <circle cx="11" cy="11" r="7" />
@@ -175,7 +180,7 @@ export default function AboutUs(props: Props) {
                             num="02"
                             accent={accent}
                             title="Youth Empowerment"
-                            body="We equip young people, families, and communities with education and training that encourage honest conversations about mental health — and help break the silence surrounding emotional distress."
+                            body="We equip young people, families, and communities with education and training that encourage honest conversations about mental health and help break the silence surrounding emotional distress."
                             icon={
                                 <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.8">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -187,7 +192,7 @@ export default function AboutUs(props: Props) {
                             num="03"
                             accent={accent}
                             title="Movement-Focused Programs"
-                            body="We incorporate physical activity as a protective tool — reducing depression, strengthening well-being, and giving young people constructive outlets for stress, struggle, and recovery."
+                            body="We incorporate physical activity as a protective tool, reducing depression, strengthening well-being, and giving young people constructive outlets for stress, struggle, and recovery."
                             icon={
                                 <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.8">
                                     <path d="M13 2L3 14h7v8l10-12h-7z" />
@@ -206,24 +211,36 @@ export default function AboutUs(props: Props) {
                             <div
                                 style={{
                                     ...S.founderPortrait,
-                                    background:
-                                        "linear-gradient(160deg, #1b3358 0%, #061227 100%)",
+                                    ...(props.founderImage
+                                        ? {
+                                              backgroundImage: `url(${props.founderImage})`,
+                                              backgroundSize: "cover",
+                                              backgroundPosition: "center top",
+                                          }
+                                        : {
+                                              background:
+                                                  "linear-gradient(160deg, #1b3358 0%, #061227 100%)",
+                                          }),
                                 }}
                             >
-                                <div style={S.jersey}>
-                                    <span style={S.jerseyLabel}>
-                                        DEFENSIVE TACKLE
-                                    </span>
-                                    <span
-                                        style={{
-                                            ...S.jerseyNumber,
-                                            color: accent,
-                                        }}
-                                    >
-                                        LR
-                                    </span>
-                                    <span style={S.jerseyName}>ROBINSON</span>
-                                </div>
+                                {!props.founderImage && (
+                                    <div style={S.jersey}>
+                                        <span style={S.jerseyLabel}>
+                                            DEFENSIVE TACKLE
+                                        </span>
+                                        <span
+                                            style={{
+                                                ...S.jerseyNumber,
+                                                color: accent,
+                                            }}
+                                        >
+                                            LR
+                                        </span>
+                                        <span style={S.jerseyName}>
+                                            ROBINSON
+                                        </span>
+                                    </div>
+                                )}
                             </div>
                             <div style={S.founderMeta}>
                                 <div style={S.metaRow}>
@@ -290,7 +307,7 @@ export default function AboutUs(props: Props) {
                             </p>
                             <p style={{ ...S.body, color: "rgba(255,255,255,0.82)" }}>
                                 He was selected by the Cincinnati Bengals with
-                                the 226th overall pick in the 2026 NFL Draft —
+                                the 226th overall pick in the 2026 NFL Draft,
                                 announced in connection with the Pat Tillman
                                 tradition that honors service, character, and
                                 conviction.
@@ -333,7 +350,7 @@ export default function AboutUs(props: Props) {
                             <strong style={{ color: NAVY }}>
                                 Strong Minds. Strong Bodies. Stronger Futures.
                             </strong>{" "}
-                            — the foundation is dedicated to increasing
+                            the foundation is dedicated to increasing
                             awareness of youth suicide, expanding mental
                             health education, and advancing movement-based
                             programs that support resilience, well-being, and
@@ -342,7 +359,7 @@ export default function AboutUs(props: Props) {
                         </p>
                         <div style={S.announceCtas}>
                             <a
-                                href={ctaUrl}
+                                href={announceCtaUrl}
                                 style={{
                                     ...S.btn,
                                     ...S.btnPrimary,
@@ -353,7 +370,7 @@ export default function AboutUs(props: Props) {
                                 Support the mission →
                             </a>
                             <a
-                                href={secondaryCtaUrl}
+                                href={announceSecondaryUrl}
                                 style={{
                                     ...S.btn,
                                     ...S.btnGhost,
@@ -716,14 +733,28 @@ addPropertyControls(AboutUs, {
         title: "Accent",
         defaultValue: GOLD,
     },
-    ctaUrl: {
+    founderImage: {
+        type: ControlType.Image,
+        title: "Founder Photo",
+    },
+    heroCtaUrl: {
         type: ControlType.Link,
-        title: "Primary CTA",
+        title: "Hero: Primary Button",
         defaultValue: "#donate",
     },
-    secondaryCtaUrl: {
+    heroSecondaryUrl: {
         type: ControlType.Link,
-        title: "Secondary CTA",
+        title: "Hero: Secondary Button",
+        defaultValue: "#mission",
+    },
+    announceCtaUrl: {
+        type: ControlType.Link,
+        title: "Announce: Primary Button",
+        defaultValue: "#donate",
+    },
+    announceSecondaryUrl: {
+        type: ControlType.Link,
+        title: "Announce: Secondary Button",
         defaultValue: "#mission",
     },
 })
