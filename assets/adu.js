@@ -105,10 +105,10 @@ function onZipInput(val) {
     const match = zipToStateRegion(clean);
     if (match) {
       region.value = match.state + ' — ' + match.region;
-      region.style.color = '#fbbf24';
+      region.style.color = '#1D6FA4';
     } else {
       region.value = 'ZIP not in CA / NV / AZ';
-      region.style.color = '#f87171';
+      region.style.color = '#c0392b';
     }
   } else {
     region.value = '';
