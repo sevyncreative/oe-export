@@ -10,7 +10,8 @@
     {href:'hvac.html',         label:'HVAC'},
     {href:'roofing.html',      label:'Roofing'},
     {href:'kitchen-bath.html', label:'Kitchen & Bath'},
-    {href:'adu.html',          label:'ADU & Builds'},
+    {href:'adu.html',          label:'ADU'},
+    {href:'commercial.html',   label:'Commercial'},
   ];
 
   const burger = document.createElement('button');
