@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OE Services | Electrical, HVAC, Roofing, Remodels & ADUs — NV · CA · AZ</title>
+<meta name="description" content="OE Services — licensed electrical & general contractor serving Nevada, California & Arizona. Instant regional estimates for electrical, HVAC, roofing, kitchen & bath, and ADUs.">
+<meta name="theme-color" content="#0b1622">
+<meta property="og:title" content="OE Services | Electrical, HVAC, Roofing & ADUs">
+<meta property="og:description" content="Instant, transparent regional estimates. Licensed in NV, CA, AZ.">
+<meta property="og:image" content="assets/oe-logo-2026.png">
+<link rel="icon" href="assets/oe-logo-2026.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:80px 0 90px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.hero h1 .grad{background:linear-gradient(120deg,var(--cyan),var(--blue-bright));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-size:20px;color:var(--ink-soft);max-width:540px;margin:24px 0 34px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+.hero-trust{display:flex;gap:28px;flex-wrap:wrap}
+.hero-trust .ti{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-soft);font-weight:500}
+.hero-trust svg{width:18px;height:18px;color:var(--green)}
+/* floating estimator preview card */
+.hero-card{position:relative;border-radius:var(--r-lg);padding:28px;
+  background:linear-gradient(165deg,rgba(29,111,164,.22),rgba(255,255,255,.03));
+  border:1px solid var(--line-2);box-shadow:var(--shadow);animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero-card::before{content:"";position:absolute;inset:0;border-radius:var(--r-lg);padding:1px;
+  background:linear-gradient(135deg,var(--cyan),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:.6}
+.hc-label{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+.hc-amount{font-family:var(--display);font-size:46px;font-weight:800;line-height:1;margin-bottom:4px}
+.hc-meta{font-size:13px;color:var(--ink-soft);margin-bottom:20px}
+.hc-bars{display:flex;flex-direction:column;gap:11px}
+.hc-bar{height:38px;border-radius:9px;background:rgba(255,255,255,.05);position:relative;overflow:hidden;display:flex;align-items:center;padding:0 14px;font-size:13px;color:var(--ink-soft)}
+.hc-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:9px;background:linear-gradient(90deg,rgba(29,111,164,.5),rgba(56,225,255,.25));animation:grow 1.4s var(--ease) forwards;width:0}
+.hc-bar span{position:relative;z-index:1}
+@keyframes grow{to{width:var(--w)}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:44px}.hero-card{max-width:440px}}
+
+/* ---------- Stats strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:40px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{text-align:center}
+.stat b{display:block;font-family:var(--display);font-size:38px;font-weight:800;color:var(--white)}
+.stat span{font-size:13.5px;color:var(--ink-soft)}
+@media(max-width:680px){.stats{grid-template-columns:1fr 1fr;gap:30px}}
+
+/* ---------- Service cards ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:920px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.svc-grid{grid-template-columns:1fr}}
+.svc{position:relative;padding:30px;border-radius:var(--r);overflow:hidden;
+  background:linear-gradient(165deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
+  border:1px solid var(--line);transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;cursor:pointer;display:block}
+.svc:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:var(--shadow-blue)}
+.svc-ic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;font-size:27px;
+  background:linear-gradient(135deg,rgba(29,111,164,.35),rgba(56,225,255,.18));margin-bottom:18px;
+  transition:transform .35s var(--ease)}
+.svc:hover .svc-ic{transform:scale(1.08) rotate(-4deg)}
+.svc h3{margin-bottom:8px;font-size:21px}
+.svc p{color:var(--ink-soft);font-size:14.5px;margin-bottom:16px}
+.svc .price{font-family:var(--mono);font-size:14px;color:var(--cyan);letter-spacing:.04em}
+.svc .go{position:absolute;top:28px;right:28px;color:var(--ink-mute);transition:.3s var(--ease)}
+.svc:hover .go{color:var(--cyan);transform:translate(4px,-4px)}
+
+/* ---------- How it works ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;counter-reset:s}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.step-c{position:relative;padding:30px;border-radius:var(--r);border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.step-c::before{counter-increment:s;content:"0" counter(s);font-family:var(--display);font-weight:800;font-size:54px;
+  color:transparent;-webkit-text-stroke:1.5px rgba(56,225,255,.4);display:block;margin-bottom:14px;line-height:1}
+.step-c h3{font-size:19px;margin-bottom:8px}
+.step-c p{color:var(--ink-soft);font-size:14.5px}
+
+/* ---------- CTA band ---------- */
+.cta-band{margin:0 auto;max-width:var(--maxw);border-radius:var(--r-lg);padding:64px 48px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(29,111,164,.4),rgba(56,225,255,.12));border:1px solid var(--line-2)}
+.cta-band h2{margin-bottom:14px}.cta-band p{color:var(--ink-soft);font-size:18px;margin-bottom:30px}
+.cta-band .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img src="assets/oe-logo-2026.png" alt="OE Services"><span><b>OE</b> Services</span></a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    <div class="nav-links" id="navlinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="estimators/estimate.html">Get estimate</a>
+      <a class="nav-phone" href="tel:8055032787">📞 (805) 503-2787</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow reveal"><span class="dot"></span> Licensed NV · CA · AZ</div>
+      <h1 class="reveal d1">Your project, <span class="grad">priced in minutes.</span></h1>
+      <p class="hero-sub reveal d2">Electrical, HVAC, roofing, kitchen &amp; bath remodels and ADUs — get a real, region-accurate estimate before anyone steps on your property. Transparent from day one.</p>
+      <div class="hero-cta reveal d3">
+        <a class="btn btn-cyan lg" href="estimators/estimate.html">Get my instant estimate
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost lg" href="tel:8055032787">Talk to a contractor</a>
+      </div>
+      <div class="hero-trust reveal d4">
+        <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Licensed &amp; insured</div>
+        <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Real regional pricing</div>
+        <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> No-obligation quotes</div>
+      </div>
+    </div>
+    <div class="reveal d3">
+      <div class="hero-card">
+        <div class="hc-label">Sample · Panel Upgrade · Las Vegas</div>
+        <div class="hc-amount accent">$5,000–$7,260</div>
+        <div class="hc-meta">All-in: equipment, labor, permits &amp; coordination</div>
+        <div class="hc-bars">
+          <div class="hc-bar"><i style="--w:84%"></i><span>Equipment &amp; breakers</span></div>
+          <div class="hc-bar"><i style="--w:72%"></i><span>Labor &amp; installation</span></div>
+          <div class="hc-bar"><i style="--w:46%"></i><span>Permits &amp; coordination</span></div>
+          <div class="hc-bar"><i style="--w:34%"></i><span>Grounding &amp; cleanup</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="wrap">
+  <div class="stats">
+    <div class="stat reveal"><b data-count="3">0</b><span>States licensed</span></div>
+    <div class="stat reveal d1"><b data-count="5">0</b><span>Service categories</span></div>
+    <div class="stat reveal d2"><b data-count="120" data-suffix="s">0</b><span>Sec. to an estimate</span></div>
+    <div class="stat reveal d3"><b data-count="100" data-suffix="%">0</b><span>Transparent pricing</span></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span> What we do</div>
+      <h2>Five trades. One transparent estimate.</h2>
+      <p>Every service uses the same instant estimator — same questions, same regional pricing logic, same honest breakdown.</p>
+    </div>
+    <div class="svc-grid">
+      <a class="svc reveal" href="estimators/estimate.html?service=electrical">
+        <span class="go"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+        <div class="svc-ic">⚡</div><h3>Electrical</h3>
+        <p>Panel upgrades, EV chargers, generators, battery backup, rewires &amp; new circuits.</p>
+        <div class="price">From $5,000 · panel upgrade</div>
+      </a>
+      <a class="svc reveal d1" href="estimators/estimate.html?service=hvac">
+        <span class="go"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+        <div class="svc-ic">❄️</div><h3>HVAC &amp; Energy</h3>
+        <p>New systems, replacements, energy-efficient windows, insulation &amp; weatherization.</p>
+        <div class="price">From $11,000 · new system</div>
+      </a>
+      <a class="svc reveal d2" href="estimators/estimate.html?service=roofing">
+        <span class="go"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+        <div class="svc-ic">🏠</div><h3>Roofing</h3>
+        <p>Asphalt, architectural, metal, tile, slate &amp; flat membrane — priced per sq ft.</p>
+        <div class="price">From $3.50/sq ft installed</div>
+      </a>
+      <a class="svc reveal d3" href="estimators/estimate.html?service=kitchen-bath">
+        <span class="go"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+        <div class="svc-ic">🍳</div><h3>Kitchen &amp; Bath</h3>
+        <p>Minor refresh to full gut renovation — kitchens and bathrooms, scoped to your goals.</p>
+        <div class="price">From $11,000 · bath refresh</div>
+      </a>
+      <a class="svc reveal d4" href="estimators/estimate.html?service=adu">
+        <span class="go"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+        <div class="svc-ic">🏡</div><h3>ADUs &amp; Additions</h3>
+        <p>Detached, garage-conversion, basement &amp; junior ADUs plus commercial build-outs.</p>
+        <div class="price">From $98,500 · detached ADU</div>
+      </a>
+      <a class="svc reveal d5" href="estimators/estimate.html">
+        <span class="go"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+        <div class="svc-ic">🧮</div><h3>Not sure yet?</h3>
+        <p>Start the estimator and pick your service as you go. It only takes a couple of minutes.</p>
+        <div class="price">Start the full estimator →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how" style="padding-top:30px">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span> How it works</div>
+      <h2>An estimate in three steps.</h2>
+    </div>
+    <div class="steps">
+      <div class="step-c reveal"><h3>Tell us about you</h3><p>Same details every time: name, property address, ZIP, email and phone. Your ZIP sets the regional pricing.</p></div>
+      <div class="step-c reveal d1"><h3>Pick your project</h3><p>Choose your service and answer a few quick questions about size, type and access.</p></div>
+      <div class="step-c reveal d2"><h3>See your number</h3><p>Get an all-in estimate with a full breakdown — then book a free on-site quote when you're ready.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="padding-top:20px">
+  <div class="cta-band reveal">
+    <h2>Ready to see your number?</h2>
+    <p>No pushy sales calls. Just an honest, region-accurate estimate.</p>
+    <div class="row">
+      <a class="btn btn-cyan lg" href="estimators/estimate.html">Start my estimate</a>
+      <a class="btn btn-ghost lg" href="tel:8055032787">📞 (805) 503-2787</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/oe-logo-2026.png" alt="OE Services">
+        <p>Licensed electrical &amp; general contractor serving Nevada, California &amp; Arizona.</p>
+        <div class="footer-lic">NV #0093240 · #0087180<br>CA #1057069 · #1124897<br>AZ ROC #354397</div>
+      </div>
+      <div><h4>Services</h4><ul>
+        <li><a href="estimators/estimate.html?service=electrical">Electrical</a></li>
+        <li><a href="estimators/estimate.html?service=hvac">HVAC &amp; Energy</a></li>
+        <li><a href="estimators/estimate.html?service=roofing">Roofing</a></li>
+        <li><a href="estimators/estimate.html?service=kitchen-bath">Kitchen &amp; Bath</a></li>
+        <li><a href="estimators/estimate.html?service=adu">ADUs &amp; Additions</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="#services">What we do</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="estimators/estimate.html">Get an estimate</a></li>
+      </ul></div>
+      <div><h4>Contact</h4><ul>
+        <li><a href="tel:8055032787">(805) 503-2787</a></li>
+        <li><a href="mailto:ahernandez@oeservices.us">ahernandez@oeservices.us</a></li>
+        <li class="muted" style="font-size:13.5px">Mon–Fri 8a–5p</li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 OE Services LLC. All rights reserved.</span>
+      <span>Estimates are preliminary and confirmed at a free on-site visit.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// reveal on scroll
+var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+// count-up stats
+var statsSeen=false;
+var statsIO=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting&&!statsSeen){statsSeen=true;
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      var target=+el.dataset.count,suf=el.dataset.suffix||'',n=0,step=Math.max(1,target/40);
+      var t=setInterval(function(){n+=step;if(n>=target){n=target;clearInterval(t);}el.textContent=Math.round(n)+suf;},26);
+    });}
+});},{threshold:.5});
+var st=document.querySelector('.stats');if(st)statsIO.observe(st);
+</script>
+</body>
+</html>
