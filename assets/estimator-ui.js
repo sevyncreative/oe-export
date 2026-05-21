@@ -73,6 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // shell caveat for commercial type
+  var comTypeGroup = document.getElementById('com-type');
+  if (comTypeGroup) {
+    comTypeGroup.addEventListener('click', function(e) {
+      var opt = e.target.closest('.ropt');
+      if (!opt) return;
+      var caveat = document.getElementById('shell-caveat');
+      if (caveat) caveat.style.display = opt.dataset.val === 'shell' ? 'block' : 'none';
+    });
+  }
+
   goStep(1);
 });
 
@@ -146,7 +157,8 @@ function step2Next() {
     hvac:'Tell us about your HVAC project',
     roofing:'Tell us about your roof',
     'kitchen-bath':'Tell us about your remodel',
-    adu:'Tell us about your ADU or build-out'
+    adu:'Tell us about your ADU or addition',
+    commercial:'Tell us about your commercial space'
   };
   var t = document.getElementById('s3-title');
   if (t) t.textContent = titles[S.service] || 'Tell us about your project';
@@ -161,6 +173,7 @@ function step3Next() {
   else if (S.service === 'roofing') ok = validateRoofing();
   else if (S.service === 'kitchen-bath') ok = validateKB();
   else if (S.service === 'adu') ok = validateADU();
+  else if (S.service === 'commercial') ok = validateCommercial();
   if (!ok) return;
   buildEstimate();
   goStep(4);
@@ -286,6 +299,25 @@ function validateADU() {
   return true;
 }
 
+function validateCommercial() {
+  var type   = getOpt('com-type');
+  var sqftEl = document.getElementById('com-sqft');
+  var sqft   = sqftEl ? parseInt(sqftEl.value) : 0;
+  var finish = getOpt('com-finish');
+  var site   = getOpt('com-site');
+  var ada    = getOpt('com-ada');
+  var permit = getOpt('com-permit');
+  se('err-com-type',   !type,              'Please select a business type.');
+  se('err-com-sqft',   !sqft || sqft < 100,'Please enter a square footage (minimum 100).');
+  se('err-com-finish', !finish,            'Please select a finish level.');
+  se('err-com-site',   !site,              'Please select the existing space condition.');
+  se('err-com-ada',    !ada,               'Please select an ADA scope.');
+  se('err-com-permit', !permit,            'Please select a permit budget.');
+  if (!type || !sqft || sqft < 100 || !finish || !site || !ada || !permit) return false;
+  S.details = {type:type, sqft:sqft, finish:finish, site:site, ada:ada, permit:permit};
+  return true;
+}
+
 /* ── Kitchen-bath scope show/hide ──────────────────────────────────── */
 function updateKbScopes() {
   var rooms = getChips('kb-room-chips');
@@ -317,6 +349,9 @@ function buildEstimate() {
   } else if (S.service === 'adu') {
     result = calcADU(S.details, reg);
     html = renderSimpleEstimate(result, result.typeLabel || 'ADU');
+  } else if (S.service === 'commercial') {
+    result = calcCommercial(S.details, reg);
+    html = renderCommercialEstimate(result);
   }
 
   S.result = result || {};
@@ -430,6 +465,22 @@ function renderKBEstimate(result, reg) {
   return html;
 }
 
+function renderCommercialEstimate(result) {
+  var html = renderHero(result.lo, result.hi, result.regionName, result.typeLabel);
+  var rows = (result.items || []).map(function(item) {
+    if (item.isExclusion) {
+      return '<div class="brow"><div class="brow-left"><div class="brow-name" style="color:var(--ink-mute)">⚠ Not included in this estimate</div>' +
+        '<div class="brow-sub">' + item.sub + '</div></div>' +
+        '<div class="brow-right"><div class="brow-range" style="color:var(--ink-mute)">—</div></div></div>';
+    }
+    return '<div class="brow"><div class="brow-left"><div class="brow-name">' + item.name + '</div><div class="brow-sub">' + item.sub + '</div></div>' +
+      '<div class="brow-right"><div class="brow-range">' + fmt(item.lo) + (item.lo !== item.hi ? ' – ' + fmt(item.hi) : '') + '</div></div></div>';
+  }).join('');
+  html += '<div class="bcard"><div class="bcard-title">' + result.typeLabel + ' — Cost Breakdown</div>' + rows + '</div>';
+  html += renderDisclaimer(result.regionName);
+  return html;
+}
+
 /* ── Step 5: Done ──────────────────────────────────────────────────── */
 function goToDone() {
   var titleEl = document.getElementById('doneTitle');
@@ -438,7 +489,7 @@ function goToDone() {
     ['Name', S.first + ' ' + S.last],
     ['Contact', S.phone || S.email],
     ['Address', S.street + ', ' + S.city + ', ' + S.state + ' ' + S.zip],
-    ['Service', ({electrical:'Electrical', hvac:'HVAC & Energy', roofing:'Roofing', 'kitchen-bath':'Kitchen & Bath', adu:'ADU / Build-Out'})[S.service] || S.service],
+    ['Service', ({electrical:'Electrical', hvac:'HVAC & Energy', roofing:'Roofing', 'kitchen-bath':'Kitchen & Bath', adu:'ADU / Addition', commercial:'Commercial Build-Out'})[S.service] || S.service],
     ['Estimate', S.result.lo ? (fmt(S.result.lo) + ' – ' + fmt(S.result.hi)) : '—']
   ];
   var summaryEl = document.getElementById('doneSummary');

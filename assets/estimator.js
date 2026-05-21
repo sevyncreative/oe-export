@@ -311,8 +311,57 @@ var ADU_RATE = {
   attached:    {label:'Attached Addition',     ca:280, nv:185, az:165},
   jadu:        {label:'Junior ADU (JADU)',      ca:160, nv:110, az:95},
   abovegarage: {label:'Above-Garage ADU',      ca:315, nv:195, az:175},
-  commercial:  {label:'Commercial Build-Out',  ca:195, nv:145, az:125}
 };
+
+/* ── Commercial Build-Out pricing ───────────────────────────────────── */
+var COM_RATE = {
+  restaurant: {label:'Restaurant / Bar',          ca:182, nv:158, az:144},
+  coffee:     {label:'Coffee Shop / Café',         ca:158, nv:138, az:125},
+  retail:     {label:'Retail / Boutique',          ca:118, nv:102, az:93},
+  salon:      {label:'Salon / Med Spa',            ca:150, nv:132, az:120},
+  medical:    {label:'Dental / Medical Office',    ca:248, nv:218, az:198},
+  office:     {label:'General Office',             ca:108, nv:94,  az:86},
+  gym:        {label:'Gym / Fitness Studio',       ca:132, nv:116, az:106},
+  nailsalon:  {label:'Nail Salon',                 ca:138, nv:120, az:110},
+  childcare:  {label:'Childcare / Preschool',      ca:145, nv:128, az:115},
+  shell:      {label:'New Ground-Up Construction', ca:285, nv:252, az:230},
+};
+var COM_EXCLUDES = {
+  restaurant: 'Equipment, hoods/vents, FF&E, liquor licensing, health dept fees',
+  coffee:     'Espresso equipment, pastry cases, POS systems, furniture',
+  retail:     'Display fixtures, inventory, POS systems, signage',
+  salon:      'Shampoo chairs, pedicure thrones, styling equipment, product inventory',
+  medical:    'Dental chairs, x-ray/imaging, sterilization units, medical supplies',
+  office:     'Furniture, AV equipment, structured cabling above rough-in',
+  gym:        'All equipment, weights, machines, lockers',
+  nailsalon:  'Pedicure chairs, UV lamps, nail product inventory',
+  childcare:  'Furniture, educational materials, outdoor play equipment, licensing fees',
+  shell:      'Interior finish (priced separately), equipment, sitework, landscaping',
+};
+var COM_FINISH = {standard:1.00, upgraded:1.15, premium:1.32};
+var COM_SITE   = {vanilla:1.00, demo:1.12, major:1.25};
+
+function calcCommercial(det, region) {
+  var typeData = COM_RATE[det.type] || COM_RATE.office;
+  var stateKey = (region.state || 'NV').toLowerCase();
+  if (!typeData[stateKey]) stateKey = 'nv';
+  var basePSF   = typeData[stateKey] * (COM_FINISH[det.finish] || 1) * (COM_SITE[det.site] || 1);
+  var sqft      = Math.max(100, Math.min(50000, parseInt(det.sqft) || 1000));
+  var baseTotal = basePSF * sqft;
+  var adaVal    = parseInt(det.ada)    || 0;
+  var permitVal = parseInt(det.permit) || 15000;
+  var raw       = baseTotal + adaVal + permitVal;
+  var biased    = biasRange(raw * 0.85, raw * 1.20);
+  var excludes  = COM_EXCLUDES[det.type] || 'FF&E, equipment, signage';
+  var items = [
+    {name:'Build-out: labor & materials (' + sqft.toLocaleString() + ' sqft × $' + Math.round(basePSF) + '/sqft)', sub:'Framing, MEP, drywall, ceiling, electrical, plumbing finish', lo:Math.round(baseTotal*0.72), hi:Math.round(baseTotal*0.92)},
+    {name:'Finish & specialization', sub:'Flooring, millwork, paint, specialty trades', lo:Math.round(baseTotal*0.08), hi:Math.round(baseTotal*0.18)},
+  ];
+  if (adaVal > 0) items.push({name:'ADA compliance allowance', sub:'Accessible route, restrooms, entry', lo:Math.round(adaVal*0.8), hi:Math.round(adaVal*1.2)});
+  items.push({name:'Permit, architecture & engineering', sub:'Plans, structural, city permits, inspections', lo:Math.round(permitVal*0.7), hi:Math.round(permitVal*1.3)});
+  items.push({name:'Not included in this estimate', sub:excludes, lo:0, hi:0, isExclusion:true});
+  return {lo:biased[0], hi:biased[1], sqft:sqft, items:items, regionName:region.name, typeLabel:typeData.label};
+}
 var ADU_FINISH = {standard:1.00, mid:1.18, luxury:1.42};
 var ADU_SITE   = {easy:1.00, moderate:1.12, complex:1.28};
 

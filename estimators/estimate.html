@@ -253,8 +253,14 @@
       <div class="svc-card" data-svc="adu">
         <span class="sc-ic">🏡</span>
         <div class="sc-name">ADUs &amp; Additions</div>
-        <div class="sc-desc">Detached, garage-conversion, basement &amp; junior ADUs plus commercial build-outs.</div>
+        <div class="sc-desc">Detached, garage-conversion, basement &amp; junior ADUs — residential space addition.</div>
         <div class="sc-price">From $98,500 · detached ADU</div>
+      </div>
+      <div class="svc-card" data-svc="commercial">
+        <span class="sc-ic">🏗️</span>
+        <div class="sc-name">Commercial Build-Out</div>
+        <div class="sc-desc">Restaurant, retail, salon, medical, office, gym &amp; ground-up construction — priced by space type.</div>
+        <div class="sc-price">From $86/sqft · general office</div>
       </div>
     </div>
     <div class="err-msg" id="err-svc"></div>
@@ -549,7 +555,6 @@
           <div class="ropt" data-val="attached">🔗 Attached Addition</div>
           <div class="ropt" data-val="jadu">🛏️ Junior ADU (JADU)</div>
           <div class="ropt" data-val="abovegarage">🔝 Above-Garage ADU</div>
-          <div class="ropt" data-val="commercial">🏗️ Commercial Build-Out</div>
         </div>
         <div class="q-err" id="err-adu-type"></div>
       </div>
@@ -578,6 +583,72 @@
         <div class="q-err" id="err-adu-site"></div>
       </div>
     </div><!-- /p-adu -->
+
+    <!-- COMMERCIAL PANEL -->
+    <div class="svc-panel" id="p-commercial">
+      <div class="q-block">
+        <div class="q-label">Type of commercial build-out</div>
+        <div class="ropt-group" id="com-type">
+          <div class="ropt" data-val="restaurant">🍽️ Restaurant / Bar</div>
+          <div class="ropt" data-val="coffee">☕ Coffee Shop / Café</div>
+          <div class="ropt" data-val="retail">🛍️ Retail / Boutique</div>
+          <div class="ropt" data-val="salon">💅 Salon / Med Spa</div>
+          <div class="ropt" data-val="medical">🦷 Dental / Medical Office</div>
+          <div class="ropt" data-val="office">💼 General Office</div>
+          <div class="ropt" data-val="gym">🏋️ Gym / Fitness Studio</div>
+          <div class="ropt" data-val="nailsalon">💅🏼 Nail Salon</div>
+          <div class="ropt" data-val="childcare">👶 Childcare / Preschool</div>
+          <div class="ropt" data-val="shell">🏗️ New Ground-Up Construction (Shell)</div>
+        </div>
+        <div class="q-err" id="err-com-type"></div>
+        <div id="shell-caveat" style="display:none;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:12px 16px;margin-top:12px;font-size:13px;color:#fcd34d;line-height:1.6">
+          ⚠ Shell pricing covers structure, rough MEP, and weather envelope only. Interior finish, sitework, landscaping, and equipment are separate.
+        </div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Square footage of the space</div>
+        <input type="number" class="sqft-input" id="com-sqft" placeholder="e.g. 1500" min="100" max="50000" inputmode="numeric">
+        <div class="q-err" id="err-com-sqft"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Interior finish level</div>
+        <div class="ropt-group" id="com-finish">
+          <div class="ropt" data-val="standard">🪵 Standard — functional commercial finish</div>
+          <div class="ropt" data-val="upgraded">⬆️ Upgraded — enhanced materials &amp; details</div>
+          <div class="ropt" data-val="premium">✨ Premium — high-end finishes throughout</div>
+        </div>
+        <div class="q-err" id="err-com-finish"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Existing space condition</div>
+        <div class="ropt-group" id="com-site">
+          <div class="ropt" data-val="vanilla">🟩 Vanilla shell — no demo needed</div>
+          <div class="ropt" data-val="demo">🔨 Demo / rework of existing build-out (+12%)</div>
+          <div class="ropt" data-val="major">🏗️ Major structural changes (+25%)</div>
+        </div>
+        <div class="q-err" id="err-com-site"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">ADA compliance scope</div>
+        <div class="ropt-group" id="com-ada">
+          <div class="ropt" data-val="0">None — new build or already compliant</div>
+          <div class="ropt" data-val="2500">Basic — path of travel updates (~$2,500)</div>
+          <div class="ropt" data-val="5000">Full — restrooms, entry, route (~$5,000)</div>
+          <div class="ropt" data-val="12000">Healthcare / complex (~$12,000)</div>
+        </div>
+        <div class="q-err" id="err-com-ada"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Permit &amp; architecture budget</div>
+        <div class="ropt-group" id="com-permit">
+          <div class="ropt" data-val="8000">Small / simple space (~$8,000)</div>
+          <div class="ropt" data-val="15000">Moderate scope (~$15,000)</div>
+          <div class="ropt" data-val="25000">Complex / full-service (~$25,000)</div>
+          <div class="ropt" data-val="40000">Full architecture + engineering (~$40,000)</div>
+        </div>
+        <div class="q-err" id="err-com-permit"></div>
+      </div>
+    </div><!-- /p-commercial -->
 
     <div class="step-nav">
       <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
@@ -633,6 +704,7 @@
         <li><a href="estimate.html?service=roofing">Roofing</a></li>
         <li><a href="estimate.html?service=kitchen-bath">Kitchen &amp; Bath</a></li>
         <li><a href="estimate.html?service=adu">ADUs &amp; Additions</a></li>
+        <li><a href="estimate.html?service=commercial">Commercial Build-Out</a></li>
       </ul></div>
       <div><h4>Company</h4><ul>
         <li><a href="../index.html#services">What we do</a></li>
