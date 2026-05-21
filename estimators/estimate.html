@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get an Estimate — OE Services</title>
+<meta name="description" content="Pick your service and get an instant, region-accurate estimate for electrical, HVAC, roofing, kitchen & bath, or ADU projects.">
+<link rel="icon" href="../assets/oe-logo-2026.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+.picker{padding:80px 0 60px}
+.picker-head{text-align:center;max-width:680px;margin:0 auto 48px}
+.picker-head h1{margin-bottom:14px;font-size:clamp(34px,4.4vw,54px)}
+.picker-head p{color:var(--ink-soft);font-size:18px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:920px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.svc-grid{grid-template-columns:1fr}}
+.svc{position:relative;padding:30px;border-radius:var(--r);overflow:hidden;
+  background:linear-gradient(165deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
+  border:1px solid var(--line);transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;cursor:pointer;display:block}
+.svc:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:var(--shadow-blue)}
+.svc-ic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;font-size:27px;
+  background:linear-gradient(135deg,rgba(29,111,164,.35),rgba(56,225,255,.18));margin-bottom:18px}
+.svc h3{margin-bottom:8px;font-size:21px}
+.svc p{color:var(--ink-soft);font-size:14.5px;margin-bottom:16px}
+.svc .price{font-family:var(--mono);font-size:13px;color:var(--cyan);letter-spacing:.04em}
+.redirect-note{margin-top:48px;text-align:center;color:var(--ink-mute);font-size:13.5px}
+.redirect-note a{color:var(--cyan);border-bottom:1px solid rgba(56,225,255,.3)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../new.html"><img src="../assets/oe-logo-2026.png" alt="OE Services"><span><b>OE</b> Services</span></a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
+    <div class="nav-links" id="navlinks">
+      <a href="../new.html">Home</a>
+      <a href="../new.html#services">Services</a>
+      <a href="../new.html#how">How it works</a>
+      <a href="estimate.html" class="active">Get estimate</a>
+      <a class="nav-phone" href="tel:8055032787">&#128222; (805) 503-2787</a>
+    </div>
+  </div>
+</nav>
+
+<header class="picker wrap">
+  <div class="picker-head reveal in">
+    <div class="eyebrow"><span class="dot"></span> Choose your service</div>
+    <h1>What are we <span class="accent">estimating?</span></h1>
+    <p>Pick a trade to start the instant estimator. Each one uses the same region-accurate pricing logic, scaled to your ZIP.</p>
+  </div>
+
+  <div class="svc-grid">
+    <a class="svc" href="../electrical.html" data-service="electrical">
+      <div class="svc-ic">&#9889;</div><h3>Electrical</h3>
+      <p>Panel upgrades, EV chargers, generators, battery backup, rewires &amp; new circuits.</p>
+      <div class="price">From $5,000 &middot; panel upgrade</div>
+    </a>
+    <a class="svc" href="../hvac.html" data-service="hvac">
+      <div class="svc-ic">&#10052;&#65039;</div><h3>HVAC &amp; Energy</h3>
+      <p>New systems, replacements, energy-efficient windows, insulation &amp; weatherization.</p>
+      <div class="price">From $11,000 &middot; new system</div>
+    </a>
+    <a class="svc" href="../roofing.html" data-service="roofing">
+      <div class="svc-ic">&#127968;</div><h3>Roofing</h3>
+      <p>Asphalt, architectural, metal, tile, slate &amp; flat membrane &mdash; priced per sq ft.</p>
+      <div class="price">From $3.50/sq ft installed</div>
+    </a>
+    <a class="svc" href="../kitchen-bath.html" data-service="kitchen-bath">
+      <div class="svc-ic">&#127859;</div><h3>Kitchen &amp; Bath</h3>
+      <p>Minor refresh to full gut renovation &mdash; kitchens and bathrooms, scoped to your goals.</p>
+      <div class="price">From $11,000 &middot; bath refresh</div>
+    </a>
+    <a class="svc" href="../adu.html" data-service="adu">
+      <div class="svc-ic">&#127969;</div><h3>ADUs &amp; Additions</h3>
+      <p>Detached, garage-conversion, basement &amp; junior ADUs plus commercial build-outs.</p>
+      <div class="price">From $98,500 &middot; detached ADU</div>
+    </a>
+    <a class="svc" href="../commercial.html" data-service="commercial">
+      <div class="svc-ic">&#127970;</div><h3>Commercial</h3>
+      <p>Tenant improvements, build-outs and commercial electrical &mdash; scoped to your space.</p>
+      <div class="price">Custom &middot; talk to a contractor</div>
+    </a>
+  </div>
+
+  <p class="redirect-note">
+    Looking for something else? <a href="tel:8055032787">Call (805) 503-2787</a> or
+    <a href="mailto:ahernandez@oeservices.us">email us</a>.
+  </p>
+</header>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/oe-logo-2026.png" alt="OE Services">
+        <p>Licensed electrical &amp; general contractor serving Nevada, California &amp; Arizona.</p>
+        <div class="footer-lic">NV #0093240 &middot; #0087180<br>CA #1057069 &middot; #1124897<br>AZ ROC #354397</div>
+      </div>
+      <div><h4>Services</h4><ul>
+        <li><a href="../electrical.html">Electrical</a></li>
+        <li><a href="../hvac.html">HVAC &amp; Energy</a></li>
+        <li><a href="../roofing.html">Roofing</a></li>
+        <li><a href="../kitchen-bath.html">Kitchen &amp; Bath</a></li>
+        <li><a href="../adu.html">ADUs &amp; Additions</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../new.html#services">What we do</a></li>
+        <li><a href="../new.html#how">How it works</a></li>
+        <li><a href="estimate.html">Get an estimate</a></li>
+      </ul></div>
+      <div><h4>Contact</h4><ul>
+        <li><a href="tel:8055032787">(805) 503-2787</a></li>
+        <li><a href="mailto:ahernandez@oeservices.us">ahernandez@oeservices.us</a></li>
+        <li class="muted" style="font-size:13.5px">Mon&ndash;Fri 8a&ndash;5p</li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 OE Services LLC. All rights reserved.</span>
+      <span>Estimates are preliminary and confirmed at a free on-site visit.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Deep-link router: if URL has ?service=<name>, send the visitor straight to
+// the matching per-service estimator page from the old site.
+(function(){
+  var map = {
+    'electrical':   '../electrical.html',
+    'hvac':         '../hvac.html',
+    'roofing':      '../roofing.html',
+    'kitchen-bath': '../kitchen-bath.html',
+    'kitchenbath':  '../kitchen-bath.html',
+    'adu':          '../adu.html',
+    'commercial':   '../commercial.html'
+  };
+  var params = new URLSearchParams(window.location.search);
+  var svc = (params.get('service') || '').toLowerCase().trim();
+  if (svc && map[svc]) {
+    window.location.replace(map[svc]);
+  }
+})();
+</script>
+</body>
+</html>
