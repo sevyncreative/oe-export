@@ -1,0 +1,69 @@
+============================================================
+ OE SERVICES WEBSITE — FOR THE DEVELOPER
+============================================================
+
+Hi — this folder is a complete, working website (HTML/CSS/JavaScript,
+no build step, no frameworks). You can open index.html in a browser and
+it runs as-is. It's meant as the build spec / starting point for the
+live site.
+
+WHAT TO READ FIRST
+------------------
+Open  README.md  — it explains the file structure, how the estimator
+pricing works, and (importantly) the two things that must be finished
+before launch:
+
+  1) PROOF CONTENT — the home page has placeholders marked [REPLACE: ...]
+     (reviews, ratings, project count, years in business). They're
+     outlined in yellow on screen. The business owner will supply the
+     real content; swap it in and remove every [REPLACE] marker. Do NOT
+     invent numbers or reviews.
+
+  2) LEAD SUBMISSION — the estimate form currently shows a confirmation
+     screen but does not send the lead anywhere yet. There's a clearly
+     marked hook in assets/estimator-ui.js (search "submission hook").
+     Wire it to the owner's email / CRM / form service.
+
+QUICK START
+-----------
+  - Run locally:   python3 -m http.server 8080   →   http://localhost:8080
+  - Deploy:        drag the folder into Vercel/Netlify, or upload to any
+                   static host. No server required.
+
+WHAT'S HERE
+-----------
+  index.html                  Home page (marketing / sales)
+  estimators/estimate.html    The instant estimator (all 5 trades)
+  assets/site.css             Shared styles / design system
+  assets/estimator.js         Pricing engine (all pricing lives here)
+  assets/estimator-ui.js      Estimator behavior + the lead hook
+  assets/oe-logo-2026.png     Logo
+  robots.txt, sitemap.xml     SEO basics
+  README.md                   Full technical handoff notes
+
+NOTES FROM THE OWNER
+--------------------
+  - Financing IS offered (copy is already written for it).
+  - Callback promise is set to "within 24 hours" — adjust if the real
+    standard differs.
+  - Pricing is intentionally weighted toward the higher end of each
+    range (see FLOOR_BIAS / CEIL_BIAS at the top of estimator.js).
+  - Contact: (805) 503-2787 · ahernandez@oeservices.us
+  - Licenses: NV #0093240 · CA #1057069 · AZ ROC #354397
+
+SEO / GOOGLE MAPS / AI SEARCH
+-----------------------------
+  The site already includes structured data (JSON-LD), sitemap, AI-crawler
+  rules, canonical tags and social cards — see the "SEO" section of README.md.
+  OE is a SERVICE-AREA business (no storefront); the schema is set up for that
+  (serviceArea covering NV/CA/AZ — do NOT add a street address).
+  TWO things still required:
+    1) Fill the real rating/review count in the schema once reviews exist.
+       Update the domain if it differs from oeservices.us.
+    2) GOOGLE MAPS RANKING is NOT done by the website — the OWNER must create/
+       verify a Google Business Profile at google.com/business as a
+       "Service-Area Business" (hide address, set service areas, pick categories).
+       The site backs it up; it can't replace it.
+
+Questions on intent or content go to the owner; everything technical
+is in README.md.
