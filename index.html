@@ -66,12 +66,7 @@
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial — build-outs, renovations, tenant improvements, commercial electrical" } }
     ]
   },
-  "makesOffer": { "@type": "Offer", "description": "Free, no-obligation estimate" },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "[REPLACE: e.g. 4.9]",
-    "reviewCount": "[REPLACE: e.g. 200]"
-  }
+  "makesOffer": { "@type": "Offer", "description": "Free, no-obligation estimate" }
 }
 </script>
 <script type="application/ld+json">
@@ -215,9 +210,33 @@
 .review .who{display:flex;align-items:center;gap:11px}
 .review .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;font-weight:700;color:var(--navy);font-size:15px}
 .review .who b{display:block;font-size:14px}.review .who span{font-size:12.5px;color:var(--ink-soft)}
-.placeholder{outline:1.5px dashed rgba(255,200,61,.45);outline-offset:3px}
-.ph-note{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#ffc83d;background:rgba(255,200,61,.1);
-  border:1px solid rgba(255,200,61,.3);border-radius:6px;padding:4px 9px;display:inline-block;margin-bottom:14px}
+.review .av img,img.av{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.stars .dim{opacity:.25}
+.g-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-soft);background:rgba(255,255,255,.06);border:1px solid var(--line);
+  border-radius:999px;padding:5px 12px;margin-bottom:13px}
+.g-text{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}
+.g-text.open{-webkit-line-clamp:unset}
+.g-fallback{grid-column:1/-1;text-align:center;padding:46px 28px}
+.g-fallback .stars{font-size:22px;letter-spacing:4px;margin-bottom:14px}
+.g-fallback p{max-width:520px;margin:0 auto 22px}
+.g-summary{font-size:15.5px;color:var(--ink-soft);margin:-30px 0 34px}
+.g-summary .stars{color:#ffc83d;letter-spacing:2px}
+.g-summary b{color:var(--ink)}
+.g-summary a{color:var(--cyan)}
+.g-actions{display:flex;justify-content:center;margin-top:34px}
+
+/* auto-scrolling project photo reel (populated from the Google Business profile) */
+.reel{overflow:hidden;margin-top:10px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.reel-track{display:flex;gap:16px;width:max-content;animation:reelmove 45s linear infinite}
+.reel:hover .reel-track{animation-play-state:paused}
+.reel-track img{height:250px;width:auto;border-radius:var(--r);border:1px solid var(--line-2);
+  transition:transform .35s var(--ease)}
+.reel-track img:hover{transform:scale(1.04)}
+@keyframes reelmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:680px){.reel-track img{height:170px}}
+@media(prefers-reduced-motion:reduce){.reel-track{animation:none}}
 
 .guarantee{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:760px){.guarantee{grid-template-columns:1fr}}
@@ -277,7 +296,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn btn-ghost lg" href="tel:8055032787">Call (805) 503-2787</a>
       </div>
-      <div class="hero-microtrust reveal d3 placeholder"><span class="stars">★★★★★</span> <span>[REPLACE: 4.9 avg · 200+ reviews]</span> · Free, no-obligation quotes</div>
+      <div class="hero-microtrust reveal d3"><span class="stars">★★★★★</span> <span id="g-microtrust"><a class="g-link" href="https://www.google.com/maps/search/?api=1&amp;query=OE%20Services%20LLC%20contractor%20Las%20Vegas%20NV" target="_blank" rel="noopener">Reviewed on Google</a></span> · Free, no-obligation quotes</div>
       <div class="hero-trust reveal d4">
         <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Honest, all-in pricing</div>
         <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Fast callback, easy process</div>
@@ -303,10 +322,10 @@
 
 <section class="wrap">
   <div class="proofbar">
-    <div class="pb reveal placeholder"><b data-count="200" data-suffix="+">0</b><span>[REPLACE: Projects completed]</span></div>
-    <div class="pb reveal d1 placeholder"><b>[4.9★]</b><span>[REPLACE: Average rating]</span></div>
-    <div class="pb reveal d2"><b data-count="3">0</b><span>States licensed</span></div>
-    <div class="pb reveal d3 placeholder"><b>[REPLACE]</b><span>Years in business</span></div>
+    <div class="pb reveal"><b data-count="18" data-suffix="+">0</b><span>Years of experience</span></div>
+    <div class="pb reveal d1"><b data-count="3">0</b><span>States licensed</span></div>
+    <div class="pb reveal d2"><b data-count="5">0</b><span>Trades, one licensed team</span></div>
+    <a class="pb reveal d3 g-link" href="https://www.google.com/maps/search/?api=1&amp;query=OE%20Services%20LLC%20contractor%20Las%20Vegas%20NV" target="_blank" rel="noopener"><b id="pb-rating" style="color:#ffc83d">★★★★★</b><span id="pb-rating-label">Reviews on Google</span></a>
   </div>
 </section>
 
@@ -381,32 +400,34 @@
 <section class="section" id="reviews" style="padding-top:20px">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow"><span class="dot"></span> Real customers</div>
+      <div class="eyebrow"><span class="dot"></span> Real customers · Live from Google</div>
       <h2>People don't just hire us. They refer us.</h2>
-      <p>Here's what working with OE actually feels like.</p>
+      <p>Straight from our Google Business profile — real names, real photos, real projects. We can't edit them, and we wouldn't want to.</p>
     </div>
-    <div class="reviews">
-      <div class="review reveal placeholder">
-        <span class="ph-note">[REPLACE with a real review]</span>
+    <p class="g-summary reveal" id="g-summary" hidden></p>
+    <div class="reviews" id="g-reviews">
+      <div class="review g-fallback reveal">
         <div class="stars">★★★★★</div>
-        <p>"They gave me a clear price upfront and it didn't change. Permits, inspection, cleanup — handled. Easiest contractor experience I've had."</p>
-        <div class="who"><div class="av">JR</div><div><b>[REPLACE: Name]</b><span>[REPLACE: Project · City]</span></div></div>
-      </div>
-      <div class="review reveal d1 placeholder">
-        <span class="ph-note">[REPLACE with a real review]</span>
-        <div class="stars">★★★★★</div>
-        <p>"Got my estimate online at midnight, had a call the next morning. No pressure, no games. The crew was on time and respectful of my home."</p>
-        <div class="who"><div class="av">MT</div><div><b>[REPLACE: Name]</b><span>[REPLACE: Project · City]</span></div></div>
-      </div>
-      <div class="review reveal d2 placeholder">
-        <span class="ph-note">[REPLACE with a real review]</span>
-        <div class="stars">★★★★★</div>
-        <p>"I had three bids. OE was the only one that put everything in writing and explained where every dollar went. Hired them on the spot."</p>
-        <div class="who"><div class="av">SK</div><div><b>[REPLACE: Name]</b><span>[REPLACE: Project · City]</span></div></div>
+        <h3 style="margin-bottom:10px">Read our verified customer reviews on Google</h3>
+        <p class="muted">Every review of our electrical, HVAC, roofing, remodel and ADU work is public on our Google Business profile — written by real customers, verified by Google.</p>
+        <a class="btn btn-cyan g-link" href="https://www.google.com/maps/search/?api=1&amp;query=OE%20Services%20LLC%20contractor%20Las%20Vegas%20NV" target="_blank" rel="noopener">See our Google reviews →</a>
       </div>
     </div>
-    <p class="muted reveal" style="text-align:center;margin-top:26px;font-size:14px">[REPLACE: Link to your Google / Yelp reviews here so visitors can verify.]</p>
+    <div class="g-actions reveal">
+      <a class="btn btn-ghost g-link" href="https://www.google.com/maps/search/?api=1&amp;query=OE%20Services%20LLC%20contractor%20Las%20Vegas%20NV" target="_blank" rel="noopener">Read all our reviews on Google →</a>
+    </div>
   </div>
+</section>
+
+<section class="section" id="work" hidden style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span> Real projects</div>
+      <h2>Straight from the field.</h2>
+      <p>Live photos from our Google Business profile — actual jobs on actual homes and businesses, not stock imagery.</p>
+    </div>
+  </div>
+  <div class="reel"><div class="reel-track" id="reel-track"></div></div>
 </section>
 
 <section class="section" style="padding-top:20px">
@@ -481,6 +502,7 @@
       </ul></div>
       <div><h4>Company</h4><ul>
         <li><a href="#reviews">Reviews</a></li>
+        <li><a class="g-link" href="https://www.google.com/maps/search/?api=1&amp;query=OE%20Services%20LLC%20contractor%20Las%20Vegas%20NV" target="_blank" rel="noopener">Find us on Google</a></li>
         <li><a href="#process">How it works</a></li>
         <li><a href="#services">What we do</a></li>
         <li><a href="estimators/estimate.html">Free estimate</a></li>
@@ -516,5 +538,7 @@ var statsIO=new IntersectionObserver(function(es){es.forEach(function(e){
 });},{threshold:.5});
 var pb=document.querySelector('.proofbar');if(pb)statsIO.observe(pb);
 </script>
+<script src="assets/config.js"></script>
+<script src="assets/google-reviews.js"></script>
 </body>
 </html>
