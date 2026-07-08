@@ -29,7 +29,7 @@
 */
 window.OE_CONFIG = {
   googleMapsApiKey: "AIzaSyDLvu_r04AZSs4cZvRXpZn2eFgIPWDuvVs",
-  googlePlaceId: "g/11x0gf1wng",
+  googlePlaceId: "",
   formspreeId: "mjgqdngz",
 
   /* Used to locate the business on Google when googlePlaceId is blank,
