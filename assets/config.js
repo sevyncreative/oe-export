@@ -28,9 +28,9 @@
       email in the customer's mail app instead — leads still reach you.
 */
 window.OE_CONFIG = {
-  googleMapsApiKey: "",
-  googlePlaceId: "",
-  formspreeId: "",
+  googleMapsApiKey: "AIzaSyDLvu_r04AZSs4cZvRXpZn2eFgIPWDuvVs",
+  googlePlaceId: "ChIJLZ2t9ci0uGERH044jIQYm4I",
+  formspreeId: "mjgqdngz",
 
   /* Used to locate the business on Google when googlePlaceId is blank,
      and for the "read our reviews" links before the API loads. */
