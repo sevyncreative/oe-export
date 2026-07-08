@@ -585,19 +585,66 @@
       '<div class="ln"><span class="k">Project</span><span class="v">' + esc(detailStr) + '</span></div>' +
       '<div class="ln"><span class="k">Estimate</span><span class="v">' + esc(estStr) + '</span></div>';
 
-    /* ---- submission hook: wire to CRM / email here ----
-       The S object holds: first, last, phone, email, street, city, state, zip,
-       service, details{}, result{}, and media{photos:[File], video:File}.
-       For photos/video use FormData (multipart), e.g.:
+    submitLead();
+  }
 
-       var fd = new FormData();
-       fd.append('lead', JSON.stringify({ first:S.first, last:S.last, phone:S.phone,
-         email:S.email, street:S.street, city:S.city, state:S.state, zip:S.zip,
-         service:S.service, details:S.details, result:S.result }));
-       S.media.photos.forEach(function (f, i) { fd.append('photo_' + i, f); });
-       if (S.media.video) fd.append('video', S.media.video);
-       fetch('/api/lead', { method:'POST', body: fd });
-    */
+  /* ---------- lead submission ----------
+     Delivery is configured in assets/config.js:
+     - OE_CONFIG.formspreeId set  → POSTs the lead (incl. photos/video)
+       to Formspree, which emails it to the business inbox.
+     - not set                    → opens the customer's mail app with a
+       pre-filled email to OE Services, so the lead is still delivered. */
+  function leadSummaryText() {
+    var lines = [
+      "New estimate request — oeservices.us",
+      "",
+      "Name: " + S.first + " " + S.last,
+      "Phone: " + S.phone,
+      "Email: " + S.email,
+      "Property: " + S.street + ", " + S.city + ", " + S.state + " " + S.zip,
+      "Service: " + (SVC_LABEL[S.service] || S.service),
+      "Estimate shown: " + (INQUIRY_SERVICES[S.service] ? "Personal review (within 24 hrs)" : $("est-amount").textContent),
+      "Details: " + JSON.stringify(S.details)
+    ];
+    var att = S.media.photos.length + (S.media.video ? 1 : 0);
+    if (att) lines.push("Customer has " + S.media.photos.length + " photo(s)" + (S.media.video ? " + 1 video" : "") + " to share.");
+    return lines.join("\n");
+  }
+
+  function submitLead() {
+    var cfg = window.OE_CONFIG || {};
+    var el = $("send-status");
+    function setStatus(cls, html) { if (el) { el.className = "send-status " + cls; el.innerHTML = html; } }
+    var svcLabel = SVC_LABEL[S.service] || S.service;
+    var phone = cfg.phone || "8055032787";
+    var mailtoHref = "mailto:" + (cfg.email || "ahernandez@oeservices.us") +
+      "?subject=" + encodeURIComponent("Estimate request — " + svcLabel + " — " + S.first + " " + S.last) +
+      "&body=" + encodeURIComponent(leadSummaryText());
+
+    if (cfg.formspreeId && cfg.formspreeId.indexOf("YOUR_") !== 0) {
+      setStatus("sending", "Sending your request…");
+      var fd = new FormData();
+      fd.append("_subject", "New estimate lead — " + svcLabel + " — " + S.first + " " + S.last);
+      fd.append("name", S.first + " " + S.last);
+      fd.append("phone", S.phone);
+      fd.append("email", S.email);
+      fd.append("property", S.street + ", " + S.city + ", " + S.state + " " + S.zip);
+      fd.append("service", svcLabel);
+      fd.append("summary", leadSummaryText());
+      S.media.photos.slice(0, 4).forEach(function (f, i) { fd.append("photo_" + (i + 1), f, f.name); });
+      if (S.media.video) fd.append("video", S.media.video, S.media.video.name);
+      fetch("https://formspree.io/f/" + cfg.formspreeId, { method: "POST", body: fd, headers: { Accept: "application/json" } })
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          setStatus("ok", "✅ Your request has been sent to our team.");
+        })
+        .catch(function () {
+          setStatus("warn", '⚠️ We couldn\'t auto-send your request. <a href="' + mailtoHref + '">Email it to us in one tap</a> or call <a href="tel:' + phone + '">(805) 503-2787</a>.');
+        });
+    } else {
+      setStatus("warn", '📧 One last tap: your email app just opened with your request pre-filled — press <b>Send</b>. Didn\'t open? <a href="' + mailtoHref + '">Click here</a> or call <a href="tel:' + phone + '">(805) 503-2787</a>.');
+      location.href = mailtoHref;
+    }
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]; }); }
 
