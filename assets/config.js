@@ -34,7 +34,7 @@ window.OE_CONFIG = {
 
   /* Used to locate the business on Google when googlePlaceId is blank,
      and for the "read our reviews" links before the API loads. */
-  googleQuery: "OE Services LLC contractor Las Vegas NV",
+  googleQuery: "OE Services Las Vegas",
   phone: "8055032787",
   email: "ahernandez@oeservices.us"
 };
