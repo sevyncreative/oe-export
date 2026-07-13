@@ -28,19 +28,13 @@
       email in the customer's mail app instead — leads still reach you.
 */
 window.OE_CONFIG = {
-  googleMapsApiKey: "AIzaSyDLvu_r04AZSs4cZvRXpZn2eFgIPWDuvVs",
-  googlePlaceId: "",
+  /* Wally reviews widget ID (get from https://app.getwally.net) */
+  wallyWidgetId: "6987a2f9bdb8740014d7ce91",
+
+  /* Formspree ID for estimate lead delivery */
   formspreeId: "mjgqdngz",
 
-  /* Proximity search (works better for service area businesses):
-     Set lat/lng to your service area center. Default: Las Vegas (36.1699, -115.1398)
-     searchRadius in meters. Default: 8000m (5 miles). */
-  lat: 36.149246,
-  lng: -115.154464,
-  searchRadius: 8000,
-  businessName: "OE Services",
-
-  /* Fallback links for when API isn't available or for "read our reviews" */
+  /* Fallback links for "read our reviews" */
   googleQuery: "OE Services Las Vegas",
   phone: "8055032787",
   email: "ahernandez@oeservices.us"

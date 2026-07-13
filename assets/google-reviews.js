@@ -1,81 +1,31 @@
 /* ============================================================
-   OE SERVICES — LIVE GOOGLE REVIEWS + BUSINESS PHOTOS
-   Pulls the real rating, review count, customer reviews (with
-   reviewer profile photos) and Google Business photos from the
-   Google Places API and injects them into the homepage.
-
-   Requires: assets/config.js loaded first, with a valid
-   OE_CONFIG.googleMapsApiKey. Without a key the page keeps its
-   static fallback (a link out to the Google profile) — nothing
-   breaks, nothing fake is shown.
+   OE SERVICES — LIVE REVIEWS VIA WALLY
+   Embeds Wally reviews widget and sets up fallback Google links.
    ============================================================ */
 (function () {
   "use strict";
 
   var cfg = window.OE_CONFIG || {};
-  var key = (cfg.googleMapsApiKey || "").trim();
-
   var mapsSearchUrl = "https://www.google.com/maps/search/?api=1&query=" +
     encodeURIComponent(cfg.googleQuery || "OE Services LLC Las Vegas NV");
 
-  /* Every element that links to the Google profile gets the generic
-     Maps search URL up-front, then the exact profile URL once known. */
+  /* Every element that links to Google gets the search URL. */
   function setProfileLinks(url) {
     document.querySelectorAll(".g-link").forEach(function (a) { a.href = url; });
   }
   setProfileLinks(mapsSearchUrl);
 
-  if (!key) return; // no API key yet — leave the graceful fallback in place
+  /* Load Wally widget if configured. */
+  if (!cfg.wallyWidgetId) return;
 
-  /* ---------- load the Maps JS API (async, non-blocking) ---------- */
-  window.__oeGmapsReady = function () {
-    google.maps.importLibrary("places").then(init).catch(fail);
-  };
-  var s = document.createElement("script");
-  s.src = "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(key) +
-          "&v=weekly&loading=async&libraries=places&callback=__oeGmapsReady";
-  s.async = true;
-  s.onerror = fail;
-  document.head.appendChild(s);
-
-  function fail(err) {
-    if (window.console && console.warn) console.warn("Google reviews unavailable:", err);
-  }
-
-  /* ---------- find the business & fetch its details ---------- */
-  function init(lib) {
-    var Place = lib.Place;
-    var idPromise;
-    if ((cfg.googlePlaceId || "").trim()) {
-      idPromise = Promise.resolve(cfg.googlePlaceId.trim());
-    } else {
-      /* Service area businesses work better with text search + location bias.
-         Try the configured business name first, then fallback to the query. */
-      var searchQueries = [
-        cfg.businessName || "OE Services",
-        cfg.googleQuery || "OE Services LLC Las Vegas NV"
-      ];
-      idPromise = (function trySearch(queries) {
-        if (!queries.length) return Promise.reject(new Error("business not found on Google"));
-        var q = queries.shift();
-        return Place.searchByText({
-          textQuery: q,
-          fields: ["id", "displayName"],
-          maxResultCount: 1
-        }).then(function (res) {
-          if (!res.places || !res.places.length) return trySearch(queries);
-          return res.places[0].id;
-        }).catch(function () { return trySearch(queries); });
-      })(searchQueries.slice());
-    }
-
-    idPromise.then(function (placeId) {
-      var place = new Place({ id: placeId });
-      return place.fetchFields({
-        fields: ["displayName", "rating", "userRatingCount", "reviews", "photos", "googleMapsURI"]
-      }).then(function () { render(place); });
-    }).catch(fail);
-  }
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = 'https://app.getwally.net/js/embed-widget.js?id=' + cfg.wallyWidgetId;
+    (d.head || d.body).appendChild(s);
+  })();
+})()
 
   /* ---------- helpers ---------- */
   function esc(t) {
