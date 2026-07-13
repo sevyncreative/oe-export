@@ -29,7 +29,7 @@
 */
 window.OE_CONFIG = {
   googleMapsApiKey: "AIzaSyDLvu_r04AZSs4cZvRXpZn2eFgIPWDuvVs",
-  googlePlaceId: "0x61b814c8f5ad9d2d:0x829b18848c384e1f",
+  googlePlaceId: "",
   formspreeId: "mjgqdngz",
 
   /* Proximity search (works better for service area businesses):
