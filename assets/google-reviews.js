@@ -49,28 +49,24 @@
     if ((cfg.googlePlaceId || "").trim()) {
       idPromise = Promise.resolve(cfg.googlePlaceId.trim());
     } else {
-      /* Service area businesses work better with proximity search.
-         Las Vegas center: 36.1699, -115.1398. Search 5mi radius. */
-      idPromise = Place.searchNearby({
-        locationRestriction: {
-          circle: {
-            center: { latitude: cfg.lat || 36.1699, longitude: cfg.lng || -115.1398 },
-            radius: cfg.searchRadius || 8000
-          }
-        },
-        fields: ["id", "displayName"],
-        maxResultCount: 10
-      }).then(function (res) {
-        if (!res.places || !res.places.length) throw new Error("business not found on Google");
-        /* Find OE Services by name. Accept partial match. */
-        var target = (cfg.businessName || "OE Services").toLowerCase();
-        for (var i = 0; i < res.places.length; i++) {
-          var name = (res.places[i].displayName || "").toLowerCase();
-          if (name.indexOf(target) !== -1) return res.places[i].id;
-        }
-        /* Fallback: take first result */
-        return res.places[0].id;
-      });
+      /* Service area businesses work better with text search + location bias.
+         Try the configured business name first, then fallback to the query. */
+      var searchQueries = [
+        cfg.businessName || "OE Services",
+        cfg.googleQuery || "OE Services LLC Las Vegas NV"
+      ];
+      idPromise = (function trySearch(queries) {
+        if (!queries.length) return Promise.reject(new Error("business not found on Google"));
+        var q = queries.shift();
+        return Place.searchByText({
+          textQuery: q,
+          fields: ["id", "displayName"],
+          maxResultCount: 1
+        }).then(function (res) {
+          if (!res.places || !res.places.length) return trySearch(queries);
+          return res.places[0].id;
+        }).catch(function () { return trySearch(queries); });
+      })(searchQueries.slice());
     }
 
     idPromise.then(function (placeId) {
