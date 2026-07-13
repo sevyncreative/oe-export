@@ -18,18 +18,21 @@
   /* Load Wally widget if configured. */
   if (!cfg.wallyWidgetId) return;
 
-  /* The Wally embed renders at the location of its own <script> tag, so the
-     script must live inside the #wally-embed container (not the document head)
-     for the widget to appear in the reviews section. */
+  /* Wally's embed.js scans the page for [data-wally-widget] containers and
+     renders each widget inside them. Tag the #wally-embed container with the
+     configured widget id, then load the embed script. */
+  var WALLY_SRC = "https://embed.getwally.net/embed.js";
+
   function loadWally() {
     var mount = document.getElementById("wally-embed");
     if (!mount) return;
-    if (mount.querySelector("script")) return; /* already loaded */
+    mount.setAttribute("data-wally-widget", cfg.wallyWidgetId);
+    mount.style.width = "100%";
+    if (document.querySelector('script[src="' + WALLY_SRC + '"]')) return; /* already loaded */
     var s = document.createElement("script");
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = "https://app.getwally.net/js/embed-widget.js?id=" + cfg.wallyWidgetId;
-    mount.appendChild(s);
+    s.src = WALLY_SRC;
+    s.defer = true;
+    document.head.appendChild(s);
   }
 
   if (document.readyState === "loading") {
