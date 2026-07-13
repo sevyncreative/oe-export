@@ -52,8 +52,12 @@
       /* Service area businesses work better with proximity search.
          Las Vegas center: 36.1699, -115.1398. Search 5mi radius. */
       idPromise = Place.searchNearby({
-        location: { latitude: cfg.lat || 36.1699, longitude: cfg.lng || -115.1398 },
-        radius: cfg.searchRadius || 8000,
+        locationRestriction: {
+          circle: {
+            center: { latitude: cfg.lat || 36.1699, longitude: cfg.lng || -115.1398 },
+            radius: cfg.searchRadius || 8000
+          }
+        },
         fields: ["id", "displayName"],
         maxResultCount: 10
       }).then(function (res) {
