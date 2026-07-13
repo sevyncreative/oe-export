@@ -18,11 +18,23 @@
   /* Load Wally widget if configured. */
   if (!cfg.wallyWidgetId) return;
 
-  (function () {
-    var d = document, s = d.createElement("script");
+  /* The Wally embed renders at the location of its own <script> tag, so the
+     script must live inside the #wally-embed container (not the document head)
+     for the widget to appear in the reviews section. */
+  function loadWally() {
+    var mount = document.getElementById("wally-embed");
+    if (!mount) return;
+    if (mount.querySelector("script")) return; /* already loaded */
+    var s = document.createElement("script");
     s.type = "text/javascript";
     s.async = true;
     s.src = "https://app.getwally.net/js/embed-widget.js?id=" + cfg.wallyWidgetId;
-    (d.head || d.body).appendChild(s);
-  })();
+    mount.appendChild(s);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadWally);
+  } else {
+    loadWally();
+  }
 })();
