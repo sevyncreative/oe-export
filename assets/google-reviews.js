@@ -49,12 +49,22 @@
     if ((cfg.googlePlaceId || "").trim()) {
       idPromise = Promise.resolve(cfg.googlePlaceId.trim());
     } else {
-      idPromise = Place.searchByText({
-        textQuery: cfg.googleQuery || "OE Services LLC Las Vegas NV",
-        fields: ["id"],
-        maxResultCount: 1
+      /* Service area businesses work better with proximity search.
+         Las Vegas center: 36.1699, -115.1398. Search 5mi radius. */
+      idPromise = Place.searchNearby({
+        location: { latitude: cfg.lat || 36.1699, longitude: cfg.lng || -115.1398 },
+        radius: cfg.searchRadius || 8000,
+        fields: ["id", "displayName"],
+        maxResultCount: 10
       }).then(function (res) {
         if (!res.places || !res.places.length) throw new Error("business not found on Google");
+        /* Find OE Services by name. Accept partial match. */
+        var target = (cfg.businessName || "OE Services").toLowerCase();
+        for (var i = 0; i < res.places.length; i++) {
+          var name = (res.places[i].displayName || "").toLowerCase();
+          if (name.indexOf(target) !== -1) return res.places[i].id;
+        }
+        /* Fallback: take first result */
         return res.places[0].id;
       });
     }

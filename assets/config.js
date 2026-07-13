@@ -32,9 +32,16 @@ window.OE_CONFIG = {
   googlePlaceId: "0x61b814c8f5ad9d2d:0x829b18848c384e1f",
   formspreeId: "mjgqdngz",
 
-  /* Used to locate the business on Google when googlePlaceId is blank,
-     and for the "read our reviews" links before the API loads. */
-  googleQuery: "OE Services",
+  /* Proximity search (works better for service area businesses):
+     Set lat/lng to your service area center. Default: Las Vegas (36.1699, -115.1398)
+     searchRadius in meters. Default: 8000m (5 miles). */
+  lat: 36.149246,
+  lng: -115.154464,
+  searchRadius: 8000,
+  businessName: "OE Services",
+
+  /* Fallback links for when API isn't available or for "read our reviews" */
+  googleQuery: "OE Services Las Vegas",
   phone: "8055032787",
   email: "ahernandez@oeservices.us"
 };
