@@ -1,5 +1,5 @@
 /* ============================================================
-   OE SERVICES — ESTIMATOR UI CONTROLLER
+   OE SERVICES. ESTIMATOR UI CONTROLLER
    Services: electrical · hvac · roofing · kitchen-bath · adu ·
              commercial · not-sure (personal inquiry)
    ============================================================ */
@@ -13,9 +13,10 @@
     first:"", last:"", phone:"", email:"", street:"", city:"", state:"", zip:"",
     service:"", details:{}, media:{ photos:[], video:null }
   };
-  var current = 1, TOTAL = 5;
+  var current = 2, TOTAL = 5;
+  var ORDER = [2, 3, 4, 1, 5], builtService = "";
 
-  /* services that DON'T produce an instant priced range — they collect a
+  /* services that DON'T produce an instant priced range. they collect a
      personal inquiry and route to a human follow-up within 24 hours. */
   var INQUIRY_SERVICES = { "not-sure": true };
 
@@ -24,20 +25,26 @@
     document.querySelectorAll(".panel").forEach(function (p) { p.classList.remove("active"); });
     $("p" + n).classList.add("active");
     current = n;
-    $("pfill").style.width = (n / TOTAL * 100) + "%";
+    var position = ORDER.indexOf(n) + 1;
+    $("pfill").style.width = (position / TOTAL * 100) + "%";
+    document.querySelector(".prog-track").setAttribute("aria-valuenow", position);
+    $("step-status").textContent = "Step " + position + " of 5";
     document.querySelectorAll("#psteps span").forEach(function (s) {
       var v = +s.dataset.s;
-      s.classList.toggle("done", v < n);
+      s.classList.toggle("done", ORDER.indexOf(v) < ORDER.indexOf(n));
+      if(v===n)s.setAttribute("aria-current","step");else s.removeAttribute("aria-current");
       s.classList.toggle("active", v === n);
     });
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    var heading = $("p" + n).querySelector("h2");
+    if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}
+    window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   }
 
   /* ---------- validation helpers ---------- */
   var reEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   function setErr(inputId, errId, bad) {
     var el = $(inputId), e = $(errId);
-    if (el) { el.classList.toggle("invalid", bad); el.classList.toggle("valid", !bad && el.value.trim() !== ""); }
+    if (el) { el.setAttribute("aria-invalid",String(bad)); if(e)el.setAttribute("aria-describedby",errId); el.classList.toggle("invalid", bad); el.classList.toggle("valid", !bad && el.value.trim() !== ""); }
     if (e) e.classList.toggle("show", bad);
   }
 
@@ -102,15 +109,7 @@
     "kitchen-bath":"Kitchen & Bath", adu:"ADU / Addition",
     commercial:"Commercial", "not-sure":"Not Sure Yet"
   };
-  document.querySelectorAll("#svc-pick .opt").forEach(function (opt) {
-    opt.addEventListener("click", function () {
-      document.querySelectorAll("#svc-pick .opt").forEach(function (o) { o.classList.remove("sel"); });
-      opt.classList.add("sel");
-      opt.querySelector("input").checked = true;
-      S.service = opt.dataset.svc;
-      $("e-svc").classList.remove("show");
-    });
-  });
+  document.querySelectorAll("#svc-pick .opt input").forEach(function(input){input.addEventListener("change",function(){document.querySelectorAll("#svc-pick .opt").forEach(function(o){o.classList.toggle("sel",o.querySelector("input").checked);});S.service=input.closest(".opt").dataset.svc;$("e-svc").classList.remove("show");});});
 
   /* ---------- dynamic step-3 question sets ---------- */
   function optHTML(name, val, title, sub, price) {
@@ -140,7 +139,7 @@
       Object.keys(cat).forEach(function (k) { html += checkOptHTML("services", k, icons[k] || "•", cat[k].label, ""); });
       html += '</div></div>';
       if (svc === "electrical") {
-        html += '<div class="hint">Main Panel Upgrades reuse your existing overhead or underground service feed in its current location — no feed modifications included. Repairs are quoted separately on request.</div>';
+        html += '<div class="hint">Main Panel Upgrades reuse your existing overhead or underground service feed in its current location. no feed modifications included. Repairs are quoted separately on request.</div>';
       }
       html += '<div class="qblock"><p>Property type</p><div class="pills" data-group="property">' +
         pillHTML("property","sfh","Single-family") + pillHTML("property","condo","Condo / townhouse") +
@@ -196,7 +195,7 @@
         pillHTML("kitchen","none","None") + pillHTML("kitchen","minor","Minor refresh") + pillHTML("kitchen","high-mid","High-mid renovation") + pillHTML("kitchen","major","Full gut") + '</div></div>';
       html += '<div class="qblock"><p>Bathroom scope <span style="color:var(--ink-mute);font-weight:400">(skip if not applicable)</span></p><div class="pills" data-group="bath">' +
         pillHTML("bath","none","None") + pillHTML("bath","minor","Minor refresh") + pillHTML("bath","high-mid","High-mid renovation") + pillHTML("bath","major","Full gut") + '</div></div>';
-      html += '<div class="hint">Choose a scope for kitchen, bathroom, or both — at least one is required.</div>';
+      html += '<div class="hint">Choose a scope for kitchen, bathroom, or both. at least one is required.</div>';
     } else if (svc === "adu") {
       var rates = { "Detached ADU":"🏠", "Garage Conversion ADU":"🚗", "Basement ADU":"⬇️", "Attached Addition":"🔗", "Junior ADU (JADU)":"🛏️", "Above-Garage ADU":"🔝" };
       html += '<div class="qblock"><p>ADU type</p><div class="opts c2" data-group="aduType">';
@@ -205,7 +204,7 @@
       html += '<div class="qblock"><p>Size: <span id="adusz" style="color:var(--cyan)">600 sq ft</span></p><div class="range-wrap">' +
         '<input type="range" id="adu-sqft" min="150" max="1500" step="25" value="600"></div></div>';
       html += '<div class="qblock"><p>Site complexity</p><div class="pills" data-group="complexity">' +
-        pillHTML("complexity","Low","Low — flat, no demo") + pillHTML("complexity","Medium","Medium — typical","checked") + pillHTML("complexity","High","High — slope / demo") + '</div></div>';
+        pillHTML("complexity","Low","Low. flat, no demo") + pillHTML("complexity","Medium","Medium. typical","checked") + pillHTML("complexity","High","High. slope / demo") + '</div></div>';
     } else if (svc === "commercial") {
       html += '<div class="qblock"><p>Commercial project type</p><div class="opts c2" data-group="commType">';
       Object.keys(E.COMM_RATE).forEach(function (k) {
@@ -215,7 +214,7 @@
       html += '</div></div>';
       html += '<div class="qblock"><p>Approximate square footage: <span id="commsz" style="color:var(--cyan)">2,000 sq ft</span></p><div class="range-wrap">' +
         '<input type="range" id="comm-sqft" min="200" max="50000" step="100" value="2000"></div>' +
-        '<div class="hint">Don\'t know the exact footage? A close estimate is fine — we confirm everything on-site.</div></div>';
+        '<div class="hint">Don\'t know the exact footage? A close estimate is fine. we confirm everything on-site.</div></div>';
       html += '<div class="qblock"><p>Finish / build level</p><div class="pills" data-group="commCx">' +
         pillHTML("commCx","standard","Standard finish","checked") + pillHTML("commCx","mid","Mid / upgraded") + pillHTML("commCx","complex","Complex / high-spec") + '</div></div>';
       html += '<div class="qblock"><p>Project budget <span style="color:var(--ink-mute);font-weight:400">(optional)</span></p><div class="pills" data-group="commBudget">' +
@@ -230,7 +229,7 @@
     } else if (svc === "not-sure") {
       html += '<div class="inq-banner">' +
         '<strong>Don\'t see your project in our standard pricing? You\'re in the right place.</strong>' +
-        '<span>Describe what you need below and add photos or a short video. We\'ll send you a personal estimate — or, within 24 hours, let you know if it\'s outside what we service and refer you to a trusted partner in our contractor network.</span>' +
+        '<span>Describe what you need below and add photos or a short video. We\'ll send you a personal estimate. or, within 24 hours, let you know if it\'s outside what we service and refer you to a trusted partner in our contractor network.</span>' +
         '</div>';
       html += '<div class="qblock"><p>What kind of work is it? <span style="color:var(--ink-mute);font-weight:400">(optional)</span></p><div class="pills" data-group="nsCategory">' +
         pillHTML("nsCategory","electrical","Electrical") + pillHTML("nsCategory","home-repair","Home repair") +
@@ -252,14 +251,14 @@
       html += '<div class="qblock"><p>Add photos <span style="color:var(--ink-mute);font-weight:400">(optional, up to 10)</span></p>' +
         '<label class="upload-zone" for="ns-photos">' +
           '<span class="up-ic">📷</span><span class="up-main">Tap to take or upload photos</span>' +
-          '<span class="up-sub">JPG or PNG — up to 10 images</span>' +
+          '<span class="up-sub">JPG or PNG. up to 10 images</span>' +
         '</label>' +
         '<input type="file" id="ns-photos" accept="image/*" multiple capture="environment" hidden>' +
         '<div class="thumbs" id="ns-photo-thumbs"></div></div>';
       html += '<div class="qblock"><p>Add a short video <span style="color:var(--ink-mute);font-weight:400">(optional, up to 25 seconds)</span></p>' +
         '<label class="upload-zone" for="ns-video">' +
           '<span class="up-ic">🎥</span><span class="up-main">Tap to record or upload a video walk-through</span>' +
-          '<span class="up-sub">MP4, MOV or any video — 25 seconds max</span>' +
+          '<span class="up-sub">MP4, MOV or any video. 25 seconds max</span>' +
         '</label>' +
         '<input type="file" id="ns-video" accept="video/*" capture="environment" hidden>' +
         '<div class="thumbs" id="ns-video-thumbs"></div>' +
@@ -269,21 +268,15 @@
     }
     b.innerHTML = html;
     wireDynamic();
+    builtService = svc;
   }
 
   function wireDynamic() {
     // option cards (radio + checkbox)
-    $("p3body").querySelectorAll(".opt").forEach(function (opt) {
-      opt.addEventListener("click", function () {
-        var input = opt.querySelector("input"), multi = opt.dataset.multi;
-        if (multi) { input.checked = !input.checked; opt.classList.toggle("sel", input.checked); }
-        else {
-          $("p3body").querySelectorAll('.opt[data-name="' + opt.dataset.name + '"]').forEach(function (o) { o.classList.remove("sel"); });
-          opt.classList.add("sel"); input.checked = true;
-        }
-        $("e-details").classList.remove("show");
-      });
-    });
+    $("p3body").querySelectorAll(".opt input").forEach(function(input){input.addEventListener("change",function(){$("p3body").querySelectorAll(".opt").forEach(function(opt){opt.classList.toggle("sel",opt.querySelector("input").checked);});$("e-details").classList.remove("show");});});
+    var defaults={property:'sfh',sqft:'md',access:'easy',pitch:'med',stories:'1',layers:'1',propType:'res',complexity:'Medium',commCx:'standard'};
+    Object.keys(defaults).forEach(function(name){var input=$("p3body").querySelector('input[name="'+name+'"][value="'+defaults[name]+'"]');if(input)input.checked=true;});
+    $("p3body").querySelectorAll('input[type="range"],input[type="number"],textarea').forEach(function(input){if(!input.labels.length){var parent=input.closest('.qblock,.calc-field');var label=parent&&parent.querySelector('p,label');input.setAttribute('aria-label',label?label.textContent.trim():'Project details');}});
     // range sliders
     var rs = $("roof-sqft"); if (rs) rs.addEventListener("input", function () { $("roofsz").textContent = (+this.value).toLocaleString() + " sq ft"; });
     var as = $("adu-sqft"); if (as) as.addEventListener("input", function () { $("adusz").textContent = (+this.value).toLocaleString() + " sq ft"; });
@@ -359,7 +352,7 @@
             URL.revokeObjectURL(url);
             if (probe.duration && probe.duration > 26) {
               S.media.video = null;
-              renderVideoThumb(null, "That clip is " + Math.round(probe.duration) + "s — please upload a video of 25 seconds or less.");
+              renderVideoThumb(null, "That clip is " + Math.round(probe.duration) + "s. please upload a video of 25 seconds or less.");
             } else {
               S.media.video = f;
               renderVideoThumb(f, "");
@@ -474,7 +467,7 @@
     var res = compute();
     var addr = S.street || "your property";
     var fn = $("est-firstname"); if (fn) fn.textContent = S.first || "there";
-    $("est-intro").textContent = "Based on your details for " + addr + ", here's your all-in estimate — every cost included, nothing hidden.";
+    $("est-intro").textContent = "A preliminary planning range based on your project selections and ZIP code.";
     $("est-amount").textContent = fmt(res.low) + " – " + fmt(res.high);
     var regName = (res.region && res.region.region) ? res.region.region : "Your area";
     $("est-region").textContent = "📍 " + regName + " · ZIP " + (S.zip || "—");
@@ -483,7 +476,7 @@
     $("p4").classList.remove("inquiry-mode");
     $("finance-nudge").style.display = "";
     var disc = $("est-disclaimer");
-    if (disc) disc.textContent = "Preliminary ballpark estimate — not a quote, bid, or binding offer. Final pricing is confirmed only after an on-site assessment and a written, signed scope of work, and may change with site conditions, permits, materials, and scope. Estimate valid 30 days. Prices subject to change.";
+    if (disc) disc.textContent = "Preliminary ballpark estimate. not a quote, bid, or binding offer. Final pricing is confirmed only after an on-site assessment and a written, signed scope of work, and may change with site conditions, permits, materials, and scope. Estimate valid 30 days. Prices subject to change.";
 
     var bd = $("est-breakdown"), html = "";
     if (svc === "electrical" || svc === "hvac") {
@@ -522,7 +515,7 @@
         '<div class="bd-row"><div class="l"><b>Finish level</b></div><div class="v">' + (E.COMM_CX_LABEL[S.details.complexity] || S.details.complexity) + '</div></div>' +
         (S.details.budget ? '<div class="bd-row"><div class="l"><b>Stated budget</b></div><div class="v">' + commBudgetLabel(S.details.budget) + '</div></div>' : '') +
         '</div>' +
-        '<div class="included" style="margin-top:14px"><b>Commercial projects are scoped on-site.</b> This range reflects typical regional build costs for the type and size you entered. Final commercial pricing depends on plans, permits, and site conditions — we\'ll confirm a firm written number after a walkthrough.</div>';
+        '<div class="included" style="margin-top:14px"><b>Commercial projects are scoped on-site.</b> This range reflects typical regional build costs for the type and size you entered. Final commercial pricing depends on plans, permits, and site conditions. we\'ll confirm a firm written number after a walkthrough.</div>';
     }
     bd.innerHTML = html;
   }
@@ -537,7 +530,7 @@
     S.result = { inquiry:true };
     $("p4").classList.add("inquiry-mode");
     var fn = $("est-firstname"); if (fn) fn.textContent = S.first || "there";
-    $("est-intro").textContent = "Thanks — we've got the details for " + (S.street || "your project") + ". Because this is a custom request, a real person reviews it (no auto-generated number).";
+    $("est-intro").textContent = "Thanks. we've got the details for " + (S.street || "your project") + ". Because this is a custom request, a real person reviews it (no auto-generated number).";
     $("est-amount").textContent = "Personal review";
     $("est-meta").textContent = "Custom / non-standard project";
     $("est-region").textContent = "📍 " + (S.city ? S.city + ", " : "") + (S.state || "") + " · ZIP " + (S.zip || "—");
@@ -556,7 +549,7 @@
         (d.timeline ? '<div class="bd-row"><div class="l"><b>Timeline</b></div><div class="v">' + esc(nsTimelineLabel(d.timeline)) + '</div></div>' : '') +
         '<div class="bd-row"><div class="l"><b>Attachments</b></div><div class="v">' + photoCount + ' photo' + (photoCount===1?'':'s') + (hasVideo ? ' · 1 video' : '') + '</div></div>' +
       '</div>' +
-      '<div class="included" style="margin-top:14px"><b>What happens next:</b> Our team reviews your request and either sends a personal estimate or, within 24 hours, lets you know if it\'s outside what we currently service — in which case we\'ll refer you to a trusted partner in our contractor network so you\'re never left without a next step.</div>';
+      '<div class="included" style="margin-top:14px"><b>What happens next:</b> Our team reviews your request and either sends a personal estimate or, within 24 hours, lets you know if it\'s outside what we currently service. in which case we\'ll refer you to a trusted partner in our contractor network so you\'re never left without a next step.</div>';
   }
   function nsCatLabel(v){return {electrical:"Electrical","home-repair":"Home repair",commercial:"Commercial",remodel:"Remodel / addition",other:"Other"}[v]||v;}
   function nsBudgetLabel(v){return {u1k:"Under $1,000","1-5k":"$1k–$5k","5-15k":"$5k–$15k","15-50k":"$15k–$50k","50kp":"$50k+",unsure:"Not sure yet"}[v]||v;}
@@ -564,8 +557,8 @@
 
   /* ---------- confirmation ---------- */
   function renderConfirm() {
-    $("done-name").textContent = S.first;
-    $("done-email").textContent = S.email;
+    
+    
     $("done-phone").textContent = S.phone;
     var detailStr = "";
     var d = S.details;
@@ -574,7 +567,7 @@
     else if (S.service === "kitchen-bath") detailStr = [d.kitchen ? "Kitchen (" + (E.KB_LABEL[d.kitchen]||d.kitchen) + ")" : "", d.bath ? "Bath (" + (E.KB_LABEL[d.bath]||d.bath) + ")" : ""].filter(Boolean).join(" + ");
     else if (S.service === "adu") detailStr = d.aduType + " · " + d.sqft.toLocaleString() + " sq ft";
     else if (S.service === "commercial") detailStr = (S.result.typeLabel || "Commercial") + " · " + d.sqft.toLocaleString() + " sq ft";
-    else if (S.service === "not-sure") detailStr = nsCatLabel(d.category || "other") + (d.desc ? " — " + d.desc.slice(0,60) + (d.desc.length>60?"…":"") : "");
+    else if (S.service === "not-sure") detailStr = nsCatLabel(d.category || "other") + (d.desc ? ". " + d.desc.slice(0,60) + (d.desc.length>60?"…":"") : "");
 
     var estStr = INQUIRY_SERVICES[S.service] ? "Personal review (within 24 hrs)" : $("est-amount").textContent;
 
@@ -596,7 +589,7 @@
        pre-filled email to OE Services, so the lead is still delivered. */
   function leadSummaryText() {
     var lines = [
-      "New estimate request — oeservices.us",
+      "New estimate request. oeservices.us",
       "",
       "Name: " + S.first + " " + S.last,
       "Phone: " + S.phone,
@@ -614,17 +607,23 @@
   function submitLead() {
     var cfg = window.OE_CONFIG || {};
     var el = $("send-status");
-    function setStatus(cls, html) { if (el) { el.className = "send-status " + cls; el.innerHTML = html; } }
+    function setStatus(cls, html) {
+      if(el){el.className="send-status "+cls;el.innerHTML=html;}
+      $("confirmation-title").textContent=cls==='ok' ? 'Request received, '+S.first+'.' : cls==='warn' ? 'Your request has not been sent.' : 'Sending your request…';
+      $("confirmation-lede").textContent=cls==='ok' ? 'Our team will follow up at '+S.email+'.' : cls==='warn' ? 'Your details are still here. Please use the email or phone option below.' : 'Please wait while we send your project details.';
+      document.querySelector('.nextlist').hidden=cls!=='ok';
+      document.querySelector('.confirm .ring').hidden=cls!=='ok';
+    }
     var svcLabel = SVC_LABEL[S.service] || S.service;
     var phone = cfg.phone || "8055032787";
     var mailtoHref = "mailto:" + (cfg.email || "ahernandez@oeservices.us") +
-      "?subject=" + encodeURIComponent("Estimate request — " + svcLabel + " — " + S.first + " " + S.last) +
+      "?subject=" + encodeURIComponent("Estimate request. " + svcLabel + ". " + S.first + " " + S.last) +
       "&body=" + encodeURIComponent(leadSummaryText());
 
     if (cfg.formspreeId && cfg.formspreeId.indexOf("YOUR_") !== 0) {
       setStatus("sending", "Sending your request…");
       var fd = new FormData();
-      fd.append("_subject", "New estimate lead — " + svcLabel + " — " + S.first + " " + S.last);
+      fd.append("_subject", "New estimate lead. " + svcLabel + ". " + S.first + " " + S.last);
       fd.append("name", S.first + " " + S.last);
       fd.append("phone", S.phone);
       fd.append("email", S.email);
@@ -642,57 +641,24 @@
           setStatus("warn", '⚠️ We couldn\'t auto-send your request. <a href="' + mailtoHref + '">Email it to us in one tap</a> or call <a href="tel:' + phone + '">(805) 503-2787</a>.');
         });
     } else {
-      setStatus("warn", '📧 One last tap: your email app just opened with your request pre-filled — press <b>Send</b>. Didn\'t open? <a href="' + mailtoHref + '">Click here</a> or call <a href="tel:' + phone + '">(805) 503-2787</a>.');
-      location.href = mailtoHref;
+      setStatus("warn", '📧 One last tap: Open your email app with the request pre-filled, then select Send. <a href="' + mailtoHref + '">Click here</a> or call <a href="tel:' + phone + '">(805) 503-2787</a>.');
+      
     }
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]; }); }
 
-  /* ---------- button wiring ---------- */
-  document.querySelectorAll("[data-next]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var t = +this.dataset.next;
-      if (current === 1 && !validateStep1()) { var fe = document.querySelector("#p1 .invalid"); if (fe) fe.scrollIntoView({ behavior:"smooth", block:"center" }); return; }
-      if (current === 2 && !S.service) { $("e-svc").classList.add("show"); return; }
-      if (current === 2) { buildDetails(S.service); $("p3h").textContent = SVC_LABEL[S.service] + (INQUIRY_SERVICES[S.service] ? " — tell us more" : " details"); applyCtaLabels(); }
-      if (current === 3 && !validateStep3()) { $("e-details").classList.add("show"); $("e-details").scrollIntoView({ behavior:"smooth", block:"center" }); return; }
-      if (t === 4) {
-        var b = this, inq = INQUIRY_SERVICES[S.service];
-        b.textContent = inq ? "Preparing…" : "Calculating…"; b.disabled = true;
-        setTimeout(function () { renderEstimate(); b.textContent = inq ? "Review my request →" : "Calculate my estimate →"; b.disabled = false; goStep(4); }, 600);
-        return;
-      }
-      if (t === 5) {
-        var b2 = this; b2.textContent = "Submitting…"; b2.disabled = true;
-        setTimeout(function () { renderConfirm(); b2.textContent = "Book my free on-site quote →"; b2.disabled = false; goStep(5); }, 650);
-        return;
-      }
-      goStep(t);
-    });
-  });
-  document.querySelectorAll("[data-back]").forEach(function (btn) {
-    btn.addEventListener("click", function () { goStep(+this.dataset.back); });
-  });
-
-  /* ---------- swap CTA wording for inquiry services ---------- */
-  function applyCtaLabels() {
-    var inq = INQUIRY_SERVICES[S.service];
-    var calc = $("calcBtn"); if (calc) calc.textContent = inq ? "Review my request →" : "Calculate my estimate →";
-    var head = $("p4h"); if (head) head.textContent = inq ? "Your request is ready to send." : "";
-    var book = $("bookBtn");
-    if (book) book.textContent = inq ? "Send my request — get a reply in 24 hrs →" : "Lock my price — book my free visit →";
-  }
-
-  /* ---------- deep-link ?service= ---------- */
-  (function preselect() {
-    var params = new URLSearchParams(location.search);
-    var svc = params.get("service");
-    if (svc && SVC_LABEL[svc]) {
-      S.service = svc;
-      var opt = document.querySelector('#svc-pick .opt[data-svc="' + svc + '"]');
-      if (opt) { opt.classList.add("sel"); opt.querySelector("input").checked = true; }
-    }
-  })();
-
-  goStep(1);
+  /* Service > project details > estimate > contact > confirmed delivery. */
+  function validateLocation(){var zip=$("fzip").value.trim();var region=E.resolveZip(zip);var ok=/^\d{5}$/.test(zip)&&region&&['NV','CA','AZ'].includes(region.state);setErr('fzip','e-zip',!ok);if(!ok){$("e-zip").textContent='Enter a project ZIP in Nevada, California or Arizona.';$("fzip").focus();return false;}S.zip=zip;S.state=region.state;$("fstate").value=region.state;return true;}
+  document.querySelectorAll('[data-next]').forEach(function(btn){btn.addEventListener('click',function(){var t=+this.dataset.next;
+    if(current===2){if(!S.service){$("e-svc").classList.add('show');return;}if(builtService!==S.service)buildDetails(S.service);$("p3h").textContent=SVC_LABEL[S.service]+' project details';applyCtaLabels();}
+    if(current===3){if(!validateLocation())return;if(!validateStep3()){$("e-details").classList.add('show');$("e-details").scrollIntoView({block:'center'});return;}}
+    if(current===1&&!validateStep1()){var invalid=document.querySelector('#p1 .invalid');if(invalid)invalid.focus();return;}
+    if(t===4){renderEstimate();goStep(4);return;}
+    if(t===5){if(btn.disabled)return;btn.disabled=true;goStep(5);renderConfirm();return;}
+    goStep(t);
+  });});
+  document.querySelectorAll('[data-back]').forEach(function(btn){btn.addEventListener('click',function(){goStep(+this.dataset.back);});});
+  function applyCtaLabels(){var inquiry=INQUIRY_SERVICES[S.service];$("calcBtn").textContent=inquiry?'Review my project ↗':'See my estimate ↗';$("p4h").textContent=inquiry?'Your project, ready for review.':'Your project estimate.';$("bookBtn").textContent=inquiry?'Add contact details ↗':'Request a free site visit ↗';}
+  var svc=new URLSearchParams(location.search).get('service');
+  if(svc&&SVC_LABEL[svc]){S.service=svc;var opt=document.querySelector('#svc-pick .opt[data-svc="'+svc+'"]');opt.classList.add('sel');opt.querySelector('input').checked=true;buildDetails(svc);$("p3h").textContent=SVC_LABEL[svc]+' project details';applyCtaLabels();goStep(3);}else goStep(2);
 })();

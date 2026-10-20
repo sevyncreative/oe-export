@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Your Instant Estimate | OE Services — Electrical, HVAC, Roofing, Remodels, ADUs & Commercial</title>
+<title>Get Your Instant Estimate | OE Services. Electrical, HVAC, Roofing, Remodels, ADUs & Commercial</title>
 <meta name="description" content="Get a free, instant region-accurate estimate for electrical, HVAC, roofing, kitchen &amp; bath, ADU and commercial projects. Honest all-in pricing. Custom job? Send photos or video for a personal estimate within 24 hours. Licensed in NV, CA, AZ.">
 <meta name="theme-color" content="#0b1622">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -40,281 +40,76 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
-<style>
-.est-wrap{max-width:760px;margin:0 auto;padding:34px 24px 90px}
-/* progress */
-.prog{margin-bottom:30px}
-.prog-track{height:6px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
-.prog-fill{height:100%;width:20%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .5s var(--ease)}
-.prog-steps{display:flex;justify-content:space-between;margin-top:10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute)}
-.prog-steps span.active{color:var(--cyan)}.prog-steps span.done{color:var(--ink-soft)}
-@media(max-width:560px){.prog-steps span{display:none}.prog-steps span.active{display:inline}}
 
-.panel{display:none;animation:stepIn .5s var(--ease) both}
-.panel.active{display:block}
-@keyframes stepIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.panel h2{font-size:clamp(1.6rem,3.4vw,2.2rem);margin-bottom:8px}
-.panel .lede{color:var(--ink-soft);margin-bottom:26px;font-size:16px}
+<link rel="stylesheet" href="../assets/experience.css">
+<link rel="stylesheet" href="../assets/estimate-layout.css">
+<link rel="stylesheet" href="../assets/estimate-experience.css">
 
-.legend{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin:22px 0 12px}
-.field{margin-bottom:16px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.row3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}
-@media(max-width:540px){.row2,.row3{grid-template-columns:1fr}}
-label.fl{display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px}
-label.fl .rq{color:var(--cyan)}
-input,select{width:100%;padding:13px 15px;border:1.5px solid var(--line-2);border-radius:var(--r-sm);
-  background:rgba(255,255,255,.04);color:var(--ink);font-size:15.5px;font-family:var(--body);transition:.2s;outline:none}
-input::placeholder{color:var(--ink-mute)}
-input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(56,225,255,.14);background:rgba(255,255,255,.06)}
-input.valid{border-color:var(--green)}
-input.invalid,select.invalid{border-color:#ef5350;background:rgba(239,83,80,.07)}
-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%2338e1ff' stroke-width='2.5' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
-.err{display:none;color:#ff8a80;font-size:12.5px;margin-top:6px;font-weight:500}
-.err.show{display:block}
-.hint{font-size:12.5px;color:var(--ink-mute);margin-top:6px}
-.region-chip{display:none;align-items:center;gap:7px;margin-top:9px;font-size:13px;font-weight:600;color:var(--cyan);
-  background:rgba(56,225,255,.1);border:1px solid rgba(56,225,255,.25);padding:8px 12px;border-radius:9px}
-.region-chip.show{display:inline-flex}
-
-/* option cards */
-.opts{display:grid;gap:11px}
-.opts.c2{grid-template-columns:1fr 1fr}.opts.c3{grid-template-columns:1fr 1fr 1fr}
-@media(max-width:540px){.opts.c2,.opts.c3{grid-template-columns:1fr}}
-.opt{position:relative;padding:16px 16px 16px 50px;border:1.5px solid var(--line-2);border-radius:12px;cursor:pointer;
-  background:rgba(255,255,255,.03);transition:.22s var(--ease)}
-.opt:hover{border-color:var(--blue-bright);transform:translateY(-2px)}
-.opt.sel{border-color:var(--cyan);background:rgba(56,225,255,.08);box-shadow:0 0 0 3px rgba(56,225,255,.12)}
-.opt input{position:absolute;opacity:0;pointer-events:none}
-.opt .mk{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;border:2px solid var(--line-2);transition:.2s}
-.opt.sel .mk{border-color:var(--cyan);background:var(--cyan)}
-.opt.sel .mk::after{content:"✓";color:var(--navy);font-weight:800;font-size:12px;position:absolute;inset:0;display:grid;place-items:center}
-.opt .ic{font-size:20px;margin-right:6px}
-.opt .t{font-weight:600;font-size:15px}
-.opt .s{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
-.opt .pr{font-family:var(--mono);font-size:12.5px;color:var(--cyan);margin-top:5px;letter-spacing:.03em}
-
-/* pills */
-.pills{display:flex;flex-wrap:wrap;gap:9px}
-.pill{position:relative;cursor:pointer}
-.pill input{position:absolute;opacity:0}
-.pill span{display:inline-block;padding:10px 16px;border:1.5px solid var(--line-2);border-radius:999px;font-size:14px;font-weight:500;
-  background:rgba(255,255,255,.03);transition:.2s}
-.pill:hover span{border-color:var(--blue-bright)}
-.pill input:checked+span{background:var(--cyan);border-color:var(--cyan);color:var(--navy);font-weight:700}
-
-.qblock{margin-bottom:22px}
-.qblock>p{font-weight:600;font-size:15.5px;margin-bottom:11px}
-
-.range-wrap{padding:6px 0}
-.range-wrap input[type=range]{-webkit-appearance:none;height:7px;border-radius:99px;background:rgba(255,255,255,.12);padding:0}
-.range-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;
-  background:var(--cyan);cursor:pointer;box-shadow:0 0 0 5px rgba(56,225,255,.2)}
-.range-wrap input[type=range]::-moz-range-thumb{width:24px;height:24px;border:0;border-radius:50%;background:var(--cyan);cursor:pointer}
-.range-val{font-family:var(--display);font-weight:800;font-size:30px;color:var(--white);text-align:center;margin-bottom:8px}
-
-.nav-btns{display:flex;gap:12px;margin-top:30px;align-items:center}
-.nav-btns .spacer{flex:1}
-.back{background:none;border:0;color:var(--ink-soft);font-weight:600;cursor:pointer;font-size:15px;padding:8px}
-.back:hover{color:var(--ink)}
-
-/* RESULT */
-.result-hero{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:34px;text-align:center;
-  background:linear-gradient(150deg,rgba(29,111,164,.45),rgba(56,225,255,.12));border:1px solid var(--line-2);box-shadow:var(--shadow-blue)}
-.result-hero .rl{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
-.result-hero .ramount{font-family:var(--display);font-size:clamp(2.6rem,8vw,3.8rem);font-weight:800;line-height:1;margin-bottom:8px}
-.result-hero .rmeta{font-size:14px;color:var(--ink-soft)}
-.result-hero .rregion{display:inline-flex;align-items:center;gap:7px;margin-top:14px;background:rgba(255,255,255,.12);
-  padding:7px 14px;border-radius:999px;font-size:13px;font-weight:600}
-.breakdown{margin-top:22px}
-.bd-card{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:14px;background:rgba(255,255,255,.025)}
-.bd-head{background:rgba(56,225,255,.06);padding:13px 16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--cyan);font-weight:600;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
-.bd-row{display:flex;justify-content:space-between;gap:14px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:14px}
-.bd-row:last-child{border-bottom:0}
-.bd-row .l{color:var(--ink-soft)}.bd-row .l b{color:var(--ink);display:block;font-weight:600}
-.bd-row .v{font-weight:700;white-space:nowrap}
-.included{font-size:13px;color:var(--ink-soft);line-height:1.7;padding:14px 16px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:var(--r);margin-top:6px}
-.included b{color:var(--ink)}
-
-/* confirmation */
-.confirm{text-align:center;padding-top:10px}
-.send-status{max-width:520px;margin:16px auto 0;padding:12px 18px;border-radius:12px;font-size:14.5px;display:none}
-.send-status.sending,.send-status.ok,.send-status.warn{display:block}
-.send-status.sending{background:rgba(56,225,255,.08);border:1px solid rgba(56,225,255,.25);color:var(--ink-soft)}
-.send-status.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#7fe0a4}
-.send-status.warn{background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.35);color:#ffd28a}
-.send-status a{color:var(--cyan);text-decoration:underline}
-.confirm .ring{width:84px;height:84px;border-radius:50%;margin:0 auto 20px;display:grid;place-items:center;
-  background:rgba(34,197,94,.16);border:2px solid var(--green);animation:pop .6s var(--ease) both}
-.confirm .ring svg{width:40px;height:40px;stroke:var(--green);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
-.nextlist{text-align:left;max-width:440px;margin:26px auto 0}
-.nextlist .ev{display:flex;gap:13px;padding:11px 0;align-items:flex-start}
-.nextlist .n{flex:none;width:28px;height:28px;border-radius:50%;background:rgba(56,225,255,.14);color:var(--cyan);
-  font-weight:700;display:grid;place-items:center;font-size:14px}
-.nextlist .ev p{font-size:15px}.nextlist .ev small{color:var(--ink-soft);display:block;font-size:13px}
-.sum{max-width:480px;margin:24px auto 0;text-align:left;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;background:rgba(255,255,255,.025)}
-.sum .ln{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:14px}
-.sum .ln:last-child{border:0}.sum .ln .k{color:var(--ink-soft)}.sum .ln .v{font-weight:600;text-align:right}
-
-/* result conversion elements */
-.value-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
-@media(min-width:560px){.value-row{grid-template-columns:repeat(4,1fr)}}
-.vr-item{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--ink);
-  background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:11px 12px}
-.vr-ic{color:#5ee08a;font-weight:800}
-.no-surprise{font-size:14px;color:var(--ink-soft);margin-top:14px;line-height:1.6;text-align:center;
-  background:rgba(56,225,255,.06);border:1px solid rgba(56,225,255,.2);border-radius:10px;padding:12px 16px}
-.est-disclaimer{font-size:12.5px;color:var(--ink-mute);line-height:1.55;text-align:center;
-  margin:12px auto 0;max-width:600px;padding:0 4px}
-.finance-nudge{margin-top:14px;font-size:14px;color:var(--ink);line-height:1.6;
-  background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(56,225,255,.07));border:1px solid var(--line-2);border-radius:12px;padding:14px 16px}
-.finance-nudge strong{color:var(--white)}
-.book-cta{margin-top:24px}
-.book-reassure{text-align:center;font-size:13px;color:var(--ink-soft);margin-top:12px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.book-reassure a{color:var(--cyan);font-weight:600}
-.ph-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:#ffc83d;background:rgba(255,200,61,.1);
-  border:1px solid rgba(255,200,61,.3);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:8px}
-.placeholder{outline:1.5px dashed rgba(255,200,61,.4);outline-offset:3px}
-
-/* textarea (commercial + not-sure) */
-.ta{width:100%;min-height:104px;resize:vertical;padding:13px 15px;border:1.5px solid var(--line-2);border-radius:var(--r-sm);
-  background:rgba(255,255,255,.04);color:var(--ink);font-size:15px;font-family:var(--body);line-height:1.55;transition:.2s;outline:none}
-.ta:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(56,225,255,.14);background:rgba(255,255,255,.06)}
-.ta::placeholder{color:var(--ink-mute)}
-.rqx{color:var(--cyan)}
-
-/* roof size calculator */
-.calc-toggle{margin-top:12px;background:rgba(56,225,255,.07);border:1px dashed rgba(56,225,255,.4);color:var(--cyan);
-  font-family:var(--body);font-weight:600;font-size:14px;padding:11px 16px;border-radius:10px;cursor:pointer;transition:.2s;width:100%}
-.calc-toggle:hover{background:rgba(56,225,255,.13)}
-.calc-box{display:none;margin-top:14px;padding:18px;border:1px solid var(--line-2);border-radius:var(--r);background:rgba(255,255,255,.03)}
-.calc-box.open{display:block;animation:stepIn .35s var(--ease) both}
-.calc-lede{font-size:13.5px;color:var(--ink-soft);margin-bottom:14px;line-height:1.6}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:480px){.calc-grid{grid-template-columns:1fr}}
-.calc-field{margin-bottom:12px}
-.calc-field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
-.calc-result{display:none;margin-top:8px;font-size:14px;padding:11px 14px;border-radius:9px;line-height:1.5}
-.calc-result.show{display:block}
-.calc-result.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--ink)}
-.calc-result.ok b{color:#5ee08a}
-.calc-result.err{background:rgba(239,83,80,.1);border:1px solid rgba(239,83,80,.3);color:#ff8a80}
-.calc-note{display:block;font-size:12px;color:var(--ink-mute);margin-top:3px;font-weight:400}
-
-/* upload zones + thumbnails */
-.upload-zone{display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;cursor:pointer;
-  padding:26px 18px;border:1.5px dashed var(--line-2);border-radius:var(--r);background:rgba(255,255,255,.03);transition:.2s}
-.upload-zone:hover{border-color:var(--cyan);background:rgba(56,225,255,.05)}
-.upload-zone .up-ic{font-size:30px}
-.upload-zone .up-main{font-weight:600;font-size:15px;color:var(--ink)}
-.upload-zone .up-sub{font-size:12.5px;color:var(--ink-mute)}
-.thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-.thumb{position:relative;width:84px;height:84px;border-radius:10px;overflow:hidden;border:1px solid var(--line-2);background:rgba(255,255,255,.04)}
-.thumb img{width:100%;height:100%;object-fit:cover}
-.thumb.video{width:auto;height:auto;display:flex;align-items:center;gap:8px;padding:10px 12px}
-.thumb .vfile{font-size:13px;color:var(--ink);font-weight:500;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.thumb-x{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;border:0;cursor:pointer;
-  background:rgba(11,22,34,.85);color:#fff;font-size:15px;line-height:1;display:grid;place-items:center}
-.thumb.video .thumb-x{position:static}
-.thumb-x:hover{background:#ef5350}
-.thumb-msg{font-size:13px;padding:8px 12px;border-radius:8px}
-.thumb-msg.err{background:rgba(239,83,80,.1);border:1px solid rgba(239,83,80,.3);color:#ff8a80}
-
-/* not-sure inquiry banner + footer */
-.inq-banner{display:flex;flex-direction:column;gap:7px;padding:18px;border-radius:var(--r);margin-bottom:22px;
-  background:linear-gradient(135deg,rgba(29,111,164,.3),rgba(56,225,255,.1));border:1px solid var(--line-2)}
-.inq-banner strong{font-size:16px;color:var(--white)}
-.inq-banner span{font-size:14px;color:var(--ink-soft);line-height:1.6}
-.inq-foot{margin-top:6px;font-size:14px;color:var(--ink-soft);line-height:1.6;padding:14px 16px;border-radius:10px;
-  background:rgba(56,225,255,.06);border:1px solid rgba(56,225,255,.2)}
-.inq-foot strong{color:var(--cyan)}
-
-/* inquiry-mode hero (Not Sure Yet result) */
-#p4.inquiry-mode .result-hero .ramount{font-size:clamp(1.8rem,5vw,2.6rem)}
-</style>
 </head>
-<body>
+<body id="top" class="est-page">
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="../index.html"><img src="../assets/oe-logo-2026.png" alt="OE Services"><span><b>OE</b> Services</span></a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
-    <div class="nav-links" id="navlinks">
-      <a href="../index.html">Home</a>
-      <a href="../index.html#services">Services</a>
-      <a href="estimate.html" class="active">Get estimate</a>
-      <a class="nav-phone" href="tel:8055032787">📞 (805) 503-2787</a>
-    </div>
-  </div>
-</nav>
+<a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="shell header-inner"><a class="identity" href="../index.html" aria-label="OE Services home"><img src="../assets/oe-logo-2026.png" alt="" width="64" height="53"><span class="identity-name">OE SERVICES<small>Electrical & general contracting</small></span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html#services">Our services</a><a href="../index.html#process">Our approach</a><a href="../index.html#areas">Service areas</a><a href="tel:+18055032787" class="nav-call">(805) 503-2787</a><a href="../estimators/estimate.html" class="button">Start a project <span class="arrow" aria-hidden="true">↗</span></a></nav><button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span></button></div><nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="../index.html#services">Our services</a><a href="../index.html#process">Our approach</a><a href="../index.html#areas">Service areas</a><a href="../index.html#reviews">Customer reviews</a><a href="../estimators/estimate.html" class="button">Start a project <span class="arrow" aria-hidden="true">↗</span></a><a class="menu-contact" href="tel:+18055032787">(805) 503-2787</a></nav></header>
 
-<main class="est-wrap">
-  <h1 class="sr-only">Free Instant Estimate — Electrical, HVAC, Roofing, Kitchen &amp; Bath, and ADU Projects | OE Services (NV, CA, AZ)</h1>
+<main class="est-shell shell" id="main"><aside class="est-sidebar"><span class="eyebrow">The project planner</span><h1>A clearer<br>starting point.</h1><p>Explore your project cost.<br>No contact details needed.</p><div class="est-side-note"><span>01 / Tell us about the work</span><span>02 / Explore your estimate</span><span>03 / Request a free visit</span></div><a class="text-link" href="tel:+18055032787">Rather talk it through? ↗</a><a class="est-phone" href="tel:+18055032787">(805) 503-2787</a></aside><div class="est-wrap">
+  
   <div class="prog">
-    <div class="prog-track"><div class="prog-fill" id="pfill"></div></div>
-    <div class="prog-steps" id="psteps">
-      <span data-s="1">Your info</span><span data-s="2">Service</span>
-      <span data-s="3">Details</span><span data-s="4">Estimate</span><span data-s="5">Done</span>
-    </div>
+    <div class="prog-track" role="progressbar" aria-label="Estimate progress" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1"><div class="prog-fill" id="pfill"></div></div>
+    <div class="prog-steps" id="psteps"><span data-s="2">1. Service</span><span data-s="3">2. Details</span><span data-s="4">3. Estimate</span><span data-s="1">4. Contact</span><span data-s="5">5. Sent</span></div><p id="step-status" class="sr-only" aria-live="polite"></p>
   </div>
 
-  <!-- STEP 1 — UNIFORM DATA COLLECTION -->
+  <!-- STEP 1. UNIFORM DATA COLLECTION -->
   <section class="panel active" id="p1">
-    <h2>Let's start with your details</h2>
-    <p class="lede">Same quick info for every project. Your ZIP sets the regional pricing.</p>
+    <h2>Let's talk about your project</h2>
+    <p class="lede">Share your details to request a free on-site visit or send your inquiry. Your request is sent only when you select the button below.</p>
     <div class="legend">Your contact info</div>
     <div class="row2">
-      <div class="field"><label class="fl">First name <span class="rq">*</span></label><input id="ffirst" autocomplete="given-name" placeholder="Jane"><div class="err" id="e-first">Enter your first name</div></div>
-      <div class="field"><label class="fl">Last name <span class="rq">*</span></label><input id="flast" autocomplete="family-name" placeholder="Smith"><div class="err" id="e-last">Enter your last name</div></div>
+      <div class="field"><label class="fl" for="ffirst">First name <span class="rq">*</span></label><input id="ffirst" autocomplete="given-name" placeholder="Jane"><div role="alert" class="err" id="e-first">Enter your first name</div></div>
+      <div class="field"><label class="fl" for="flast">Last name <span class="rq">*</span></label><input id="flast" autocomplete="family-name" placeholder="Smith"><div role="alert" class="err" id="e-last">Enter your last name</div></div>
     </div>
     <div class="row2">
-      <div class="field"><label class="fl">Phone <span class="rq">*</span></label><input id="fphone" type="tel" inputmode="tel" maxlength="14" autocomplete="tel" placeholder="(702) 555-0123"><div class="err" id="e-phone">Enter a valid 10-digit phone</div></div>
-      <div class="field"><label class="fl">Email <span class="rq">*</span></label><input id="femail" type="email" inputmode="email" autocomplete="email" placeholder="jane@email.com"><div class="err" id="e-email">Enter a valid email</div></div>
+      <div class="field"><label class="fl" for="fphone">Phone <span class="rq">*</span></label><input id="fphone" type="tel" inputmode="tel" maxlength="14" autocomplete="tel" placeholder="(702) 555-0123"><div role="alert" class="err" id="e-phone">Enter a valid 10-digit phone</div></div>
+      <div class="field"><label class="fl" for="femail">Email <span class="rq">*</span></label><input id="femail" type="email" inputmode="email" autocomplete="email" placeholder="jane@email.com"><div role="alert" class="err" id="e-email">Enter a valid email</div></div>
     </div>
     <div class="legend">Property address</div>
-    <div class="field"><label class="fl">Street address <span class="rq">*</span></label><input id="fstreet" autocomplete="address-line1" placeholder="123 Desert Vista Dr"><div class="err" id="e-street">Enter a street address</div></div>
-    <div class="row3">
-      <div class="field"><label class="fl">City <span class="rq">*</span></label><input id="fcity" autocomplete="address-level2" placeholder="Las Vegas"><div class="err" id="e-city">Enter a city</div></div>
-      <div class="field"><label class="fl">State <span class="rq">*</span></label><input id="fstate" maxlength="2" autocomplete="address-level1" placeholder="NV"><div class="err" id="e-state">2-letter code</div></div>
-      <div class="field"><label class="fl">ZIP <span class="rq">*</span></label><input id="fzip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="89101"><div class="err" id="e-zip">Valid 5-digit ZIP</div></div>
+    <div class="field"><label class="fl" for="fstreet">Street address <span class="rq">*</span></label><input id="fstreet" autocomplete="address-line1" placeholder="123 Desert Vista Dr"><div role="alert" class="err" id="e-street">Enter a street address</div></div>
+    <div class="row2">
+      <div class="field"><label class="fl" for="fcity">City <span class="rq">*</span></label><input id="fcity" autocomplete="address-level2" placeholder="Las Vegas"><div role="alert" class="err" id="e-city">Enter a city</div></div>
+      <div class="field"><label class="fl" for="fstate">State <span class="rq">*</span></label><input id="fstate" maxlength="2" autocomplete="address-level1" placeholder="NV"><div role="alert" class="err" id="e-state">2-letter code</div></div>
+      
     </div>
-    <div class="region-chip" id="rchip">📍 <span id="rchiptext"></span></div>
-    <div class="nav-btns"><div class="spacer"></div><button class="btn btn-cyan" data-next="2">Continue →</button></div>
+    
+    <p class="contact-note">By sending, you ask OE Services to contact you about this project. This does not confirm an appointment or authorize work.</p><div class="nav-btns"><button class="back" data-back="4">← Your estimate</button><div class="spacer"></div><button class="btn btn-cyan" id="submitRequest" data-next="5">Send my request ↗</button></div>
   </section>
 
-  <!-- STEP 2 — SERVICE SELECT -->
+  <!-- STEP 2. SERVICE SELECT -->
   <section class="panel" id="p2">
     <h2>What can we estimate for you?</h2>
-    <p class="lede">Pick one to start — you can run the estimator again for other projects.</p>
+    <p class="lede">Pick one to start. you can run the estimator again for other projects.</p>
     <div class="opts c2" id="svc-pick">
-      <label class="opt" data-svc="electrical"><input type="radio" name="svc"><span class="mk"></span><div class="t"><span class="ic">⚡</span>Electrical</div><div class="s">Panel upgrades (standard &amp; 400A), EV chargers, generators, battery</div></label>
-      <label class="opt" data-svc="hvac"><input type="radio" name="svc"><span class="mk"></span><div class="t"><span class="ic">❄️</span>HVAC &amp; Energy</div><div class="s">New / replacement systems, windows, insulation</div></label>
-      <label class="opt" data-svc="roofing"><input type="radio" name="svc"><span class="mk"></span><div class="t"><span class="ic">🏠</span>Roofing</div><div class="s">Shingle, metal, tile, slate &amp; flat membrane</div></label>
-      <label class="opt" data-svc="kitchen-bath"><input type="radio" name="svc"><span class="mk"></span><div class="t"><span class="ic">🍳</span>Kitchen &amp; Bath</div><div class="s">Refresh to full gut renovation</div></label>
-      <label class="opt" data-svc="adu"><input type="radio" name="svc"><span class="mk"></span><div class="t"><span class="ic">🏡</span>ADU / Addition</div><div class="s">Detached, garage, basement &amp; junior ADUs</div></label>
-      <label class="opt" data-svc="commercial"><input type="radio" name="svc"><span class="mk"></span><div class="t"><span class="ic">🏢</span>Commercial</div><div class="s">Build-outs, renovations, tenant improvements &amp; electrical</div></label>
-      <label class="opt" data-svc="not-sure"><input type="radio" name="svc"><span class="mk"></span><div class="t"><span class="ic">💬</span>Not Sure Yet</div><div class="s">Custom project? Describe it, add photos/video — personal estimate</div></label>
+      <label class="opt" data-svc="electrical"><input type="radio" name="svc"><span aria-hidden="true" class="mk"></span><div class="t">Electrical</div><div class="s">Panel upgrades (standard &amp; 400A), EV chargers, generators, battery</div></label>
+      <label class="opt" data-svc="hvac"><input type="radio" name="svc"><span aria-hidden="true" class="mk"></span><div class="t">HVAC &amp; Energy</div><div class="s">New / replacement systems, windows, insulation</div></label>
+      <label class="opt" data-svc="roofing"><input type="radio" name="svc"><span aria-hidden="true" class="mk"></span><div class="t">Roofing</div><div class="s">Shingle, metal, tile, slate &amp; flat membrane</div></label>
+      <label class="opt" data-svc="kitchen-bath"><input type="radio" name="svc"><span aria-hidden="true" class="mk"></span><div class="t">Kitchen &amp; Bath</div><div class="s">Refresh to full gut renovation</div></label>
+      <label class="opt" data-svc="adu"><input type="radio" name="svc"><span aria-hidden="true" class="mk"></span><div class="t">ADU / Addition</div><div class="s">Detached, garage, basement &amp; junior ADUs</div></label>
+      <label class="opt" data-svc="commercial"><input type="radio" name="svc"><span aria-hidden="true" class="mk"></span><div class="t">Commercial</div><div class="s">Build-outs, renovations, tenant improvements &amp; electrical</div></label>
+      <label class="opt" data-svc="not-sure"><input type="radio" name="svc"><span aria-hidden="true" class="mk"></span><div class="t">Not Sure Yet</div><div class="s">Custom project? Describe it, add photos/video. personal estimate</div></label>
     </div>
-    <div class="err" id="e-svc">Please choose a service</div>
-    <div class="nav-btns"><button class="back" data-back="1">← Back</button><div class="spacer"></div><button class="btn btn-cyan" data-next="3">Continue →</button></div>
+    <div role="alert" class="err" id="e-svc">Please choose a service</div>
+    <div class="nav-btns"><a class="back" href="../index.html#services">← Our services</a><div class="spacer"></div><button class="btn btn-cyan" data-next="3">Continue →</button></div>
   </section>
 
-  <!-- STEP 3 — DETAILS (dynamic per service) -->
+  <!-- STEP 3. DETAILS (dynamic per service) -->
   <section class="panel" id="p3">
     <h2 id="p3h">Project details</h2>
     <p class="lede" id="p3lede">A few quick questions to fine-tune your estimate.</p>
-    <div id="p3body"></div>
-    <div class="err" id="e-details">Please complete the highlighted questions</div>
+    <div class="estimate-location"><div class="field"><label class="fl" for="fzip">Project ZIP code <span class="rq">*</span></label><input id="fzip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="89101"><div role="alert" class="err" id="e-zip">Valid 5-digit ZIP</div></div><div class="region-chip" id="rchip">📍 <span id="rchiptext"></span></div><p class="hint">Used for regional pricing. We work in Nevada, California and Arizona.</p></div><div id="p3body"></div>
+    <div role="alert" class="err" id="e-details">Please complete the highlighted questions</div>
     <div class="nav-btns"><button class="back" data-back="2">← Back</button><div class="spacer"></div><button class="btn btn-cyan" id="calcBtn" data-next="4">Calculate my estimate →</button></div>
   </section>
 
-  <!-- STEP 4 — ESTIMATE (conversion moment) -->
+  <!-- STEP 4. ESTIMATE (conversion moment) -->
   <section class="panel" id="p4">
-    <h2 id="p4h">Here's your honest price, <span id="est-firstname">there</span>.</h2>
+    <h2 id="p4h">Your project estimate.</h2>
     <p class="lede" id="est-intro"></p>
     <div class="result-hero">
       <div class="rl">All-in estimated project cost</div>
@@ -322,7 +117,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <div class="rmeta" id="est-meta"></div>
       <div class="rregion" id="est-region"></div>
     </div>
-    <p class="est-disclaimer" id="est-disclaimer">Preliminary ballpark estimate — not a quote, bid, or binding offer. Final pricing is confirmed only after an on-site assessment and a written, signed scope of work, and may change with site conditions, permits, materials, and scope. Estimate valid 30 days. Prices subject to change.</p>
+    <p class="est-disclaimer" id="est-disclaimer">Preliminary ballpark estimate. not a quote, bid, or binding offer. Final pricing is confirmed only after an on-site assessment and a written, signed scope of work, and may change with site conditions, permits, materials, and scope. Estimate valid 30 days. Prices subject to change.</p>
 
     <!-- value reframe: what's included that competitors hide -->
     <div class="value-row">
@@ -331,29 +126,29 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <div class="vr-item"><span class="vr-ic">✓</span> Inspections coordinated</div>
       <div class="vr-item"><span class="vr-ic">✓</span> Cleanup &amp; haul-away</div>
     </div>
-    <p class="no-surprise">This is an all-in range built to reflect the real cost — not a teaser rate designed to balloon later. We confirm your exact price in writing at your free visit.</p>
+    <p class="no-surprise">A starting range to help you plan. Your site assessment confirms the exact scope and price.</p>
 
     <!-- financing nudge -->
     <div class="finance-nudge" id="finance-nudge">
-      <strong>💳 Prefer to spread it out?</strong> <span id="finance-line">Flexible financing &amp; monthly payment options are available for qualified homeowners — just ask at your free visit.</span>
+      <strong>💳 Prefer to spread it out?</strong> <span id="finance-line">Flexible financing &amp; monthly payment options are available for qualified homeowners. just ask at your free visit.</span>
     </div>
 
     <div class="breakdown" id="est-breakdown"></div>
-    <div class="included"><b>Why book the free on-site visit?</b> Your online estimate is region-accurate, but a 20-minute visit lets us lock an exact written price, answer every question, and reserve your spot on the schedule. There's no cost and no obligation — most customers say it's the easiest part.</div>
+    <div class="included"><b>Your next step: a free on-site assessment.</b> Talk through the details, ask questions and get a written scope and quote. Requesting a visit is free and carries no obligation.</div>
 
     <div class="book-cta">
-      <button class="btn btn-cyan lg block" id="bookBtn" data-next="5">Lock my price — book my free visit →</button>
-      <div class="book-reassure">🔒 Free &amp; no obligation · ⏱️ Takes 30 seconds · 📞 Or call <a href="tel:8055032787">(805) 503-2787</a></div>
+      <button class="btn btn-cyan lg block" id="bookBtn" data-next="1">Lock my price. book my free visit →</button>
+      <div class="book-reassure">Free &amp; no obligation <span>Or call <a href="tel:+18055032787">(805) 503-2787</a></span></div>
     </div>
     <div class="nav-btns" style="margin-top:14px"><button class="back" data-back="3">← Adjust my answers</button><div class="spacer"></div></div>
   </section>
 
-  <!-- STEP 5 — DONE -->
+  <!-- STEP 5. DONE -->
   <section class="panel" id="p5">
     <div class="confirm">
       <div class="ring"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-      <h2>You're all set, <span id="done-name">there</span>!</h2>
-      <p class="lede">Your request is in. We'll reply to <strong id="done-email">your email</strong>.</p>
+      <h2 id="confirmation-title">Sending your request…</h2>
+      <p class="lede" id="confirmation-lede">Please wait while we send your project details.</p>
       <div id="send-status" class="send-status" role="status"></div>
       <div class="nextlist">
         <div class="ev"><span class="n">1</span><p>We'll call or text within 24 hours<small>At <span id="done-phone">your number</span></small></p></div>
@@ -364,19 +159,14 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <p class="est-disclaimer" style="margin-top:18px">Any figure shown is a preliminary ballpark estimate, not a quote, bid, or binding offer. Final pricing is established only after an on-site assessment and a written, signed scope of work, and is subject to change based on actual site conditions, permits, materials, and any change in scope. No work is performed and no price is binding until a written agreement is signed by both parties.</p>
     </div>
   </section>
-</main>
+</div></main>
 
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-bottom" style="border:0;margin:0;padding:0;justify-content:center;text-align:center;flex-direction:column;gap:10px">
-      <span>© 2026 OE Services LLC · NV #0093240 · CA #1057069 · AZ ROC #354397 · <a href="tel:8055032787" style="color:var(--cyan)">(805) 503-2787</a></span>
-      <span style="font-size:12px;color:var(--ink-mute);max-width:760px;line-height:1.55">All estimates shown are preliminary, ballpark figures for informational purposes only and are not a quote, bid, or binding offer. Final pricing is determined after an on-site assessment and provided in a written, signed scope of work; it is subject to change based on site conditions, permits, materials, and scope. No work is performed and no price is binding until a written agreement is signed by both parties.</span>
-    </div>
-  </div>
-</footer>
+<footer class="site-footer"><div class="shell"><div class="footer-grid"><div class="footer-brand"><a class="identity" href="../index.html" aria-label="OE Services home"><img src="../assets/oe-logo-2026.png" alt="" width="64" height="53"><span class="identity-name">OE SERVICES<small>Electrical & general contracting</small></span></a><p class="footer-about">Electrical, renovation and construction services for homes and businesses across Nevada, California and Arizona.</p></div><div class="footer-column"><span class="eyebrow">Explore</span><a href="../index.html#services">Our services</a><a href="../index.html#process">Our approach</a><a href="../index.html#reviews">Customer reviews</a><a href="../estimators/estimate.html">Get an estimate</a></div><div class="footer-column"><span class="eyebrow">Services</span><a href="../electrical.html">Electrical</a><a href="../hvac.html">HVAC & Energy</a><a href="../roofing.html">Roofing</a><a href="../kitchen-bath.html">Kitchen & Bath</a><a href="../adu.html">ADUs & Additions</a><a href="../commercial.html">Commercial</a></div><div class="footer-column"><span class="eyebrow">Let's talk</span><a href="tel:+18055032787">(805) 503-2787</a><a href="mailto:ahernandez@oeservices.us">ahernandez@oeservices.us</a><span>Monday–Friday, 8am–5pm</span><a href="../index.html#areas">View contractor licenses <span class="arrow" aria-hidden="true">↗</span></a></div></div><div class="footer-bottom"><span>© 2026 OE Services LLC</span><a href="https://sevyncreative.com" target="_blank" rel="noopener">Powered by Sevyn Creative ↗</a><a href="#top">Back to top ↑</a></div><p class="footer-note">Online estimates are preliminary planning ranges. Final pricing is confirmed after an on-site assessment in a written scope of work. Architectural photography is illustrative, not a representation of completed OE projects.</p></div></footer>
 
+<script src="../assets/experience.js"></script>
 <script src="../assets/config.js"></script>
 <script src="../assets/estimator.js"></script>
 <script src="../assets/estimator-ui.js"></script>
 </body>
 </html>
+
