@@ -139,7 +139,7 @@
       Object.keys(cat).forEach(function (k) { html += checkOptHTML("services", k, icons[k] || "•", cat[k].label, ""); });
       html += '</div></div>';
       if (svc === "electrical") {
-        html += '<div class="hint">Main Panel Upgrades reuse your existing overhead or underground service feed in its current location. no feed modifications included. Repairs are quoted separately on request.</div>';
+        html += '<div class="hint">Main Panel Upgrades reuse your existing overhead or underground service feed in its current location. No feed modifications included. Repairs are quoted separately on request.</div>';
       }
       html += '<div class="qblock"><p>Property type</p><div class="pills" data-group="property">' +
         pillHTML("property","sfh","Single-family") + pillHTML("property","condo","Condo / townhouse") +
@@ -195,11 +195,11 @@
         pillHTML("kitchen","none","None") + pillHTML("kitchen","minor","Minor refresh") + pillHTML("kitchen","high-mid","High-mid renovation") + pillHTML("kitchen","major","Full gut") + '</div></div>';
       html += '<div class="qblock"><p>Bathroom scope <span style="color:var(--ink-mute);font-weight:400">(skip if not applicable)</span></p><div class="pills" data-group="bath">' +
         pillHTML("bath","none","None") + pillHTML("bath","minor","Minor refresh") + pillHTML("bath","high-mid","High-mid renovation") + pillHTML("bath","major","Full gut") + '</div></div>';
-      html += '<div class="hint">Choose a scope for kitchen, bathroom, or both. at least one is required.</div>';
+      html += '<div class="hint">Choose a scope for kitchen, bathroom, or both. At least one is required.</div>';
     } else if (svc === "adu") {
       var rates = { "Detached ADU":"🏠", "Garage Conversion ADU":"🚗", "Basement ADU":"⬇️", "Attached Addition":"🔗", "Junior ADU (JADU)":"🛏️", "Above-Garage ADU":"🔝" };
       html += '<div class="qblock"><p>ADU type</p><div class="opts c2" data-group="aduType">';
-      Object.keys(rates).forEach(function (k) { html += optHTML("aduType", k, rates[k] + " " + k, "", ""); });
+      Object.keys(rates).forEach(function (k) { html += optHTML("aduType", k, k, "", ""); });
       html += '</div></div>';
       html += '<div class="qblock"><p>Size: <span id="adusz" style="color:var(--cyan)">600 sq ft</span></p><div class="range-wrap">' +
         '<input type="range" id="adu-sqft" min="150" max="1500" step="25" value="600"></div></div>';
@@ -209,12 +209,12 @@
       html += '<div class="qblock"><p>Commercial project type</p><div class="opts c2" data-group="commType">';
       Object.keys(E.COMM_RATE).forEach(function (k) {
         var icons = { "new-buildout":"🏗️", "renovation":"🛠️", "tenant-improve":"🏢", "comm-electrical":"⚡" };
-        html += optHTML("commType", k, (icons[k]||"•") + " " + E.COMM_RATE[k].label, "", "");
+        html += optHTML("commType", k, E.COMM_RATE[k].label, "", "");
       });
       html += '</div></div>';
       html += '<div class="qblock"><p>Approximate square footage: <span id="commsz" style="color:var(--cyan)">2,000 sq ft</span></p><div class="range-wrap">' +
         '<input type="range" id="comm-sqft" min="200" max="50000" step="100" value="2000"></div>' +
-        '<div class="hint">Don\'t know the exact footage? A close estimate is fine. we confirm everything on-site.</div></div>';
+        '<div class="hint">Don\'t know the exact footage? A close estimate is fine. We confirm everything on-site.</div></div>';
       html += '<div class="qblock"><p>Finish / build level</p><div class="pills" data-group="commCx">' +
         pillHTML("commCx","standard","Standard finish","checked") + pillHTML("commCx","mid","Mid / upgraded") + pillHTML("commCx","complex","Complex / high-spec") + '</div></div>';
       html += '<div class="qblock"><p>Project budget <span style="color:var(--ink-mute);font-weight:400">(optional)</span></p><div class="pills" data-group="commBudget">' +
@@ -229,7 +229,7 @@
     } else if (svc === "not-sure") {
       html += '<div class="inq-banner">' +
         '<strong>Don\'t see your project in our standard pricing? You\'re in the right place.</strong>' +
-        '<span>Describe what you need below and add photos or a short video. We\'ll send you a personal estimate. or, within 24 hours, let you know if it\'s outside what we service and refer you to a trusted partner in our contractor network.</span>' +
+        '<span>Describe what you need below and add photos or a short video. We\'ll send you a personal estimate or, within 24 hours, let you know if it\'s outside what we service and refer you to a trusted partner in our contractor network.</span>' +
         '</div>';
       html += '<div class="qblock"><p>What kind of work is it? <span style="color:var(--ink-mute);font-weight:400">(optional)</span></p><div class="pills" data-group="nsCategory">' +
         pillHTML("nsCategory","electrical","Electrical") + pillHTML("nsCategory","home-repair","Home repair") +
@@ -248,10 +248,10 @@
         pillHTML("nsTimeline","planning","Planning stage") + '</div></div>';
 
       /* ----- PHOTO + VIDEO UPLOAD ----- */
-      html += '<div class="qblock"><p>Add photos <span style="color:var(--ink-mute);font-weight:400">(optional, up to 10)</span></p>' +
+      html += '<div class="qblock"><p>Add photos <span style="color:var(--ink-mute);font-weight:400">(optional, up to 4)</span></p>' +
         '<label class="upload-zone" for="ns-photos">' +
           '<span class="up-ic">📷</span><span class="up-main">Tap to take or upload photos</span>' +
-          '<span class="up-sub">JPG or PNG. up to 10 images</span>' +
+          '<span class="up-sub">JPG or PNG, up to 4 images</span>' +
         '</label>' +
         '<input type="file" id="ns-photos" accept="image/*" multiple capture="environment" hidden>' +
         '<div class="thumbs" id="ns-photo-thumbs"></div></div>';
@@ -274,9 +274,9 @@
   function wireDynamic() {
     // option cards (radio + checkbox)
     $("p3body").querySelectorAll(".opt input").forEach(function(input){input.addEventListener("change",function(){$("p3body").querySelectorAll(".opt").forEach(function(opt){opt.classList.toggle("sel",opt.querySelector("input").checked);});$("e-details").classList.remove("show");});});
-    var defaults={property:'sfh',sqft:'md',access:'easy',pitch:'med',stories:'1',layers:'1',propType:'res',complexity:'Medium',commCx:'standard'};
+    var defaults={property:'sfh',sqft:'md',access:'easy',pitch:'med',stories:'1',layers:'1',propType:'res',complexity:'Medium',commCx:'standard',kitchen:'none',bath:'none'};
     Object.keys(defaults).forEach(function(name){var input=$("p3body").querySelector('input[name="'+name+'"][value="'+defaults[name]+'"]');if(input)input.checked=true;});
-    $("p3body").querySelectorAll('input[type="range"],input[type="number"],textarea').forEach(function(input){if(!input.labels.length){var parent=input.closest('.qblock,.calc-field');var label=parent&&parent.querySelector('p,label');input.setAttribute('aria-label',label?label.textContent.trim():'Project details');}});
+    $("p3body").querySelectorAll('input[type="range"],input[type="number"],textarea,select').forEach(function(input){if(!input.labels.length){var parent=input.closest('.qblock,.calc-field');var label=parent&&parent.querySelector('p,label');input.setAttribute('aria-label',label?label.textContent.trim():'Project details');}});
     // range sliders
     var rs = $("roof-sqft"); if (rs) rs.addEventListener("input", function () { $("roofsz").textContent = (+this.value).toLocaleString() + " sq ft"; });
     var as = $("adu-sqft"); if (as) as.addEventListener("input", function () { $("adusz").textContent = (+this.value).toLocaleString() + " sq ft"; });
@@ -334,7 +334,7 @@
     if (pIn) {
       pIn.addEventListener("change", function () {
         var files = Array.prototype.slice.call(this.files || []);
-        S.media.photos = S.media.photos.concat(files).slice(0, 10);
+        S.media.photos = S.media.photos.concat(files).slice(0, 4);
         renderPhotoThumbs();
       });
     }
@@ -352,7 +352,7 @@
             URL.revokeObjectURL(url);
             if (probe.duration && probe.duration > 26) {
               S.media.video = null;
-              renderVideoThumb(null, "That clip is " + Math.round(probe.duration) + "s. please upload a video of 25 seconds or less.");
+              renderVideoThumb(null, "That clip is " + Math.round(probe.duration) + "s. Please upload a video of 25 seconds or less.");
             } else {
               S.media.video = f;
               renderVideoThumb(f, "");
@@ -474,9 +474,10 @@
 
     // reset any inquiry styling on the hero
     $("p4").classList.remove("inquiry-mode");
+    $("p4").querySelector(".rl").textContent = "All-in estimated project cost";
     $("finance-nudge").style.display = "";
     var disc = $("est-disclaimer");
-    if (disc) disc.textContent = "Preliminary ballpark estimate. not a quote, bid, or binding offer. Final pricing is confirmed only after an on-site assessment and a written, signed scope of work, and may change with site conditions, permits, materials, and scope. Estimate valid 30 days. Prices subject to change.";
+    if (disc) disc.textContent = "Preliminary ballpark estimate, not a quote, bid, or binding offer. Final pricing is confirmed only after an on-site assessment and a written, signed scope of work, and may change with site conditions, permits, materials, and scope. Estimate valid 30 days. Prices subject to change.";
 
     var bd = $("est-breakdown"), html = "";
     if (svc === "electrical" || svc === "hvac") {
@@ -497,7 +498,7 @@
         '<div class="bd-row"><div class="l"><b>Warranty</b></div><div class="v">' + m.warranty + '</div></div>' +
         '<div class="bd-row"><div class="l"><b>Best for</b></div><div class="v" style="max-width:55%;text-align:right;font-weight:500;color:var(--ink-soft)">' + m.best + '</div></div></div>';
     } else if (svc === "kitchen-bath") {
-      $("est-meta").textContent = "Full renovation · materials, labor & permits";
+      $("est-meta").textContent = "Selected scope · materials, labor & permits";
       html += '<div class="bd-card"><div class="bd-head"><span>Scope</span><span>Estimated</span></div>';
       res.lines.forEach(function (ln) { html += '<div class="bd-row"><div class="l"><b>' + ln.label + '</b></div><div class="v">~' + fmt(ln.base) + '</div></div>'; });
       html += '</div>';
@@ -515,7 +516,7 @@
         '<div class="bd-row"><div class="l"><b>Finish level</b></div><div class="v">' + (E.COMM_CX_LABEL[S.details.complexity] || S.details.complexity) + '</div></div>' +
         (S.details.budget ? '<div class="bd-row"><div class="l"><b>Stated budget</b></div><div class="v">' + commBudgetLabel(S.details.budget) + '</div></div>' : '') +
         '</div>' +
-        '<div class="included" style="margin-top:14px"><b>Commercial projects are scoped on-site.</b> This range reflects typical regional build costs for the type and size you entered. Final commercial pricing depends on plans, permits, and site conditions. we\'ll confirm a firm written number after a walkthrough.</div>';
+        '<div class="included" style="margin-top:14px"><b>Commercial projects are scoped on-site.</b> This range reflects typical regional build costs for the type and size you entered. Final commercial pricing depends on plans, permits, and site conditions. We\'ll confirm a firm written number after a walkthrough.</div>';
     }
     bd.innerHTML = html;
   }
@@ -529,8 +530,9 @@
     var d = S.details;
     S.result = { inquiry:true };
     $("p4").classList.add("inquiry-mode");
+    $("p4").querySelector(".rl").textContent = "Your custom project";
     var fn = $("est-firstname"); if (fn) fn.textContent = S.first || "there";
-    $("est-intro").textContent = "Thanks. we've got the details for " + (S.street || "your project") + ". Because this is a custom request, a real person reviews it (no auto-generated number).";
+    $("est-intro").textContent = "Review your project details below. Add your contact details next, then send your request for a personal estimate from our team.";
     $("est-amount").textContent = "Personal review";
     $("est-meta").textContent = "Custom / non-standard project";
     $("est-region").textContent = "📍 " + (S.city ? S.city + ", " : "") + (S.state || "") + " · ZIP " + (S.zip || "—");
@@ -549,7 +551,7 @@
         (d.timeline ? '<div class="bd-row"><div class="l"><b>Timeline</b></div><div class="v">' + esc(nsTimelineLabel(d.timeline)) + '</div></div>' : '') +
         '<div class="bd-row"><div class="l"><b>Attachments</b></div><div class="v">' + photoCount + ' photo' + (photoCount===1?'':'s') + (hasVideo ? ' · 1 video' : '') + '</div></div>' +
       '</div>' +
-      '<div class="included" style="margin-top:14px"><b>What happens next:</b> Our team reviews your request and either sends a personal estimate or, within 24 hours, lets you know if it\'s outside what we currently service. in which case we\'ll refer you to a trusted partner in our contractor network so you\'re never left without a next step.</div>';
+      '<div class="included" style="margin-top:14px"><b>What happens next:</b> Our team reviews your request and either sends a personal estimate or, within 24 hours, lets you know if it\'s outside what we currently service, in which case we\'ll refer you to a trusted partner in our contractor network so you\'re never left without a next step.</div>';
   }
   function nsCatLabel(v){return {electrical:"Electrical","home-repair":"Home repair",commercial:"Commercial",remodel:"Remodel / addition",other:"Other"}[v]||v;}
   function nsBudgetLabel(v){return {u1k:"Under $1,000","1-5k":"$1k–$5k","5-15k":"$5k–$15k","15-50k":"$15k–$50k","50kp":"$50k+",unsure:"Not sure yet"}[v]||v;}
