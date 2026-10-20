@@ -16,6 +16,33 @@
   }
   const preview=document.querySelector('.service-preview');
   if(preview){document.querySelectorAll('.service-row').forEach(function(row){function show(){document.querySelectorAll('.service-row').forEach(r=>r.classList.remove('is-active'));row.classList.add('is-active');preview.querySelector('h3').textContent=row.dataset.heading;preview.querySelector('p').textContent=row.dataset.description;preview.querySelector('.preview-label').textContent=row.dataset.label;preview.querySelector('img').src=row.dataset.image;preview.querySelector('img').alt=row.dataset.alt;preview.querySelector('.image-caption').textContent=row.dataset.caption;preview.querySelector('.preview-estimate').href='estimators/estimate.html?service='+row.dataset.service;preview.querySelector('.preview-detail').href=row.href;}row.addEventListener('mouseenter',show);row.addEventListener('focus',show);});}
-  const load=document.querySelector('[data-load-reviews]');
-  if(load){load.addEventListener('click',function(){const status=document.querySelector('.review-status');load.disabled=true;load.textContent='Loading Google reviews…';status.textContent='You can also read the reviews directly on Google.';const mount=document.getElementById('wally-embed');mount.setAttribute('data-wally-widget',(window.OE_CONFIG||{}).wallyWidgetId||'6987a2f9bdb8740014d7ce91');const script=document.createElement('script');script.src='https://embed.getwally.net/embed.js';script.async=true;script.onload=function(){load.hidden=true;status.textContent='If the review widget does not appear, use the Google reviews link above.';};script.onerror=function(){load.hidden=true;status.textContent='Reviews could not load here. Read them directly on Google using the link above.';};document.head.appendChild(script);});}
+  const reviewMount=document.getElementById('wally-embed');
+  if(reviewMount){
+    const status=document.querySelector('.review-status');
+    let started=false;
+    function loadReviews(){
+      if(started)return;
+      started=true;
+      status.textContent='Loading Google reviews...';
+      reviewMount.setAttribute('data-wally-widget',(window.OE_CONFIG||{}).wallyWidgetId||'6987a2f9bdb8740014d7ce91');
+      const observer=new MutationObserver(function(){
+        const frame=reviewMount.querySelector('iframe');
+        if(!frame)return;
+        frame.title='OE Services customer reviews from Google';
+        frame.addEventListener('load',function(){status.textContent='';status.hidden=true;},{once:true});
+        observer.disconnect();
+      });
+      observer.observe(reviewMount,{childList:true,subtree:true});
+      const script=document.createElement('script');
+      script.src='https://embed.getwally.net/embed.js';
+      script.async=true;
+      script.onload=function(){status.textContent='';status.hidden=true;};
+      script.onerror=function(){observer.disconnect();status.hidden=false;status.textContent='Reviews are temporarily unavailable here. Read them directly on Google using the link above.';};
+      document.head.appendChild(script);
+    }
+    if('IntersectionObserver' in window){
+      const nearReviews=new IntersectionObserver(function(entries){if(entries.some(entry=>entry.isIntersecting)){nearReviews.disconnect();loadReviews();}},{rootMargin:'700px'});
+      nearReviews.observe(document.getElementById('reviews'));
+    }else loadReviews();
+  }
 })();
