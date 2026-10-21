@@ -2,3 +2,6 @@
 
 /* Refined materials, freestanding solar and accessible-entry concept. */
 .spot-addition{left:30%;top:80%}.spot-energy{left:87%;top:62%}.property-stage{background:radial-gradient(ellipse at 48% 35%,#f5f6ee 0%,#e7ede7 65%,#dce7e2 100%)}.entry-steps{transition:opacity .4s}[data-active=adu] .entry-steps{opacity:0}.is-blueprint .house-details{opacity:.15}.is-blueprint .energy-upgrade{opacity:.3}.house-canvas svg{filter:drop-shadow(0 10px 12px #1a3e4910)}.dimension{opacity:.45}.addition-upgrade{transform:translateY(5px)}
+
+/* Shared projection: gable roof, entry ramp and standalone solar. */
+.spot-electrical{left:49%;top:70%}.spot-roofing{left:60%;top:39%}.spot-remodel{left:30%;top:60%}.spot-addition{left:27%;top:84%}.spot-energy{left:77%;top:71%}.window-glass{transition:fill .6s}[data-active=electrical] .window-glass{fill:url(#warm)}.is-blueprint .building{opacity:.1}.is-blueprint .entry-steps{opacity:.12}.is-blueprint .energy-upgrade,.is-blueprint .addition-upgrade{opacity:0}.is-blueprint[data-active=hvac] .energy-upgrade,.is-blueprint[data-active=adu] .addition-upgrade{opacity:.45}.house-canvas svg{filter:none}.upgrade{transition:opacity .5s,transform .5s}@media(prefers-reduced-motion:reduce){.window-glass,.upgrade{transition:none}}
